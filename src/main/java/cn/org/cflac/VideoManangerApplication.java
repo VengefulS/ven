@@ -8,6 +8,7 @@ public class VideoManangerApplication {
 
 	public static void main(String[] args) {
 		SpringApplication.run(VideoManangerApplication.class, args);
+		System.out.println("springboot 已启动！");
 	}
 
 }
