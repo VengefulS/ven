@@ -1,0 +1,16 @@
+spring:
+  datasource:
+    name: vido
+    url: jdbc:mysql://10.1.100.165:3306/spzy
+    username: lar
+    password: larlar
+    driver-class-name: com.mysql.jdbc.Driver //驱动
+  jpa:
+    database : MYSQL  
+    show-sql : true
+    hibernate:
+      ddl-auto: update //自动更新
+    properties:  
+      hibernate:  
+        dialect : org.hibernate.dialect.MySQL5Dialect
+    
