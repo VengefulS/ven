@@ -6,7 +6,7 @@ spring:
   profiles: dev
 
   datasource:
-    name: vido
+    name: video
     url: jdbc:mysql://10.1.100.165:3306/spzy
     username: lar
     password: larlar
