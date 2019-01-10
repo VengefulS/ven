@@ -1,0 +1,12 @@
+spring:
+  thymeleaf:
+    prefix: classpath:/templates/
+    suffix: .html
+
+  profiles: dev
+
+  datasource:
+    url: jdbc:mysql://localhost:3306/test
+    username: root
+    password: root
+    driver-class-name: com.mysql.jdbc.Driver
