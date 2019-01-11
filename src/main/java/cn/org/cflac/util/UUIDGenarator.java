@@ -1,4 +1,4 @@
-package cn.org.cflac.home.controller;
+package cn.org.cflac.util;
 
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;

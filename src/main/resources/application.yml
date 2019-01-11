@@ -3,14 +3,14 @@ spring:
     prefix: classpath:/templates/
     suffix: .html
 
-  profiles: dev
+ # profiles: dev
 
   datasource:
     name: video
     url: jdbc:mysql://10.1.100.165:3306/spzy
     username: lar
     password: larlar
-    driver-class-name: com.mysql.jdbc.Driver //驱动
+    driver-class-name: com.mysql.cj.jdbc.Driver
   jpa:
     database : MYSQL  
     show-sql : true
