@@ -7,16 +7,17 @@ spring:
 
   datasource:
     name: video
-    url: jdbc:mysql://10.1.100.165:3306/spzy
+    url: jdbc:mysql://10.1.100.165:3306/spzy?useUnicode=true&characterEncoding=utf8&serverTimezone=GMT
     username: lar
     password: larlar
     driver-class-name: com.mysql.cj.jdbc.Driver
-  jpa:
-    database : MYSQL  
-    show-sql : true
-    hibernate:
-      ddl-auto: update //自动更新
-    properties:  
-      hibernate:  
-        dialect : org.hibernate.dialect.MySQL5Dialect
+
+
+mybatis:
+  configuration:
+    map-underscore-to-camel-case: true
+  mapper-locations: mapper/*.xml
+  typeAliasesPackage: cn.org.cflac.entity
+    
+    
     

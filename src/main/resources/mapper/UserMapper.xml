@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.org.cflac.home.dao.UserMapper">
+  <resultMap id="BaseResultMap" type="cn.org.cflac.entity.User">
+    <result column="user_id" jdbcType="VARCHAR" property="userId" />
+    <result column="user_loginname" jdbcType="VARCHAR" property="userLoginname" />
+    <result column="user_name" jdbcType="VARCHAR" property="userName" />
+    <result column="user_password" jdbcType="VARCHAR" property="userPassword" />
+  </resultMap>
+  <insert id="insert" parameterType="cn.org.cflac.entity.User">
+    insert into user (user_id, user_loginname, user_name, 
+      user_password)
+    values (#{userId,jdbcType=VARCHAR}, #{userLoginname,jdbcType=VARCHAR}, #{userName,jdbcType=VARCHAR}, 
+      #{userPassword,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="cn.org.cflac.entity.User">
+    insert into user
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="userId != null">
+        user_id,
+      </if>
+      <if test="userLoginname != null">
+        user_loginname,
+      </if>
+      <if test="userName != null">
+        user_name,
+      </if>
+      <if test="userPassword != null">
+        user_password,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="userId != null">
+        #{userId,jdbcType=VARCHAR},
+      </if>
+      <if test="userLoginname != null">
+        #{userLoginname,jdbcType=VARCHAR},
+      </if>
+      <if test="userName != null">
+        #{userName,jdbcType=VARCHAR},
+      </if>
+      <if test="userPassword != null">
+        #{userPassword,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+</mapper>

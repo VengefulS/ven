@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD com.example.Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.org.cflac.home.mapper.ActivityMapper">
+  <resultMap id="BaseResultMap" type="cn.org.cflac.entity.Activity">
+    <result column="activity_id" jdbcType="VARCHAR" property="activityId" />
+    <result column="activity_name" jdbcType="VARCHAR" property="activityName" />
+    <result column="activity_type" jdbcType="VARCHAR" property="activityType" />
+    <result column="activity_person" jdbcType="VARCHAR" property="activityPerson" />
+    <result column="activity_site" jdbcType="VARCHAR" property="activitySite" />
+    <result column="activity_begin_date" jdbcType="DATE" property="activityBeginDate" />
+    <result column="activity_end_date" jdbcType="DATE" property="activityEndDate" />
+  </resultMap>
+  <insert id="insert" parameterType="cn.org.cflac.entity.Activity">
+    insert into activity_info (activity_id, activity_name, activity_type, 
+      activity_person, activity_site, activity_begin_date, 
+      activity_end_date)
+    values (#{activityId,jdbcType=VARCHAR}, #{activityName,jdbcType=VARCHAR}, #{activityType,jdbcType=VARCHAR}, 
+      #{activityPerson,jdbcType=VARCHAR}, #{activitySite,jdbcType=VARCHAR}, #{activityBeginDate,jdbcType=DATE}, 
+      #{activityEndDate,jdbcType=DATE})
+  </insert>
+  <insert id="insertSelective" parameterType="cn.org.cflac.entity.Activity">
+    insert into activity_info
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="activityId != null">
+        activity_id,
+      </if>
+      <if test="activityName != null">
+        activity_name,
+      </if>
+      <if test="activityType != null">
+        activity_type,
+      </if>
+      <if test="activityPerson != null">
+        activity_person,
+      </if>
+      <if test="activitySite != null">
+        activity_site,
+      </if>
+      <if test="activityBeginDate != null">
+        activity_begin_date,
+      </if>
+      <if test="activityEndDate != null">
+        activity_end_date,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="activityId != null">
+        #{activityId,jdbcType=VARCHAR},
+      </if>
+      <if test="activityName != null">
+        #{activityName,jdbcType=VARCHAR},
+      </if>
+      <if test="activityType != null">
+        #{activityType,jdbcType=VARCHAR},
+      </if>
+      <if test="activityPerson != null">
+        #{activityPerson,jdbcType=VARCHAR},
+      </if>
+      <if test="activitySite != null">
+        #{activitySite,jdbcType=VARCHAR},
+      </if>
+      <if test="activityBeginDate != null">
+        #{activityBeginDate,jdbcType=DATE},
+      </if>
+      <if test="activityEndDate != null">
+        #{activityEndDate,jdbcType=DATE},
+      </if>
+    </trim>
+  </insert>
+	<resultMap id="result" type="cn.org.cflac.entity.Activity">
+		<result column="name" property="name" />
+		<result column="password" property="password" />
+		<result column="number" property="number" />
+ 
+	</resultMap>
+ 
+	<select id="findAll" parameterType="String" resultMap="result">
+		SELECT * FROM activity_info
+	</select>
+	<select id="findActivityCount" parameterType="java.util.Map" resultType="java.lang.Integer">
+		SELECT count(1)
+        FROM activity_info
+        <where>
+            <if test="activity_name != null and activity_name.length > 0">
+                activity_name = #{activityName}
+            </if>
+            <if test="logdate != null and logdate.length > 0">
+                and date_format(activity_begin_date, '%Y-%m-%d %H-%i-%S') = #{logdate}
+            </if>
+            <if test="starttime != null and starttime.length > 0 or endtime != null and endtime.length > 0">
+                and activity_begin_date BETWEEN str_to_date(#{starttime}, '%Y-%m-%d %H-%i-%S') AND str_to_date(#{endtime},
+                '%Y-%m-%d %H-%i-%S')
+            </if>
+        </where>
+	</select>
+	<select id="findActivityList" parameterType="java.util.Map" resultType="cn.org.cflac.entity.Activity">
+	SELECT L.activity_name,L.activity_type,L.activity_person,L.activity_site,
+	 activity_begin_date,activity_end_date
+	from activity_info L
+	<where>
+		<if test="activity_name != null and activity_name.length > 0">
+			L.activity_name = #{activityName}
+		</if>
+		 <if test="logdate != null and logdate.length > 0">
+			and date_format(L.activity_begin_date, '%Y-%m-%d %H-%i-%S') = #{logdate}
+		</if>
+		<if test="starttime != null and starttime.length > 0 or endtime != null and endtime.length > 0">
+			and L.activity_begin_date BETWEEN str_to_date(#{starttime}, '%Y-%m-%d %H-%i-%S')
+			AND str_to_date(#{endtime},
+			'%Y-%m-%d %H-%i-%S')
+		</if>
+	</where>
+	order by L.activity_begin_date 
+	limit #{start},#{length}
+	<!-- WHERE ROWNUM <![CDATA[ <= (#{end})) TL WHERE RN >= #{start}]]> -->
+</select>
+	
+ 
+</mapper>

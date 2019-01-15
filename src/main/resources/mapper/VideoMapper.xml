@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.org.cflac.home.dao.VideoMapper">
+  <resultMap id="BaseResultMap" type="cn.org.cflac.entity.Video">
+    <result column="video_id" jdbcType="VARCHAR" property="videoId" />
+    <result column="video_name" jdbcType="VARCHAR" property="videoName" />
+    <result column="video_address" jdbcType="VARCHAR" property="videoAddress" />
+    <result column="video_introduction" jdbcType="VARCHAR" property="videoIntroduction" />
+    <result column="video_upload_time" jdbcType="DATE" property="videoUploadTime" />
+  </resultMap>
+  <insert id="insert" parameterType="cn.org.cflac.entity.Video">
+    insert into activity_video (video_id, video_name, video_address, 
+      video_introduction, video_upload_time)
+    values (#{videoId,jdbcType=VARCHAR}, #{videoName,jdbcType=VARCHAR}, #{videoAddress,jdbcType=VARCHAR}, 
+      #{videoIntroduction,jdbcType=VARCHAR}, #{videoUploadTime,jdbcType=DATE})
+  </insert>
+  <insert id="insertSelective" parameterType="cn.org.cflac.entity.Video">
+    insert into activity_video
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="videoId != null">
+        video_id,
+      </if>
+      <if test="videoName != null">
+        video_name,
+      </if>
+      <if test="videoAddress != null">
+        video_address,
+      </if>
+      <if test="videoIntroduction != null">
+        video_introduction,
+      </if>
+      <if test="videoUploadTime != null">
+        video_upload_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="videoId != null">
+        #{videoId,jdbcType=VARCHAR},
+      </if>
+      <if test="videoName != null">
+        #{videoName,jdbcType=VARCHAR},
+      </if>
+      <if test="videoAddress != null">
+        #{videoAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="videoIntroduction != null">
+        #{videoIntroduction,jdbcType=VARCHAR},
+      </if>
+      <if test="videoUploadTime != null">
+        #{videoUploadTime,jdbcType=DATE},
+      </if>
+    </trim>
+  </insert>
+</mapper>

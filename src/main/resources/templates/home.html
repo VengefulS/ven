@@ -53,16 +53,7 @@
     <!-- sidebar: style can be found in sidebar.less -->
     <section class="sidebar">
      
-      <!-- search form -->
-      <form action="#" method="get" class="sidebar-form">
-        <div class="input-group">
-          <input type="text" name="q" class="form-control" placeholder="Search...">
-          <span class="input-group-btn">
-                <button type="submit" name="search" id="search-btn" class="btn btn-flat"><i class="fa fa-search"></i>
-                </button>
-              </span>
-        </div>
-      </form>
+ 
       <!-- /.search form -->
       <!-- sidebar menu: : style can be found in sidebar.less -->
       <ul class="sidebar-menu" data-widget="tree">
@@ -98,33 +89,8 @@
           <div class="box">
             <!-- /.box-header -->
             <div class="box-body">
-              <table id="example2" class="table table-bordered table-hover">
-                <thead>
-                <tr>
-                  <th>活动名称</th>
-                  <th>时间</th>
-                  <th>地点</th>
-                  <th>门类</th>
-                  <th>人物</th>
-                  <th>相关视频预览</th>
-                </tr>
-                </thead>
-                <tbody>
-                <tr>
-                  <td>活动1</td>
-                  <td>now</td>
-                  <td>北京</td>
-                  <td>艺术</td>
-                  <td>小明</td>
-                  <td>
-                  <button type="button" class="btn btn-default btn-sm">
-                  <span class="glyphicon glyphicon-play"></span>
-                  </button>
-          		  </td>
-                  
-                </tr>
-                
-                </tbody>
+              <table id="findAll" class="table table-striped table-bordered table-hover dataTable no-footer">
+             	
               </table>
             </div>
             <!-- /.box-body -->
@@ -143,15 +109,15 @@
   </footer>
 
   <!-- Control Sidebar -->
-  <aside class="control-sidebar control-sidebar-dark">
-    <!-- Create the tabs -->
+  <!-- <aside class="control-sidebar control-sidebar-dark">
+    Create the tabs
     <ul class="nav nav-tabs nav-justified control-sidebar-tabs">
       <li><a href="#control-sidebar-home-tab" data-toggle="tab"><i class="fa fa-home"></i></a></li>
       <li><a href="#control-sidebar-settings-tab" data-toggle="tab"><i class="fa fa-gears"></i></a></li>
     </ul>
-    <!-- Tab panes -->
+    Tab panes
     <div class="tab-content">
-      <!-- Home tab content -->
+      Home tab content
       <div class="tab-pane" id="control-sidebar-home-tab">
         <h3 class="control-sidebar-heading">Recent Activity</h3>
         <ul class="control-sidebar-menu">
@@ -200,7 +166,7 @@
             </a>
           </li>
         </ul>
-        <!-- /.control-sidebar-menu -->
+        /.control-sidebar-menu
 
         <h3 class="control-sidebar-heading">Tasks Progress</h3>
         <ul class="control-sidebar-menu">
@@ -253,14 +219,14 @@
             </a>
           </li>
         </ul>
-        <!-- /.control-sidebar-menu -->
+        /.control-sidebar-menu
 
       </div>
-      <!-- /.tab-pane -->
-      <!-- Stats tab content -->
+      /.tab-pane
+      Stats tab content
       <div class="tab-pane" id="control-sidebar-stats-tab">Stats Tab Content</div>
-      <!-- /.tab-pane -->
-      <!-- Settings tab content -->
+      /.tab-pane
+      Settings tab content
       <div class="tab-pane" id="control-sidebar-settings-tab">
         <form method="post">
           <h3 class="control-sidebar-heading">General Settings</h3>
@@ -275,7 +241,7 @@
               Some information about this general settings option
             </p>
           </div>
-          <!-- /.form-group -->
+          /.form-group
 
           <div class="form-group">
             <label class="control-sidebar-subheading">
@@ -287,7 +253,7 @@
               Other sets of options are available
             </p>
           </div>
-          <!-- /.form-group -->
+          /.form-group
 
           <div class="form-group">
             <label class="control-sidebar-subheading">
@@ -299,7 +265,7 @@
               Allow the user to show his name in blog posts
             </p>
           </div>
-          <!-- /.form-group -->
+          /.form-group
 
           <h3 class="control-sidebar-heading">Chat Settings</h3>
 
@@ -309,7 +275,7 @@
               <input type="checkbox" class="pull-right" checked>
             </label>
           </div>
-          <!-- /.form-group -->
+          /.form-group
 
           <div class="form-group">
             <label class="control-sidebar-subheading">
@@ -317,7 +283,7 @@
               <input type="checkbox" class="pull-right">
             </label>
           </div>
-          <!-- /.form-group -->
+          /.form-group
 
           <div class="form-group">
             <label class="control-sidebar-subheading">
@@ -325,12 +291,12 @@
               <a href="javascript:void(0)" class="text-red pull-right"><i class="fa fa-trash-o"></i></a>
             </label>
           </div>
-          <!-- /.form-group -->
+          /.form-group
         </form>
       </div>
-      <!-- /.tab-pane -->
+      /.tab-pane
     </div>
-  </aside>
+  </aside> -->
   <!-- /.control-sidebar -->
   <!-- Add the sidebar's background. This div must be placed
        immediately after the control sidebar -->
@@ -352,7 +318,10 @@
 <!-- AdminLTE App -->
 <script src="/js/adminlte.js"></script>
 <!-- AdminLTE for demo purposes -->
-<script src="/js/demo.js"></script>
+<!-- <script src="/!!!!!js/demo.js"></script> -->
+
+<script src="/js/home.js"></script>
+
 <!-- page script -->
 <script>
   $(function () {
@@ -360,10 +329,10 @@
     $('#example2').DataTable({
       'paging'      : true,
       'lengthChange': false,
-      'searching'   : true,
-      'ordering'    : false,
+      'searching'   : false,
+      'ordering'    : true,
       'info'        : false,
-      'autoWidth'   : false
+      'autoWidth'   : true
     })
   })
 </script>
