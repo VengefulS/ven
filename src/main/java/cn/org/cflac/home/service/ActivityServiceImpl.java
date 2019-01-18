@@ -29,17 +29,18 @@ public class ActivityServiceImpl implements ActivityService{
 
 
 	@Override
-	public Paging<Activity> findActivityList(String activityName,String logdate, String starttime, String endtime, Integer start,Integer length, Integer draw) {
+	public Paging<Activity> findActivityList(String search,String activityName,String logdate, String starttime, String endtime, Integer start,Integer length, Integer draw) {
 		
 		// 将参数放进map中
         Map<String, Object> map = new HashMap<>();
         Map<String, Object> map1 = new HashMap<>();
         List<Activity> list = null;
+        map.put("search", search);
         map.put("activityName", activityName);
         map.put("logdate", logdate);
         map.put("starttime", starttime);//.replace("T", " ")
         map.put("endtime", endtime);
-        map.put("start", start + 1);
+        map.put("start", start);
         map.put("length",length);
 
         map1.put("activityName", activityName);

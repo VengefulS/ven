@@ -10,5 +10,4 @@ public class VideoManangerApplication {
 		SpringApplication.run(VideoManangerApplication.class, args);
 		System.out.println("springboot 已启动！");
 	}
-
 }

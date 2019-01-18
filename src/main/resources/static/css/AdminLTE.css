@@ -18,7 +18,7 @@ body {
   height: 100%;
 }
 body {
-  font-family: 'Source Sans Pro', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  /* font-family: 'Source Sans Pro', 'Helvetica Neue', Helvetica, Arial, sans-serif; */
   font-weight: 400;
   overflow-x: hidden;
   overflow-y: auto;
@@ -57,7 +57,7 @@ body {
   -moz-transition: -moz-transform 0.3s ease-in-out, margin 0.3s ease-in-out;
   -o-transition: -o-transform 0.3s ease-in-out, margin 0.3s ease-in-out;
   transition: transform 0.3s ease-in-out, margin 0.3s ease-in-out;
-  margin-left: 230px;
+  /* margin-left: 230px; */
   z-index: 820;
 }
 .layout-top-nav .content-wrapper,
@@ -91,6 +91,8 @@ body {
   z-index: 800;
 }
 .main-footer {
+	font-size:10px;
+	text-align:center;
   background: #fff;
   padding: 15px;
   color: #444;
@@ -195,7 +197,7 @@ a:focus {
   -o-transition: margin-left 0.3s ease-in-out;
   transition: margin-left 0.3s ease-in-out;
   margin-bottom: 0;
-  margin-left: 230px;
+  margin-left: 350px;
   border: none;
   min-height: 50px;
   border-radius: 0;
@@ -289,7 +291,7 @@ a:focus {
   font-size: 20px;
   line-height: 50px;
   text-align: center;
-  width: 230px;
+  width: 350px;
   font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
   padding: 0 15px;
   font-weight: 300;

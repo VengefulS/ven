@@ -13,7 +13,8 @@ public interface ActivityService {
 	List<Activity> findAll(String activityId);
 
 	 // 返回数据
-    Paging<Activity> findActivityList(String activityName,
+    Paging<Activity> findActivityList(String search,
+    								  String activityName,
     								  String logdate,
     								  String starttime,
     								  String endtime,

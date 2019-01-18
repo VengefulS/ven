@@ -16,23 +16,16 @@ public class Activity {
 
     private Date activityBeginDate;
 
-    private Date activityEndDate;
+    private String activityVideoGatherer;
 
     public String getActivityId() {
         return activityId;
     }
     
     public String getDisplayActivityBeginDate(){
-    	SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+    	SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
     	if(activityBeginDate != null){
     	return	sdf.format(activityBeginDate);
-    	}
-    	return null;
-    }
-    public String getDisplayActivityEndDate(){
-    	SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-    	if(activityEndDate != null){
-    	return	sdf.format(activityEndDate);
     	}
     	return null;
     }
@@ -81,11 +74,13 @@ public class Activity {
         this.activityBeginDate = activityBeginDate;
     }
 
-    public Date getActivityEndDate() {
-        return activityEndDate;
-    }
+	public String getActivityVideoGatherer() {
+		return activityVideoGatherer;
+	}
 
-    public void setActivityEndDate(Date activityEndDate) {
-        this.activityEndDate = activityEndDate;
-    }
+	public void setActivityVideoGatherer(String activityVideoGatherer) {
+		this.activityVideoGatherer = activityVideoGatherer;
+	}
+
+    
 }

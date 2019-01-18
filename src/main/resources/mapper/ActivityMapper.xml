@@ -81,33 +81,33 @@
 		SELECT count(1)
         FROM activity_info
         <where>
-            <if test="activity_name != null and activity_name.length > 0">
+            <if test="search != null and search.length > 0">
                 activity_name = #{activityName}
             </if>
             <if test="logdate != null and logdate.length > 0">
-                and date_format(activity_begin_date, '%Y-%m-%d %H-%i-%S') = #{logdate}
+                and date_format(activity_begin_date, '%Y-%m-%d') = #{logdate}
             </if>
             <if test="starttime != null and starttime.length > 0 or endtime != null and endtime.length > 0">
-                and activity_begin_date BETWEEN str_to_date(#{starttime}, '%Y-%m-%d %H-%i-%S') AND str_to_date(#{endtime},
-                '%Y-%m-%d %H-%i-%S')
+                and activity_begin_date BETWEEN str_to_date(#{starttime}, '%Y-%m-%d') AND str_to_date(#{endtime},
+                '%Y-%m-%d')
             </if>
         </where>
 	</select>
 	<select id="findActivityList" parameterType="java.util.Map" resultType="cn.org.cflac.entity.Activity">
 	SELECT L.activity_name,L.activity_type,L.activity_person,L.activity_site,
-	 activity_begin_date,activity_end_date
-	from activity_info L
+	 L.activity_begin_date,L.activity_video_gatherer
+	from activity_info L 
 	<where>
-		<if test="activity_name != null and activity_name.length > 0">
-			L.activity_name = #{activityName}
+		<if test="search != null">
+			L.activity_name like concat('%',#{search},'%')
 		</if>
 		 <if test="logdate != null and logdate.length > 0">
-			and date_format(L.activity_begin_date, '%Y-%m-%d %H-%i-%S') = #{logdate}
+			and date_format(L.activity_begin_date, '%Y-%m-%d') = #{logdate}
 		</if>
 		<if test="starttime != null and starttime.length > 0 or endtime != null and endtime.length > 0">
-			and L.activity_begin_date BETWEEN str_to_date(#{starttime}, '%Y-%m-%d %H-%i-%S')
+			and L.activity_begin_date BETWEEN str_to_date(#{starttime}, '%Y-%m-%d')
 			AND str_to_date(#{endtime},
-			'%Y-%m-%d %H-%i-%S')
+			'%Y-%m-%d')
 		</if>
 	</where>
 	order by L.activity_begin_date 
