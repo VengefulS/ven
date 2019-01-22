@@ -4976,4 +4976,16 @@ table.text-center th {
   .table-responsive > .table tr td {
     white-space: normal !important;
   }
+
 }
+/*   .modal-body > div {
+  	width:30%;
+  	height:23%;
+  } */
+  .modal-video {
+  	text-align: center;
+  }
+   .thumbnail{
+  	margin-top :20px;
+  	margin-bottom :0px;
+  } 

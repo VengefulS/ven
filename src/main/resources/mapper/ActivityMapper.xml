@@ -94,7 +94,7 @@
         </where>
 	</select>
 	<select id="findActivityList" parameterType="java.util.Map" resultType="cn.org.cflac.entity.Activity">
-	SELECT L.activity_name,L.activity_type,L.activity_person,L.activity_site,
+	SELECT L.activity_id,L.activity_name,L.activity_type,L.activity_person,L.activity_site,
 	 L.activity_begin_date,L.activity_video_gatherer
 	from activity_info L 
 	<where>

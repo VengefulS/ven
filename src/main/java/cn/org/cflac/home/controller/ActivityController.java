@@ -2,12 +2,11 @@ package cn.org.cflac.home.controller;
 
 
 
-import java.util.Enumeration;
 
-import javax.servlet.http.HttpServletRequest;
+
+
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -15,6 +14,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import cn.org.cflac.entity.Activity;
 import cn.org.cflac.entity.Paging;
+import cn.org.cflac.entity.Video;
 import cn.org.cflac.home.service.ActivityService;
 
 
@@ -26,7 +26,7 @@ public class ActivityController {
 	@Autowired
 	private ActivityService activityService;
 	
-	@RequestMapping(value="/FindAll")
+	@RequestMapping(value="/findAll")
 	@ResponseBody
 	public Paging<Activity> FindAll(Integer draw,
 			@RequestParam(value = "search[value]",required = false) String search,
@@ -65,4 +65,7 @@ public class ActivityController {
         }
         return paging;
 	}
+	
+	
+	
 }

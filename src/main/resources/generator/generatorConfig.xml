@@ -8,7 +8,7 @@
             <property name="suppressDate" value="true"/> <!-- 是否去除自动生成的注释 true：是 ： false:否 -->
             <property name="suppressAllComments" value="true"/>
         </commentGenerator> <!--数据库链接URL，用户名、密码 -->
-        <jdbcConnection driverClass="com.mysql.cj.jdbc.Driver" connectionURL="jdbc:mysql://10.1.100.165/spzy" userId="lar"
+        <jdbcConnection driverClass="com.mysql.cj.jdbc.Driver" connectionURL="jdbc:mysql://10.1.100.165/lar_test" userId="lar"
                         password="larlar"></jdbcConnection>
         <javaTypeResolver>
             <property name="forceBigDecimals" value="false"/>
@@ -23,11 +23,11 @@
         <javaClientGenerator type="XMLMAPPER" targetPackage="cn.org.cflac.home.dao" targetProject="src/main/java">
             <property name="enableSubPackages" value="true"/>
         </javaClientGenerator> <!-- 要生成的表 tableName是数据库中的表名或视图名 domainObjectName是实体类名-->
-        <table tableName="activity_info" domainObjectName="Activity" enableCountByExample="false" enableUpdateByExample="false"
+        <table tableName="t_train_project_fund" domainObjectName="TTrainProjectFund" enableCountByExample="false" enableUpdateByExample="false"
                enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false"></table>
-               <table tableName="user" domainObjectName="User" enableCountByExample="false" enableUpdateByExample="false"
+               <table tableName="t_train_project_plan" domainObjectName="TTrainProjectPlan" enableCountByExample="false" enableUpdateByExample="false"
                enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false"></table>
-               <table tableName="activity_video" domainObjectName="Video" enableCountByExample="false" enableUpdateByExample="false"
+               <table tableName="t_train_student_project_rel" domainObjectName="TTrainStudentProjectRel" enableCountByExample="false" enableUpdateByExample="false"
                enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false"></table>
                
     </context>

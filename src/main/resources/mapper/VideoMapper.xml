@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="cn.org.cflac.home.dao.VideoMapper">
+<mapper namespace="cn.org.cflac.home.mapper.VideoMapper">
   <resultMap id="BaseResultMap" type="cn.org.cflac.entity.Video">
     <result column="video_id" jdbcType="VARCHAR" property="videoId" />
     <result column="video_name" jdbcType="VARCHAR" property="videoName" />
@@ -51,4 +51,19 @@
       </if>
     </trim>
   </insert>
+  
+  
+  <select id="findVideoByActid" parameterType="java.util.Map" resultType="cn.org.cflac.entity.Video">
+  SELECT V.video_id, V.video_name,V.video_address ,V.video_introduction,V.video_upload_time from activity_video V where V.video_id in (
+	SELECT
+	R.video_id 
+	FROM
+	activity_video_rel R 
+	<where>
+	<if test="activityId != null">
+	R.activity_id = #{activityId}
+	</if>
+	</where>
+	) ORDER BY video_upload_time DESC
+  </select>
 </mapper>
