@@ -2,6 +2,7 @@ spring:
   thymeleaf:
     prefix: classpath:/templates/
     suffix: .html
+    cache: false
 
  # profiles: dev
 
@@ -12,7 +13,12 @@ spring:
     password: root
     driver-class-name: com.mysql.cj.jdbc.Driver
 
-
+  servlet:
+    multipart:
+      max-file-size: 100MB
+      max-request-size: 100MB
+      enabled:  true
+        
 
 mybatis:
   configuration:

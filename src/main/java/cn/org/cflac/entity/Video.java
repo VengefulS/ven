@@ -8,6 +8,8 @@ public class Video {
     private String videoName;
 
     private String videoAddress;
+    
+    private String videoPicAddress;
 
     private String videoIntroduction;
 
@@ -37,7 +39,17 @@ public class Video {
         this.videoAddress = videoAddress == null ? null : videoAddress.trim();
     }
 
-    public String getVideoIntroduction() {
+    
+    
+    public String getVideoPicAddress() {
+		return videoPicAddress;
+	}
+
+	public void setVideoPicAddress(String videoPicAddress) {
+		this.videoPicAddress = videoPicAddress;
+	}
+
+	public String getVideoIntroduction() {
         return videoIntroduction;
     }
 

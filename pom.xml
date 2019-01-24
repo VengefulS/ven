@@ -25,6 +25,8 @@
 			<artifactId>spring-boot-starter-data-jpa</artifactId>
 		</dependency>
 		
+		
+		
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-web</artifactId>
@@ -40,7 +42,7 @@
 			<artifactId>spring-boot-starter-test</artifactId>
 			<scope>test</scope>
 		</dependency>
-		
+		<!-- thymeleaf模板插件 -->
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-thymeleaf</artifactId>
@@ -74,6 +76,16 @@
             <artifactId>pagehelper</artifactId>
             <version>4.1.0</version>
         </dependency>
+        
+        <!-- devtools插件，热部署 -->
+    	<dependency>
+       		<groupId>org.springframework.boot</groupId>
+       		<artifactId>spring-boot-devtools</artifactId>
+        	<optional>true</optional>
+        	<scope>true</scope>
+        	<version>2.1.1.RELEASE</version>
+    	</dependency>
+        
 	</dependencies>
 
 	<build>

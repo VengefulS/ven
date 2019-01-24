@@ -4989,3 +4989,9 @@ table.text-center th {
   	margin-top :20px;
   	margin-bottom :0px;
   } 
+.modal-pic{
+	height : 33.33333%;	
+}
+.videoPlay-body {
+	padding : 0px;
+}

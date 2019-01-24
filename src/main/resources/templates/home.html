@@ -67,13 +67,13 @@
   </footer>
 
 </div>
-<!-- 模态框（Modal） -->
-<div class="modal fade" id="videoModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" >
+<!-- 视频列表模态框（Modal） -->
+<div class="modal fade" id="videoListModal" data-backdrop="static" tabindex="-2" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" >
     <div class="modal-dialog" >
         <div class="modal-content" style=" width:100%;height:82% ">
             <div class="modal-header" style=" width:100%; height:11%;" >
                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                <h4 class="modal-title modal-actName" id="myModalLabel"></h4>
+                <h4 class="modal-title modal-actName" id="myModalLabel" name="modal-aName"></h4>
             </div>
             <div class="modal-body modal-video" style="overflow:auto; width:100%; height:430px;"  >
 			
@@ -86,6 +86,50 @@
         </div><!-- /.modal-content -->
     </div><!-- /.modal -->
 </div>
+
+<!-- 视频播放模态框（Modal） -->
+<div class="modal fade" id="videoModal"  data-backdrop="static" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" >
+    <div class="modal-dialog" >
+        
+        <div class="modal-content video-play" style=" width:630px;height:500px ">
+        <div class="modal-header" style=" width:100%; height:11%;" >
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h4 class="modal-title modal-videoName" id="myModalLabel"></h4>
+            </div>
+            <div class="modal-body videoPlay-body" style="overflow:auto; width:100%; height:89%;"  >
+			    <video id="videoPlay1" width="100%" height="98%"   controls="controls" x-webkit-airplay="true" loop="flase" webkit-playsinline="true"></video>
+			</div>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal -->
+</div>
+
+
+<!-- 视频添加模态框（Modal） -->
+<div class="modal fade" id="addVideoModal"  data-backdrop="static" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" >
+    <div class="modal-dialog" >
+        
+        <div class="modal-content " style=" width:500px;height:600px ">
+        <div class="modal-header" style=" width:100%; height:11%;" >
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h4 class="modal-title modal-add-actName" id="myModalLabel"></h4>
+            </div>
+            <div class="modal-body " style="overflow:auto; width:100%; height:76%;"  >
+			<form  id="addVideo-tb">
+				<p>视频名称：<input type="text" name="videoName" class="videoName"  /></p>
+				<p><span style="float: left">视频简介：</span><textarea maxlength="350" cols="30" rows="5" name="videoIntroduction" class="videoIntroduction"  /></textarea></p>
+				<p>选择文件: <input type="file" name="fileName"></p>
+				<input type="button" value="开始上传" >
+				<h4 id="upload-msg"></h4>
+			</form>
+			</div>
+			<div class="modal-footer" style=" width:100%; height:13%;" >
+                <button type="button" class="btn btn-primary btn-addVideoFile" >提交</button>
+                <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+            </div>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal -->
+</div>
+
 <!-- jQuery 3 -->
 <script src="/jquery/dist/jquery.js"></script>
 <!-- Bootstrap 3.3.7 -->
@@ -104,19 +148,6 @@
 
 <script src="/js/home.js"></script>
 
-<!-- page script -->
-<script>
-  /* $(function () {
-    $('#example1').DataTable()
-    $('#example2').DataTable({
-      'paging'      : true,
-      'lengthChange': false,
-      'searching'   : false,
-      'ordering'    : true,
-      'info'        : false,
-      'autoWidth'   : true
-    })
-  }) */
-</script>
+
 </body>
 </html>

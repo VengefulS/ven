@@ -138,7 +138,7 @@ function query(search){
 		"columnDefs" : [{
 			"targets" : -1,
 			"render" : function(data, type, full, meta) {
-				var ret = "<button id="+full.activityId+" name="+full.activityName+" class = \"btn btn-default btn-sm btn-tmodal\" type=\"button\"  data-toggle=\"modal\" data-target=\"#videoModal\" onClick=\"modalVideo(this)\"  ><span class=\"glyphicon glyphicon-play\"></span> </button>"
+				var ret = "<button id="+full.activityId+" name="+full.activityName+" class = \"btn btn-default btn-sm btn-tmodal\" type=\"button\"  data-toggle=\"modal\" data-target=\"#videoListModal\" onClick=\"modalVideo(this)\"  ><span class=\"glyphicon glyphicon-play\"></span> </button>"
 				/*var btn = $("<button class = \"btn btn-default btn-sm btn-tmodal\" type=\"button\"  data-toggle=\"modal\" data-target=\"#videoModal\" onClick=\"modalVideo(this)\"> </button>")
 				btn.data("id",actid);
 				btn.append("<span class=\"glyphicon glyphicon-play\"></span>");*/
@@ -152,8 +152,8 @@ function query(search){
 	
 }
 
-
-function modalVideo(act,data){
+/* 视频列表  */
+function modalVideo(act){
 	$('.modal-video').empty();
 	$('#myModalLabel').html('');
 	
@@ -166,34 +166,94 @@ function modalVideo(act,data){
 		async  : false,
 		data  :{"activityId" : act.id},
 		success : function(data){
-			console.log("11111111111");
 			var txt='';
+			var va='';
+			var vpa='';
+			var vn='';
 			for(var i = 0;i<data.data.length;i++){
-				txt = '\<div class="col-sm-8 col-md-4"\>'
-					+'\<a href="#" class="thumbnail" \>'
+				va=data.data[i].videoAddress;
+				vpa=data.data[i].videoPicAddress;
+				vn=data.data[i].videoName;
+				console.log("11111111");
+				txt = '\<div class="col-sm-8 col-md-4 modal-pic " \>'
+					+'\<a href="#" class="thumbnail" onClick="videoPlay(\''+va+'\',\''+vpa+'\',\''+vn+'\')" \>' 
 					+'\<img src="'
-					+data.data[i].videoAddress
-					+'"alt="视频缩略图"\>\</a\>'
-					+data.data[i].videoName
+					+vpa
+					+'" alt="视频缩略图"\>\</a\>'
+					+vn
 					+'\</div\>';
 				$('.modal-video').append(txt);
 			}
-		}
+		},
+		error:function(e){
+            alert("视频获取异常");
+            window.clearInterval(timer);
+        }
 		
-		/*"dataFilter" : function(data,type) {
-			var json = JSON.parse(data);
-			var returnData = {};
-			returnData.data = json.data;
-			return JSON.stringify(returnData);
-		}*/
+		
 	});
 	
 	var txtend=	'\<div class="col-sm-8 col-md-4"\>'
-		+'\<a href="#" class="thumbnail" \>'
+		+'\<a href="#" class="thumbnail" onClick=addVideo() \>'
 		+'\<img src='
 		+'"img/add.gif"'
 		+'alt="视频添加"\>\</a\>'
 		+'\</div\>';
 	$('.modal-video').append(txtend);
 }
+
+/*  视频播放  */
+function videoPlay(url,picUrl,name){
+	$(".modal-videoName").empty();
+	$("#videoModal").modal('show');
+	
+	$(".modal-videoName").html(name);
+	
+	$("#videoPlay1").attr("src",url);
+	$("#videoPlay1").attr("poster",picUrl);
+	console.log("1111111111");
+}
+
+/*视频上传窗口弹出*/
+
+function addVideo(){
+	$(".modal-add-actName").empty();
+	$(".videoName").val("");
+	$(".videoIntroduction").val("");
+	
+	
+	$("#addVideoModal").modal('show');
+	console.log("2222222222");
+	
+	var aname = document.getElementsByName("modal-aName")[0].innerText;
+	$(".modal-add-actName").html("为"+aname+"添加视频");
+	
+	
+	
+	
+	
+	
+}
+//现在没使用
+function uploadtest(){
+    var form = new FormData(document.getElementById("addVideo-tb"));
+
+    $.ajax({
+        url:"/video/videoFileUpload",
+        type:"post",
+        data:form,
+        processData:false,
+        contentType:false,
+        success:function(data){
+            window.clearInterval(timer);
+            console.log("视频添加成功");
+        },
+        error:function(e){
+            alert("添加失败");
+            window.clearInterval(timer);
+        }
+    });        
+   /* get();//此处为上传文件的进度条
+*/}
+
 

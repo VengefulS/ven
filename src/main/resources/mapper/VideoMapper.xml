@@ -54,7 +54,7 @@
   
   
   <select id="findVideoByActid" parameterType="java.util.Map" resultType="cn.org.cflac.entity.Video">
-  SELECT V.video_id, V.video_name,V.video_address ,V.video_introduction,V.video_upload_time from activity_video V where V.video_id in (
+  SELECT V.video_id, V.video_name,V.video_address,V.video_pic_address ,V.video_introduction,V.video_upload_time from activity_video V where V.video_id in (
 	SELECT
 	R.video_id 
 	FROM
