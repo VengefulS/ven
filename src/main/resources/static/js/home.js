@@ -121,7 +121,7 @@ function query(search){
 			"defaultContent" : "",
 			"visible" : true
 		}, {
-			"title" : "采集人",
+			"title" : "视频采集人",
 			"type" : "html",
 			"data" : "activityVideoGatherer",
 			"defaultContent" : "",
@@ -174,7 +174,7 @@ function modalVideo(act){
 				va=data.data[i].videoAddress;
 				vpa=data.data[i].videoPicAddress;
 				vn=data.data[i].videoName;
-				console.log("11111111");
+				
 				txt = '\<div class="col-sm-8 col-md-4 modal-pic " \>'
 					+'\<a href="#" class="thumbnail" onClick="videoPlay(\''+va+'\',\''+vpa+'\',\''+vn+'\')" \>' 
 					+'\<img src="'
@@ -211,49 +211,73 @@ function videoPlay(url,picUrl,name){
 	
 	$("#videoPlay1").attr("src",url);
 	$("#videoPlay1").attr("poster",picUrl);
-	console.log("1111111111");
+	
+	$(".videoPlay-close").click(function(){
+		$("#videoPlay1").attr("src","");
+		$("#videoPlay1").attr("poster","");
+	})
 }
 
 /*视频上传窗口弹出*/
 
 function addVideo(){
+	
 	$(".modal-add-actName").empty();
 	$(".videoName").val("");
 	$(".videoIntroduction").val("");
-	
-	
 	$("#addVideoModal").modal('show');
 	console.log("2222222222");
 	
 	var aname = document.getElementsByName("modal-aName")[0].innerText;
 	$(".modal-add-actName").html("为"+aname+"添加视频");
 	
-	
-	
-	
-	
+
 	
 }
-//现在没使用
-function uploadtest(){
-    var form = new FormData(document.getElementById("addVideo-tb"));
+/*$("#btn-addVideoFile").click(function(){
+	uploadtest();
+});
 
+
+function uploadtest(){
+	console.log("uploadtest");
+	var dd = '<div class="progress" style="width: 350px">'
+			 +'<div id="progress-bar" class="progress-bar progress-bar-success progress-bar-striped" role="progressbar"'
+			 +'aria-valuenow="40" aria-valuemin="0" aria-valuemax="100" style="width: 0%">'
+			 +'<span class="sr-only">40% Complete (success)</span>'
+			 +'</div>'
+			 +'</div>'
+	$("#progress-d").append(dd);
+	
+	
+    //var form = new FormData(document.getElementById("addVideo-tb"));
+    form.append('videoName','66666');
+
+    
+    
     $.ajax({
-        url:"/video/videoFileUpload",
-        type:"post",
-        data:form,
+        url:"/video/fileUpload",
+        type : "POST",
+        data:$("#addVideo-tb").serialize(),
+        cache: false,
         processData:false,
         contentType:false,
         success:function(data){
-            window.clearInterval(timer);
-            console.log("视频添加成功");
+           
+        	   console.log("视频添加成功");
+           
         },
         error:function(e){
             alert("添加失败");
-            window.clearInterval(timer);
         }
-    });        
-   /* get();//此处为上传文件的进度条
-*/}
+    });       
+    //get();//此处为上传文件的进度条
+}
+
+*/
+
+
+
+
 
 
