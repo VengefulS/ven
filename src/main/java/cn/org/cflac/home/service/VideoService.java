@@ -10,4 +10,7 @@ public interface VideoService {
 
 	
 	Paging<Video> findVideoByActid(String activityId);
+
+	
+	 Map insertVideo(Map videoMap);
 }

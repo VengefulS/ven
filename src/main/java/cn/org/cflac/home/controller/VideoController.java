@@ -3,8 +3,10 @@ package cn.org.cflac.home.controller;
 import java.io.File;
 import java.io.IOException;
 import java.util.Enumeration;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
 
 
 
@@ -51,6 +53,19 @@ public class VideoController {
 		
 	}
 	
+	
+	//save
+	@RequestMapping(value = "/insert")
+	public Map insertVideo(Map videoMap){
+	
+		return videoService.insertVideo(videoMap);
+
+	}
+	
+	
+	
+	
+	
 	public static void main(String[] args) {
 		String fileName = "qweqw.mp4";
 		
@@ -59,11 +74,7 @@ public class VideoController {
 	}
 	
 	
-    /**
-     * 视频文件上传
-     * @param file
-     * @return
-     */
+/*    
     @RequestMapping("/fileUpload")
     @ResponseBody 
     public String fileUpload(@RequestParam("fileName") MultipartFile file,
@@ -109,5 +120,5 @@ public class VideoController {
         }
 	
 	
-    }
+    }*/
 }

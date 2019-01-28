@@ -3,58 +3,20 @@
 <mapper namespace="cn.org.cflac.home.mapper.VideoMapper">
   <resultMap id="BaseResultMap" type="cn.org.cflac.entity.Video">
     <result column="video_id" jdbcType="VARCHAR" property="videoId" />
-    <result column="video_name" jdbcType="VARCHAR" property="videoName" />
     <result column="video_address" jdbcType="VARCHAR" property="videoAddress" />
-    <result column="video_introduction" jdbcType="VARCHAR" property="videoIntroduction" />
+    <result column="video_pic_address" jdbcType="VARCHAR" property="videoPicAddress" />
     <result column="video_upload_time" jdbcType="DATE" property="videoUploadTime" />
   </resultMap>
-  <insert id="insert" parameterType="cn.org.cflac.entity.Video">
-    insert into activity_video (video_id, video_name, video_address, 
-      video_introduction, video_upload_time)
-    values (#{videoId,jdbcType=VARCHAR}, #{videoName,jdbcType=VARCHAR}, #{videoAddress,jdbcType=VARCHAR}, 
-      #{videoIntroduction,jdbcType=VARCHAR}, #{videoUploadTime,jdbcType=DATE})
+  <insert id="insertVideo" parameterType="cn.org.cflac.entity.Video">
+    insert into activity_video (video_id, video_address, video_pic_address,video_upload_time)
+    values (replace(uuid(),'-',''), #{videoAddress}
+    , #{videoPicAddress}, NOW())
   </insert>
-  <insert id="insertSelective" parameterType="cn.org.cflac.entity.Video">
-    insert into activity_video
-    <trim prefix="(" suffix=")" suffixOverrides=",">
-      <if test="videoId != null">
-        video_id,
-      </if>
-      <if test="videoName != null">
-        video_name,
-      </if>
-      <if test="videoAddress != null">
-        video_address,
-      </if>
-      <if test="videoIntroduction != null">
-        video_introduction,
-      </if>
-      <if test="videoUploadTime != null">
-        video_upload_time,
-      </if>
-    </trim>
-    <trim prefix="values (" suffix=")" suffixOverrides=",">
-      <if test="videoId != null">
-        #{videoId,jdbcType=VARCHAR},
-      </if>
-      <if test="videoName != null">
-        #{videoName,jdbcType=VARCHAR},
-      </if>
-      <if test="videoAddress != null">
-        #{videoAddress,jdbcType=VARCHAR},
-      </if>
-      <if test="videoIntroduction != null">
-        #{videoIntroduction,jdbcType=VARCHAR},
-      </if>
-      <if test="videoUploadTime != null">
-        #{videoUploadTime,jdbcType=DATE},
-      </if>
-    </trim>
-  </insert>
+  
   
   
   <select id="findVideoByActid" parameterType="java.util.Map" resultType="cn.org.cflac.entity.Video">
-  SELECT V.video_id, V.video_name,V.video_address,V.video_pic_address ,V.video_introduction,V.video_upload_time from activity_video V where V.video_id in (
+  SELECT V.video_id,V.video_address,V.video_pic_address,V.video_upload_time from activity_video V where V.video_id in (
 	SELECT
 	R.video_id 
 	FROM

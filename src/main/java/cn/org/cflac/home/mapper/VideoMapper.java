@@ -5,6 +5,8 @@ import java.util.Map;
 
 
 
+
+
 import org.apache.ibatis.annotations.Mapper;
 
 import cn.org.cflac.entity.Video;
@@ -14,4 +16,8 @@ public interface VideoMapper {
     
     //根据活动ID查询视频列表
     List<Video> findVideoByActid(Map map);
+
+    //添加视频
+	public int insertVideo(Map videoMap);
+    
 }

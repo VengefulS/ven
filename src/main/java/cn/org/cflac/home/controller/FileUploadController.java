@@ -5,16 +5,23 @@ package cn.org.cflac.home.controller;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 
+
+
+
+
 import com.alibaba.fastjson.JSONObject;
 
 import org.apache.log4j.Logger;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.util.FileCopyUtils;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -23,6 +30,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 
+import cn.org.cflac.home.service.VideoService;
 import cn.org.cflac.util.BuildJsonOfObject;
 
 
@@ -30,11 +38,15 @@ import cn.org.cflac.util.BuildJsonOfObject;
 
 @RestController
 @RequestMapping("/videof")
-public class TestFileUpload {
+public class FileUploadController {
 
 	private Logger log;
+	
+	@Autowired
+	private VideoService videoService;
+	
 	 
-	public TestFileUpload() {
+	public FileUploadController() {
 		this.log = Logger.getLogger(this.getClass());
 	}
  
@@ -44,16 +56,27 @@ public class TestFileUpload {
 		response.setCharacterEncoding("utf-8");
 		String msg = "添加成功";
 		log.info("-------------------开始调用上传文件upload接口-------------------");
+		Map<String,String> map = new HashMap();
 		try{
 		String name = files.getOriginalFilename();
-		//String path = TestFileUpload.class.getClassLoader().getResource("/").toString();
-		//int index = path.indexOf("Shopping");
-		/*path = path.substring(0, index + "Shopping".length()) + "/WebContent/resources/upload/";*/
-		/*String path = ""*/
+		
 		String path = "D:/www/"; //将文件上传的地址写成了本地  文件夹www需要存在
-		path = path + File.separator + name;
+		String folder = name.split("\\.")[0];
+		String picPath ="http://10.1.100.152/resource/2.jpg";
+		//调用方法为上传的视频生成一个缩略图然后存到picPath中
+		path = path + File.separator + folder+ File.separator +name;
+		
+		map.put("videoAddress", path);
+		map.put("videoPicAddress", picPath);
+		videoService.insertVideo(map);
+		
 		File uploadFile = new File(path);
+		if(!uploadFile.getParentFile().exists()){ //判断文件父目录是否存在
+			uploadFile.getParentFile().mkdirs();
+        }
 		files.transferTo(uploadFile);
+		
+		
 		}catch(Exception e){
 			msg="添加失败";
 			e.printStackTrace();
@@ -61,7 +84,10 @@ public class TestFileUpload {
 		}
 		log.info("-------------------结束调用上传文件upload接口-------------------");
 		json.put("msg", msg);
+		
+		//return videoService.insertVideo(map);
 		return BuildJsonOfObject.buildJsonOfJsonObject(json);
+		
 	}
  
 	/*private byte[] inputStreamToByte(InputStream is) throws IOException {
@@ -75,7 +101,7 @@ public class TestFileUpload {
 		return data;
 	}*/
  //这个方法没用到
-	@RequestMapping(value = "/uploadservlet", method = RequestMethod.POST, produces = "text/html;charset=utf-8")
+/*	@RequestMapping(value = "/uploadservlet", method = RequestMethod.POST, produces = "text/html;charset=utf-8")
 	protected String uploadServlet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		JSONObject json=new JSONObject();
@@ -107,5 +133,5 @@ public class TestFileUpload {
 		log.info("-------------------结束调用上传文件uploadservlet接口-------------------");
 		json.put("msg", msg);
 		return BuildJsonOfObject.buildJsonOfJsonObject(json);
-	}
+	}*/
 }

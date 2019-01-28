@@ -11,6 +11,9 @@ import org.springframework.stereotype.Service;
 
 
 
+
+
+
 import cn.org.cflac.entity.Paging;
 import cn.org.cflac.entity.Video;
 import cn.org.cflac.home.mapper.VideoMapper;
@@ -38,5 +41,18 @@ public class VideoServiceImpl implements VideoService {
         paging.setData(list);
         return paging;
 	}
+
+	@Override
+	public Map insertVideo(Map videoMap) {
+		
+			videoMapper.insertVideo(videoMap);
+			return videoMap;
+	}
+
+
+
+	
+
+	
 
 }

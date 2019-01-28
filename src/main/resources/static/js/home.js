@@ -132,11 +132,17 @@ function query(search){
 			"data" : "",
 			"defaultContent" : "",
 			"visible" : true
+		},{
+			"title" : "批量下载",
+			"type" : "html",
+			"data" : "",
+			"defaultContent" : "",
+			"visible" : true
 		}
 		],
-		// 最后列描述  加按钮
+		// 从右向左第二列列描述  加按钮
 		"columnDefs" : [{
-			"targets" : -1,
+			"targets" : -2,
 			"render" : function(data, type, full, meta) {
 				var ret = "<button id="+full.activityId+" name="+full.activityName+" class = \"btn btn-default btn-sm btn-tmodal\" type=\"button\"  data-toggle=\"modal\" data-target=\"#videoListModal\" onClick=\"modalVideo(this)\"  ><span class=\"glyphicon glyphicon-play\"></span> </button>"
 				/*var btn = $("<button class = \"btn btn-default btn-sm btn-tmodal\" type=\"button\"  data-toggle=\"modal\" data-target=\"#videoModal\" onClick=\"modalVideo(this)\"> </button>")
@@ -145,7 +151,29 @@ function query(search){
 				return ret;
 				}
 			
-			}]
+			},{
+				"targets" : -1, 
+				"render" : function(data, type, full, meta) {
+					var ret = "<button  class = \"btn-download\" ><span class=\"glyphicon glyphicon-download-alt\"></span> </button>"
+					/*var btn = $("<button class = \"btn btn-default btn-sm btn-tmodal\" type=\"button\"  data-toggle=\"modal\" data-target=\"#videoModal\" onClick=\"modalVideo(this)\"> </button>")
+					btn.data("id",actid);
+					btn.append("<span class=\"glyphicon glyphicon-play\"></span>");*/
+					return ret;
+					}
+				
+				}]/*,
+			// 最后列描述  加按钮
+			"columnDefs" : [{
+				"targets" : -1,
+				"render" : function(data, type, full, meta) {
+					var ret = "<button id="+full.activityId+" name="+full.activityName+" class = \"btn-download\" ><span class=\"glyphicon glyphicon-download-alt\"></span> </button>"
+					var btn = $("<button class = \"btn btn-default btn-sm btn-tmodal\" type=\"button\"  data-toggle=\"modal\" data-target=\"#videoModal\" onClick=\"modalVideo(this)\"> </button>")
+					btn.data("id",actid);
+					btn.append("<span class=\"glyphicon glyphicon-play\"></span>");
+					return ret;
+					}
+				
+				}]*/
 
 	}).api();
 	
@@ -173,14 +201,12 @@ function modalVideo(act){
 			for(var i = 0;i<data.data.length;i++){
 				va=data.data[i].videoAddress;
 				vpa=data.data[i].videoPicAddress;
-				vn=data.data[i].videoName;
 				
 				txt = '\<div class="col-sm-8 col-md-4 modal-pic " \>'
-					+'\<a href="#" class="thumbnail" onClick="videoPlay(\''+va+'\',\''+vpa+'\',\''+vn+'\')" \>' 
+					+'\<a href="#" class="thumbnail" onClick="videoPlay(\''+va+'\',\''+vpa+'\')" \>' 
 					+'\<img src="'
 					+vpa
 					+'" alt="视频缩略图"\>\</a\>'
-					+vn
 					+'\</div\>';
 				$('.modal-video').append(txt);
 			}
@@ -223,6 +249,7 @@ function videoPlay(url,picUrl,name){
 function addVideo(){
 	
 	$(".modal-add-actName").empty();
+	$("#thelist").empty();
 	$(".videoName").val("");
 	$(".videoIntroduction").val("");
 	$("#addVideoModal").modal('show');
