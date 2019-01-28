@@ -12,6 +12,8 @@ import java.util.Map;
 
 
 
+import java.util.UUID;
+
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -54,13 +56,6 @@ public class VideoController {
 	}
 	
 	
-	//save
-	@RequestMapping(value = "/insert")
-	public Map insertVideo(Map videoMap){
-	
-		return videoService.insertVideo(videoMap);
-
-	}
 	
 	
 	
@@ -68,9 +63,9 @@ public class VideoController {
 	
 	public static void main(String[] args) {
 		String fileName = "qweqw.mp4";
-		
+		String uuid = UUID.randomUUID().toString().replaceAll("-","");
 		System.out.println(fileName.split("\\.")[0]);
-	
+		System.out.println(uuid);
 	}
 	
 	

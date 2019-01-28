@@ -19,5 +19,8 @@ public interface VideoMapper {
 
     //添加视频
 	public int insertVideo(Map videoMap);
+	
+	//向关联表插入数据
+	public int insertActivityVideoRel(Map relMap);
     
 }

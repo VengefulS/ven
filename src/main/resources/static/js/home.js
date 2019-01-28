@@ -144,7 +144,7 @@ function query(search){
 		"columnDefs" : [{
 			"targets" : -2,
 			"render" : function(data, type, full, meta) {
-				var ret = "<button id="+full.activityId+" name="+full.activityName+" class = \"btn btn-default btn-sm btn-tmodal\" type=\"button\"  data-toggle=\"modal\" data-target=\"#videoListModal\" onClick=\"modalVideo(this)\"  ><span class=\"glyphicon glyphicon-play\"></span> </button>"
+				var ret = "<button id="+full.activityId+" name="+full.activityName+" class = \"btn btn-default btn-sm btn-tmodal btn-actRelId\" type=\"button\"  data-toggle=\"modal\" data-target=\"#videoListModal\" onClick=\"modalVideo(this)\"  ><span class=\"glyphicon glyphicon-play\"></span> </button>"
 				/*var btn = $("<button class = \"btn btn-default btn-sm btn-tmodal\" type=\"button\"  data-toggle=\"modal\" data-target=\"#videoModal\" onClick=\"modalVideo(this)\"> </button>")
 				btn.data("id",actid);
 				btn.append("<span class=\"glyphicon glyphicon-play\"></span>");*/
@@ -186,7 +186,8 @@ function modalVideo(act){
 	$('#myModalLabel').html('');
 	
 	$('#myModalLabel').html(act.name);
-	// console.log(act.id);
+	
+	 $(".modal-activityId").attr("id",act.id);
 	$.ajax({
 		url	: "/video/findVideoByActid",
 		type  : "POST",
@@ -219,6 +220,8 @@ function modalVideo(act){
 		
 	});
 	
+	
+	
 	var txtend=	'\<div class="col-sm-8 col-md-4"\>'
 		+'\<a href="#" class="thumbnail" onClick=addVideo() \>'
 		+'\<img src='
@@ -226,6 +229,8 @@ function modalVideo(act){
 		+'alt="视频添加"\>\</a\>'
 		+'\</div\>';
 	$('.modal-video').append(txtend);
+/*	var actId = act.id;
+	passActivityId(actId);*/
 }
 
 /*  视频播放  */
@@ -257,10 +262,17 @@ function addVideo(){
 	
 	var aname = document.getElementsByName("modal-aName")[0].innerText;
 	$(".modal-add-actName").html("为"+aname+"添加视频");
-	
-
-	
+		
 }
+
+
+/*function passActivityId(actId){
+	$.ajax({
+		url: "/videof/upload",
+        type: "POST",
+        data: { "activityId" : actId }
+	});
+}*/
 /*$("#btn-addVideoFile").click(function(){
 	uploadtest();
 });

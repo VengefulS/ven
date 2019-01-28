@@ -9,11 +9,17 @@
   </resultMap>
   <insert id="insertVideo" parameterType="cn.org.cflac.entity.Video">
     insert into activity_video (video_id, video_address, video_pic_address,video_upload_time)
-    values (replace(uuid(),'-',''), #{videoAddress}
+    values (#{uuid}, #{videoAddress}
     , #{videoPicAddress}, NOW())
   </insert>
   
+    <insert id="insertActivityVideoRel" parameterType="cn.org.cflac.entity.Relationship">
+    insert into activity_video_rel (id,activity_id, video_id)
+    values (#{uuid}, #{activityId}
+    , #{videoId})
+  </insert>
   
+
   
   <select id="findVideoByActid" parameterType="java.util.Map" resultType="cn.org.cflac.entity.Video">
   SELECT V.video_id,V.video_address,V.video_pic_address,V.video_upload_time from activity_video V where V.video_id in (

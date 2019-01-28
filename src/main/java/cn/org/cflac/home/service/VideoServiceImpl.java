@@ -49,6 +49,14 @@ public class VideoServiceImpl implements VideoService {
 			return videoMap;
 	}
 
+	@Override
+	public Map insertRel(Map relMap) {
+		
+		videoMapper.insertActivityVideoRel(relMap);
+		
+		return relMap;
+	}
+
 
 
 	

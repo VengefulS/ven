@@ -67,8 +67,17 @@ uploader.on( 'uploadError', function( file ) {
 uploader.on( 'uploadComplete', function( file ) {
     $( '#'+file.id ).find('.progress').fadeOut();
 });
+uploader.on( 'uploadBeforeSend', function( block, data ) {
+    //file.relActId= document.getElementsByName("modal-activityId")[0].id;
+    
+    // file为分块对应的file对象。
+    var file = block.file;
+ 
+ 
+    // 修改data可以控制发送哪些携带数据。
+    data.relActId = document.getElementsByName("modal-activityId")[0].id;
+});
 $("#ctlBtn").on('click', function() {
-	
 		uploader.upload();
 	
 });
