@@ -7,7 +7,9 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.OutputStream;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipOutputStream;
 
@@ -16,6 +18,8 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+
+import cn.org.cflac.util.DownloadHelp;
 
 @RestController
 @RequestMapping("/videod")
@@ -26,30 +30,39 @@ public class FileDownloadController {
 	//普通java文件下载方法，适用于所有框架  
 	@RequestMapping("/download")
     public String downloadFiles(HttpServletRequest request,HttpServletResponse res) throws IOException {
-         String basePath = "http://10.1.100.152/resource/videoresource";
+         String basePath = "D://www/";
          
          
 
         //获取文件名称（包括文件格式）  
         String fileName = "video1.mp4";  
+        
+        //根据活动id到数据库查询相关的视频id 将地址取出存入下面的list中
 
+        //List videoList = new ArrayList<String>();//把取出来的视频地址放到list中
+        
+        
+        
+        
         //组合成完整的文件路径  
         String targetPath = basePath+File.separator+fileName;
 
         //模拟多一个文件，用于测试多文件批量下载  
-        String targetPath1 = basePath+File.separator+"2.jpg";  
+       // String targetPath1 = basePath+File.separator+"2.jpg";  
         //模拟文件路径下再添加个文件夹，验证穷举
-        String targetPath2 = basePath+File.separator+"test";
+       // String targetPath2 = basePath+File.separator+"test";
 
         System.out.println("文件名："+fileName);  
         System.out.println("文件路径："+targetPath);  
 
+        
+        
        //方法1：IO流实现下载的功能  
-        res.setContentType("text/html; charset=UTF-8"); //设置编码字符  
+       /* res.setContentType("text/html; charset=UTF-8"); //设置编码字符  
         res.setContentType("application/octet-stream"); //设置内容类型为下载类型  
         res.setHeader("Content-disposition", "attachment;filename="+fileName);//设置下载的文件名称  
         OutputStream out = res.getOutputStream();   //创建页面返回方式为输出流，会自动弹出下载框   
-
+*/
 /*    //方法1-1：IO字节流下载，用于小文件  
         System.out.println("字节流下载");  
         InputStream is = new FileInputStream(targetPath);  //创建文件输入流  
@@ -62,10 +75,14 @@ public class FileDownloadController {
         */  
 
 
-/*    //方法1-2：IO字符流下载，用于大文件  
-        System.out.println("字符流");  
+    //方法1-2：IO字符流下载，用于大文件  
+        System.out.println("");  
         File file = new File(targetPath);  //创建文件  
-        FileInputStream fis=new FileInputStream(file);  //创建文件字节输入流  
+        
+        DownloadHelp dh = new DownloadHelp();
+        dh.download(request,res,fileName,file);
+        
+      /*  FileInputStream fis=new FileInputStream(file);  //创建文件字节输入流  
         BufferedInputStream bis=new BufferedInputStream(fis); //创建文件缓冲输入流  
         byte[] buffer = new byte[bis.available()];//从输入流中读取不受阻塞
         bis.read(buffer);//读取数据文件
@@ -73,16 +90,21 @@ public class FileDownloadController {
         out.write(buffer);//输出数据文件
         out.flush();//释放缓存
         out.close();//关闭输出流
-*/   
+*/  
 
-    //方法1-3：将附件中多个文件进行压缩，批量打包下载文件
+ /*   //方法1-3：将附件中多个文件进行压缩，批量打包下载文件
         //创建压缩文件需要的空的zip包  
         String zipBasePath=request.getSession().getServletContext().getRealPath("/upload/zip");  
         String zipName = "temp.zip";
         String zipFilePath = zipBasePath+File.separator+zipName;  
 
-        //创建需要下载的文件路径的集合
+        //创建需要下载的文件路径的集合 						 上面创建了一个list 中已经存放了要下载的视频地址
+        
+        
+        
+        
         List<String> filePaths = new ArrayList<String>();  
+        
         filePaths.add(targetPath);  
         filePaths.add(targetPath1); 
         filePaths.add(targetPath2);
@@ -94,7 +116,7 @@ public class FileDownloadController {
         }
         //创建zip文件输出流  
         ZipOutputStream zos = new ZipOutputStream(new FileOutputStream(zip));
-        this.zipFile(zipBasePath,zipName, zipFilePath,filePaths,zos);
+        this.zipFile(zipBasePath,zipName, zipFilePath,videoList,zos);
         zos.close();
         res.setHeader("Content-disposition", "attachment;filename="+zipName);//设置下载的压缩文件名称
 
@@ -106,18 +128,18 @@ public class FileDownloadController {
         out.write(buff);//输出数据文件
         out.flush();//释放缓存
         out.close();//关闭输出流
-        
+      */
         return null;
     }
 
-    /**
+   /* *//**
      * 压缩文件
      * @param zipBasePath 临时压缩文件基础路径
      * @param zipName 临时压缩文件名称
      * @param zipFilePath 临时压缩文件完整路径
      * @param filePaths 需要压缩的文件路径集合
      * @throws IOException
-     */
+     *//*
     private String zipFile(String zipBasePath, String zipName, String zipFilePath, List<String> filePaths,ZipOutputStream zos) throws IOException {
 
         //循环读取文件路径集合，获取每一个文件的路径  
@@ -158,6 +180,6 @@ public class FileDownloadController {
         return null;
     }
 
-	
+	*/
 	
 }
