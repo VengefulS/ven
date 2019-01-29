@@ -69,19 +69,19 @@ public class FileUploadController {
 		String name = files.getOriginalFilename();
 		
 		String uuid = UUIDGenarator.nextUUID();
-		String path = "D:/www"; //将文件上传的地址写成了本地  文件夹www需要存在
+		String path = "D://www/";//"http://10.1.100.152/resource/videoresource"; 
 		String folder = name.split("\\.")[0];
-		String picPath ="http://10.1.100.152/resource/2.jpg";
+		String picPath ="http://10.1.100.152/resource/imgresource/2.jpg";
 		//调用方法为上传的视频生成一个缩略图然后存到picPath中
-		path = path + File.separator + folder+ File.separator +name;
-		
+		path = path + "/" +name;
+		//"/" + folder+ 
 		
 		
 		
 		CommonsMultipartResolver multipartResolver = new CommonsMultipartResolver();
 	    MultipartHttpServletRequest multiReq = multipartResolver.resolveMultipart(request);
 	    String relActId = multiReq.getParameter("relActId");
-	    System.out.print(relActId);
+	    System.out.println(relActId);
 		
 		
 		
