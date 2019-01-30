@@ -71,20 +71,24 @@ public class FileUploadController {
 		String name = files.getOriginalFilename();
 		
 		String uuid = UUIDGenarator.nextUUID();
-		String path = "D://www/";//"http://10.1.100.152/resource/videoresource"; 
+		String path = "D://www"; 
 		String folder = name.split("\\.")[0];
-		String picPath ="http://10.1.100.152/resource/imgresource/2.jpg";
-		//调用方法为上传的视频生成一个缩略图然后存到picPath中
+		String picPath ="D://www/"+folder+".jpg";
+		//"D://www"       "D://www"+folder+".jpg"
+		//"http://10.1.100.152/opt/lar/files/videomanager/videoresource"
+		//"http://10.1.100.152/opt/lar/files/videomanager/imgresource/"+folder+".jpg"
 		path = path + "/" +name;
 		//"/" + folder+ 
+		System.out.println("folder:"+folder);
 		System.out.println("path:"+path);
+		//调用方法为上传的视频生成一个缩略图然后存到picPath中
 		String videoPicPath = Ffmpeg.createImg(path);
 		System.out.println("videoPicPath:"+videoPicPath);
 		
 		CommonsMultipartResolver multipartResolver = new CommonsMultipartResolver();
 	    MultipartHttpServletRequest multiReq = multipartResolver.resolveMultipart(request);
 	    String relActId = multiReq.getParameter("relActId");
-	    System.out.println(relActId);
+	    System.out.println("relActId:"+relActId);
 		
 		
 		

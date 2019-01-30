@@ -4995,3 +4995,12 @@ table.text-center th {
 .videoPlay-body {
 	padding : 0px;
 }
+
+.modal-activityId div{
+	width: 190px;
+	height:133px;
+	
+}
+.modal-list1 {
+	width:1200px;
+}

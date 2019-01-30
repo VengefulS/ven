@@ -57,6 +57,8 @@ public class ActivityController {
 		System.out.println("start="+index);
 		System.out.println("length="+size);
 		*/
+		
+		System.out.println(search);
 		Paging<Activity> paging = null;
         try {
             paging = activityService.findActivityList(search ,activityName, logdate, starttime, endtime, index, size, draw);
