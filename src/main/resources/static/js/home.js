@@ -154,7 +154,7 @@ function query(search){
 			},{
 				"targets" : -1, 
 				"render" : function(data, type, full, meta) {
-					var ret = "<button  class = \"btn-download\" ><span class=\"glyphicon glyphicon-download-alt\"></span> </button>"
+					var ret = "<button id="+full.activityId+" class = \"btn-download\" onClick=\"downloadVideos(this)\" ><span class=\"glyphicon glyphicon-download-alt\"></span> </button>"
 					/*var btn = $("<button class = \"btn btn-default btn-sm btn-tmodal\" type=\"button\"  data-toggle=\"modal\" data-target=\"#videoModal\" onClick=\"modalVideo(this)\"> </button>")
 					btn.data("id",actid);
 					btn.append("<span class=\"glyphicon glyphicon-play\"></span>");*/
@@ -265,6 +265,14 @@ function addVideo(){
 		
 }
 
+/*批量下载视频*/
+function downloadVideos(v){
+	
+	console.log("downloadVideos");
+	console.log(v.id);
+	
+	window.location.href="/videod/download?id="+v.id;
+}
 
 /*function passActivityId(actId){
 	$.ajax({

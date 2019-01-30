@@ -64,7 +64,7 @@ public class DownloadHelp {
 		} else { // 否则从头开始下载，客户端不支持断点续载
 			contentLength = fileLength; // 200,无需显式设置
 		}
-		resp.reset();
+		//resp.reset();
 		resp.setHeader("Accept-Ranges", "bytes");
 		if (pastLength != 0) { // 不是从头开始下载
 			log.info("文件断点下载");

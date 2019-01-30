@@ -21,6 +21,7 @@ import javax.servlet.http.HttpServletResponse;
 
 
 
+
 import com.alibaba.fastjson.JSONObject;
 
 import org.apache.log4j.Logger;
@@ -36,6 +37,7 @@ import org.springframework.web.multipart.commons.CommonsMultipartResolver;
 
 import cn.org.cflac.home.service.VideoService;
 import cn.org.cflac.util.BuildJsonOfObject;
+import cn.org.cflac.util.Ffmpeg;
 import cn.org.cflac.util.UUIDGenarator;
 
 
@@ -75,8 +77,9 @@ public class FileUploadController {
 		//调用方法为上传的视频生成一个缩略图然后存到picPath中
 		path = path + "/" +name;
 		//"/" + folder+ 
-		
-		
+		System.out.println("path:"+path);
+		String videoPicPath = Ffmpeg.createImg(path);
+		System.out.println("videoPicPath:"+videoPicPath);
 		
 		CommonsMultipartResolver multipartResolver = new CommonsMultipartResolver();
 	    MultipartHttpServletRequest multiReq = multipartResolver.resolveMultipart(request);
@@ -87,7 +90,7 @@ public class FileUploadController {
 		
 		map.put("uuid", uuid);
 		map.put("videoAddress", path);
-		map.put("videoPicAddress", picPath);
+		map.put("videoPicAddress", videoPicPath);
 		videoService.insertVideo(map);
 		/*String relActId = file.*/
 		String uuidRel = UUIDGenarator.nextUUID();
