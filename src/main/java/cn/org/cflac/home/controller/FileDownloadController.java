@@ -89,8 +89,9 @@ public class FileDownloadController {
        // System.out.println(zipBasePath);
         String zipName = "video.zip";
         String zipFilePath = "D://www"+File.separator+zipName;  
-
-        //创建需要下载的文件路径的集合 						 上面创建了一个list 中已经存放了要下载的视频地址
+//request.getServletContext().getRealPath("/");
+System.out.println(request.getServletContext().getRealPath("/"));
+        //创建需要下载的文件路径的集合 
         
         
         
@@ -173,5 +174,6 @@ public class FileDownloadController {
     }
 
 
+   
 	
 }

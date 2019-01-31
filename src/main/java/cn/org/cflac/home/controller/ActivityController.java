@@ -39,7 +39,28 @@ public class ActivityController {
             @RequestParam(value = "starttime",required = false) String starttime,
             @RequestParam(value = "endtime",required = false) String endtime){
 
+		/*List<Activity> list = activityService.findAll(activityId);
+		Map<Integer ,Object> map = new HashMap<Integer, Object>();
+		for(int i =0;i<list.size();i++){
+            map.put(i, list.get(i));  
+        }*/
 		
+		
+		/*Enumeration<String > enums = request.getParameterNames();
+		while(enums.hasMoreElements()){
+			String  paramName=(String)enums.nextElement();
+			String[]  values=request.getParameterValues(paramName);
+			for(int  i=0;i<values.length;i++){
+				System.out.println("["+i+"]   "+paramName+"  "+values[i]);
+			}
+		}*/
+
+		/*System.out.println(search);
+		System.out.println("start="+index);
+		System.out.println("length="+size);
+		*/
+		
+		System.out.println(search);
 		Paging<Activity> paging = null;
         try {
             paging = activityService.findActivityList(search ,activityName, logdate, starttime, endtime, index, size, draw);

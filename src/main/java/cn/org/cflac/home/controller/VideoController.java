@@ -45,7 +45,7 @@ public class VideoController {
 	public Paging<Video> FindVideo(
 			@RequestParam(value = "activityId",required = false) String  activityId){
 		
-		System.out.println(activityId);
+		System.out.println("当前活动ID"+activityId);
 		
 		Paging<Video> paging = null;
         try {

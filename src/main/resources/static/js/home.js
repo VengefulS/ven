@@ -2,7 +2,7 @@
 $(document).ready(function(){
 	var table;
 	query("");
-	$("#findAll_filter .input-sm").attr({'placeholder':'按活动名称查找'});
+	$("#findAll_filter .input-sm").attr({'placeholder':'按活动名称和采集人查找'});
 
 	
 })
@@ -80,6 +80,7 @@ function query(search){
 			"async" : false,
 			"dataType" : "json",
 			"dataFilter" : function(data,type) {
+				console.log("执行ajax");
 				var json = JSON.parse(data);
 				var returnData = {};
 				returnData.draw = json.draw;
@@ -97,25 +98,25 @@ function query(search){
 			"defaultContent" : "",
 			"visible" : true
 		}, {
-			"title" : "时间",
+			"title" : "活动开始时间",
 			"type" : "html",
 			"data" : "displayActivityBeginDate",
 			"defaultContent" : "",
 			"visible" : true
 		},{
-			"title" : "地点",
+			"title" : "活动地点",
 			"type" : "html",
 			"data" : "activitySite",
 			"defaultContent" : "",
 			"visible" : true
 		}, {
-			"title" : "门类",
+			"title" : "活动门类",
 			"type" : "html",
 			"data" : "activityType",
 			"defaultContent" : "",
 			"visible" : true
 		},{
-			"title" : "相关人物",
+			"title" : "活动相关人物",
 			"type" : "html",
 			"data" : "activityPerson",
 			"defaultContent" : "",
@@ -223,10 +224,10 @@ function modalVideo(act){
 	
 	
 	var txtend=	'\<div class="col-sm-8 col-md-4"\>'
-		+'\<a href="#" class="thumbnail" onClick=addVideo() \>'
+		+'\<a href="#" class="thumbnail" onClick=addVideo() style="height:111px;" \>'
 		+'\<img src='
 		+'"img/add.gif"'
-		+'alt="视频添加"\>\</a\>'
+		+'alt="视频添加" style="height:100px;" \>\</a\>'
 		+'\</div\>';
 	$('.modal-video').append(txtend);
 /*	var actId = act.id;

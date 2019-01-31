@@ -12,7 +12,7 @@ public class Ffmpeg {
     int b = videoRealPath.lastIndexOf(".");
     String videoPicName =  videoRealPath.substring(a+1, b);
     //截图的路径（输出路径） 
-    String videoPicPath ="D://www/"+videoPicName+".jpg";
+    String videoPicPath ="D://www"+videoPicName+".jpg";//"http://10.1.100.152/opt/lar/files/videomanager/imgresource/"+videoPicName+".jpg";
     try {   
         //调用批处理文件   
         Runtime.getRuntime().exec("cmd /c start D://ffmpeg/ffmpeg.bat " + videoRealPath + " " + videoPicPath);   
