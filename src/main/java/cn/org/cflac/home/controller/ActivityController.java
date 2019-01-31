@@ -91,7 +91,7 @@ public class ActivityController {
 		
 		activity.setActivityId(UUIDGenarator.nextUUID());
 		activityService.addActivity(activity);
-		return null;
+		return "success";
 		
 	}
 	

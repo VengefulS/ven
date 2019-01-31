@@ -292,7 +292,7 @@ $("#addAtivity").click(function(){
 	$.ajax({
             type: 'post',
             //contentType: 'application/json;charset=utf-8',
-            dataType: 'json',
+            dataType: 'text',
             url: '/act/addActivity',
             data: {
                             "activityName": $("#activityName").val(),
@@ -303,8 +303,8 @@ $("#addAtivity").click(function(){
                             "activityVideoGatherer": $("#activityVideoGatherer").val()
                   },
             success: function (data) {
-               alert("111111");
-               console.log($("#activityName").val());
+               alert("添加成功");
+               //console.log($("#activityName").val());
             }
     })
  });
