@@ -9,6 +9,7 @@
     <result column="activity_site" jdbcType="VARCHAR" property="activitySite" />
     <result column="activity_begin_date" jdbcType="DATE" property="activityBeginDate" />
     <result column="activity_end_date" jdbcType="DATE" property="activityEndDate" />
+    <result column="activity_video_gatherer" jdbcType="VARCHAR" property="activityVideoGatherer" />
   </resultMap>
   <insert id="insert" parameterType="cn.org.cflac.entity.Activity">
     insert into activity_info (activity_id, activity_name, activity_type, 
@@ -20,9 +21,9 @@
   </insert>
   <insert id="insertActivity" parameterType="cn.org.cflac.entity.Activity">
     insert into activity_info (activity_id, activity_name, activity_type, 
-      activity_person, activity_site, activity_begin_date)
+      activity_person, activity_site, activity_begin_date,activity_video_gatherer)
     values (#{activityId,jdbcType=VARCHAR}, #{activityName,jdbcType=VARCHAR}, #{activityType,jdbcType=VARCHAR}, 
-      #{activityPerson,jdbcType=VARCHAR}, #{activitySite,jdbcType=VARCHAR}, #{activityBeginDate,jdbcType=DATE})
+      #{activityPerson,jdbcType=VARCHAR}, #{activitySite,jdbcType=VARCHAR}, #{activityBeginDate,jdbcType=DATE},#{activityVideoGatherer,jdbcType=VARCHAR})
   </insert>
   <insert id="insertSelective" parameterType="cn.org.cflac.entity.Activity">
     insert into activity_info
@@ -48,6 +49,9 @@
       <if test="activityEndDate != null">
         activity_end_date,
       </if>
+      <if test="activityVideoGatherer != null">
+        activity_video_gatherer,
+      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
       <if test="activityId != null">
@@ -70,6 +74,9 @@
       </if>
       <if test="activityEndDate != null">
         #{activityEndDate,jdbcType=DATE},
+      </if>
+      <if test="activityVideoGatherer != null">
+        #{activityVideoGatherer,jdbcType=VARCHAR},
       </if>
     </trim>
   </insert>
