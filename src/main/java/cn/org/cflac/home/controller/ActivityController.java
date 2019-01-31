@@ -6,6 +6,10 @@ package cn.org.cflac.home.controller;
 
 
 
+import java.util.Enumeration;
+
+import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -73,9 +77,22 @@ public class ActivityController {
 	@RequestMapping(value="/addActivity",method=RequestMethod.POST)
 	@ResponseBody
 	public String addActivity(@ModelAttribute Activity activity) {
+		/*
+		 Enumeration<String > enums = request.getParameterNames();
+			while(enums.hasMoreElements()){
+				String  paramName=(String)enums.nextElement();
+				String[]  values=request.getParameterValues(paramName);
+				for(int  i=0;i<values.length;i++){
+					System.out.println("["+i+"]   "+paramName+"  "+values[i]);
+				}
+			}*/
+
+		
+		
 		activity.setActivityId(UUIDGenarator.nextUUID());
 		activityService.addActivity(activity);
-		return "home";
+		return null;
+		
 	}
 	
 }
