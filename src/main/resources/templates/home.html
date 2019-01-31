@@ -1,157 +1,255 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <meta charset="utf-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <title>Home</title>
-  <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
-  <link rel="stylesheet" href="/bootstrap/dist/css/bootstrap.css">
-  <link rel="stylesheet" href="/font-awesome/css/font-awesome.css">
-  <link rel="stylesheet" href="/css/ionicons.css">
-  <link rel="stylesheet" href="/datatables.net-bs/css/dataTables.bootstrap.css">
-  <link rel="stylesheet" href="/css/AdminLTE.css">
-  <link rel="stylesheet" href="/css/_all-skins.css">
-<link rel="stylesheet" type="text/css" href="/webuploader/webuploader.css">
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<title>Home</title>
+<meta
+	content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no"
+	name="viewport">
+<link rel="stylesheet" href="/bootstrap/dist/css/bootstrap.css">
+<link rel="stylesheet" href="/font-awesome/css/font-awesome.css">
+<link rel="stylesheet" href="/css/ionicons.css">
+<link rel="stylesheet"
+	href="/datatables.net-bs/css/dataTables.bootstrap.css">
+<link rel="stylesheet" href="/css/AdminLTE.css">
+<link rel="stylesheet" href="/css/_all-skins.css">
+<link rel="stylesheet" type="text/css"
+	href="/webuploader/webuploader.css">
 
 
-  <!-- Google Font -->
-  <link rel="stylesheet"
-        href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
+<!-- Google Font -->
+<link rel="stylesheet"
+	href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
 </head>
 <body class="hold-transition skin-blue ">
-<div class="wrapper">
-  <header class="main-header">
-    <!-- Logo -->
-    <a href="/home" class="logo">
-      <span class="logo-lg">中国文艺网视频素材存储管理系统</span>
-    </a>
-    <!-- Header Navbar: style can be found in header.less -->
-    <nav class="navbar navbar-static-top">
-      <div class="navbar-custom-menu">
-        <ul class="nav navbar-nav">
-          <!-- User Account: style can be found in dropdown.less -->
-          <li class="dropdown user user-menu">
-            <a href="/home" class="dropdown-toggle" data-toggle="dropdown">
-              <span class="hidden-xs">管理员</span>
-            </a>
-          </li>
-        </ul>
-      </div>
-    </nav>
-  </header>
-  
-  <div class="content-wrapper">
-    <!-- Main content -->
-    <section class="content">
-      <div class="row">
-        <div class="col-xs-12">
-          <div class="box">
-            <!-- /.box-header -->
-            <div class="box-body">
-              <table id="findAll" class="table table-striped table-bordered table-hover dataTable " sytle="width: 100% !important;">
-             	
-              </table>
-            </div>
-            <!-- /.box-body -->
-          </div>
-          <!-- /.box -->
-        </div>
-        <!-- /.col -->
-      </div>
-      <!-- /.row -->
-    </section>
-    <!-- /.content -->
-  </div>
+	<div class="wrapper">
+		<header class="main-header">
+			<!-- Logo -->
+			<a href="/home" class="logo"> <span class="logo-lg">中国文艺网视频素材存储管理系统</span>
+			</a>
+			<!-- Header Navbar: style can be found in header.less -->
+			<nav class="navbar navbar-static-top">
+				<div class="navbar-custom-menu">
+					<ul class="nav navbar-nav">
+						<!-- User Account: style can be found in dropdown.less -->
+						<li class="dropdown user user-menu"><a href="/home"
+							class="dropdown-toggle" data-toggle="dropdown"> <span
+								class="hidden-xs">管理员</span>
+						</a></li>
+					</ul>
+				</div>
+			</nav>
+		</header>
 
-  <!-- /.content-wrapper -->
-  <footer class="main-footer">
-    <strong> Copyright © 2019 中国文艺网视频素材存储管理系统</strong>
-  </footer>
+		<div class="content-wrapper">
+			<!-- Main content -->
+			<section class="content">
+				<div class="row">
+					<div class="col-xs-12">
+						<div class="box">
 
-</div>
-<!-- 视频列表模态框（Modal） -->
-<div class="modal fade" id="videoListModal" data-backdrop="static" tabindex="-2" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" >
-    <div class="modal-dialog" >
-        <div class="modal-content" style=" width:100%;height:82% ">
-            <div class="modal-header" style=" width:100%; height:11%;" >
-                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                <h4 class="modal-title modal-actName" id="myModalLabel" name="modal-aName"></h4>
-            </div>
-            <div class="modal-body modal-video modal-activityId"  name="modal-activityId" style="overflow:auto; width:100%; height:430px;"  >
-			
+							<!-- 添加活动按钮 -->
+							<button type="button" class="btn bg-primary"
+								data-toggle="modal" data-target="#addActivityListModal">
+								<span class="glyphicon glyphicon-plus" aria-hidden="true"></span>添加活动
+							</button>
+
+							<!-- /.box-header -->
+							<div class="box-body">
+								<table id="findAll"
+									class="table table-striped table-bordered table-hover dataTable "
+									sytle="width: 100% !important;">
+
+								</table>
+							</div>
+							<!-- /.box-body -->
+						</div>
+						<!-- /.box -->
+					</div>
+					<!-- /.col -->
+				</div>
+				<!-- /.row -->
+			</section>
+			<!-- /.content -->
+		</div>
+
+		<!-- /.content-wrapper -->
+		<footer class="main-footer">
+			<strong> Copyright © 2019 中国文艺网视频素材存储管理系统</strong>
+		</footer>
+
+	</div>
+
+	<!-- 活动列表模态框(Modal) -->
+	<div class="modal fade" id="addActivityListModal"
+		data-backdrop="static" tabindex="-1" role="dialog"
+		aria-labelledby="myModalLabel" aria-hidden="true">
+		<div class="modal-dialog">
+			<div class="modal-content" style="width: 100%; height: 82%">
+				<div class="modal-header" style="width: 100%; height: 11%;">
+					<button type="button" class="close" data-dismiss="modal"
+						aria-hidden="true">&times;</button>
+					<h4 class="modal-title">添加一个活动</h4>
+				</div>
+				<div class="modal-body" style="overflow: auto; width: 100%; height: 89%;">
+					<div class="form-group">
+						<label for="activityName" class="col-sm-2 control-label">活动名称</label>
+						<div class="col-sm-10">
+							<input type="text" class="form-control" id="activityName"
+								placeholder="请输入活动名称">
+						</div>
+					</div>
+					<div class="form-group">
+						<label for="activityType" class="col-sm-2 control-label">门类</label>
+						<div class="col-sm-10">
+							<input type="text" class="form-control" id="activityType"
+								placeholder="请输入门类">
+						</div>
+					</div>
+					<div class="form-group">
+						<label for="activityPerson" class="col-sm-2 control-label">相关人物</label>
+						<div class="col-sm-10">
+							<input type="text" class="form-control" id="activityPerson"
+								placeholder="请输入相关人物">
+						</div>
+					</div>
+					<div class="form-group">
+						<label for="activitySite" class="col-sm-2 control-label">地点</label>
+						<div class="col-sm-10">
+							<input type="text" class="form-control" id="activitySite"
+								placeholder="请输入地点">
+						</div>
+					</div>
+					<div class="form-group">
+						<label for="activityBeginDate" class="col-sm-2 control-label">时间</label>
+						<div class="col-sm-10">
+							<input type="text" class="form-control" id="activityBeginDate"
+								placeholder="请输入活动时间">
+						</div>
+					</div>
+					<div class="form-group">
+						<label for="activityVideoGatherer" class="col-sm-2 control-label">采集人</label>
+						<div class="col-sm-10">
+							<input type="text" class="form-control" id="activityVideoGatherer"
+								placeholder="请输入采集人">
+						</div>
+					</div>
+				</div>
+				<div class="modal-footer" style="width: 100%; height: 13%;">
+					<button type="button" class="btn btn-primary" id="addAtivity">添加</button>
+					<button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+				</div>
 			</div>
+			<!-- /.modal-content -->
+		</div>
+		<!-- /.modal -->
+	</div>
 
-            <div class="modal-footer" style=" width:100%; height:13%;" >
-                <button type="button" class="btn btn-primary" data-dismiss="modal">确认</button>
-                <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
-            </div>
-        </div><!-- /.modal-content -->
-    </div><!-- /.modal -->
-</div>
+	<!-- 视频列表模态框（Modal） -->
+	<div class="modal fade" id="videoListModal" data-backdrop="static"
+		tabindex="-2" role="dialog" aria-labelledby="myModalLabel"
+		aria-hidden="true">
+		<div class="modal-dialog">
+			<div class="modal-content" style="width: 100%; height: 82%">
+				<div class="modal-header" style="width: 100%; height: 11%;">
+					<button type="button" class="close" data-dismiss="modal"
+						aria-hidden="true">&times;</button>
+					<h4 class="modal-title modal-actName" id="myModalLabel"
+						name="modal-aName"></h4>
+				</div>
+				<div class="modal-body modal-video modal-activityId"
+					name="modal-activityId"
+					style="overflow: auto; width: 100%; height: 430px;"></div>
 
-<!-- 视频播放模态框（Modal） -->
-<div class="modal fade" id="videoModal"  data-backdrop="static" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" >
-    <div class="modal-dialog" >
-        
-        <div class="modal-content video-play" style=" width:630px;height:500px ">
-        <div class="modal-header" style=" width:100%; height:11%;" >
-                <button type="button" class="close videoPlay-close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                <h4 class="modal-title modal-videoName" id="myModalLabel"></h4>
-            </div>
-            <div class="modal-body videoPlay-body" style="overflow:auto; width:100%; height:89%;"  >
-			    <video id="videoPlay1" width="100%" height="98%"   controls="controls" x-webkit-airplay="true" loop="flase" webkit-playsinline="true"></video>
+				<div class="modal-footer" style="width: 100%; height: 13%;">
+					<button type="button" class="btn btn-primary" data-dismiss="modal">确认</button>
+					<button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+				</div>
 			</div>
-        </div><!-- /.modal-content -->
-    </div><!-- /.modal -->
-</div>
+			<!-- /.modal-content -->
+		</div>
+		<!-- /.modal -->
+	</div>
 
+	<!-- 视频播放模态框（Modal） -->
+	<div class="modal fade" id="videoModal" data-backdrop="static"
+		tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+		aria-hidden="true">
+		<div class="modal-dialog">
 
-<!-- 视频添加模态框（Modal） -->
-<div class="modal fade" id="addVideoModal"  data-backdrop="static" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" >
-    <div class="modal-dialog" >
-        
-        <div class="modal-content " style=" width:500px;height:400px ">
-        <div class="modal-header" style=" width:100%; height:11%;" >
-                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                <h4 class="modal-title modal-add-actName" id="myModalLabel"></h4>
-            </div>
-         <div class="modal-body " style="overflow:auto; width:100%; height:89%;"  >
-			    
-			    <div id="uploader" class="wu-example">
-    			<!--用来存放文件信息-->
-    			<div id="thelist" class="uploader-list"></div>
-    			<div class="btns">
-       		 	<div id="picker" class="choose-file">选择文件</div>
-        		<button id="ctlBtn" class="btn btn-default">开始上传</button>
-    			</div>
+			<div class="modal-content video-play"
+				style="width: 630px; height: 500px">
+				<div class="modal-header" style="width: 100%; height: 11%;">
+					<button type="button" class="close videoPlay-close"
+						data-dismiss="modal" aria-hidden="true">&times;</button>
+					<h4 class="modal-title modal-videoName" id="myModalLabel"></h4>
+				</div>
+				<div class="modal-body videoPlay-body"
+					style="overflow: auto; width: 100%; height: 89%;">
+					<video id="videoPlay1" width="100%" height="98%"
+						controls="controls" x-webkit-airplay="true" loop="flase"
+						webkit-playsinline="true"></video>
+				</div>
 			</div>
+			<!-- /.modal-content -->
+		</div>
+		<!-- /.modal -->
+	</div>
+
+
+	<!-- 视频添加模态框（Modal） -->
+	<div class="modal fade" id="addVideoModal" data-backdrop="static"
+		tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+		aria-hidden="true">
+		<div class="modal-dialog">
+
+			<div class="modal-content " style="width: 500px; height: 400px">
+				<div class="modal-header" style="width: 100%; height: 11%;">
+					<button type="button" class="close" data-dismiss="modal"
+						aria-hidden="true">&times;</button>
+					<h4 class="modal-title modal-add-actName" id="myModalLabel"></h4>
+				</div>
+				<div class="modal-body "
+					style="overflow: auto; width: 100%; height: 89%;">
+
+					<div id="uploader" class="wu-example">
+						<!--用来存放文件信息-->
+						<div id="thelist" class="uploader-list"></div>
+						<div class="btns">
+							<div id="picker" class="choose-file">选择文件</div>
+							<button id="ctlBtn" class="btn btn-default">开始上传</button>
+						</div>
+					</div>
+				</div>
+
 			</div>
-			
-        </div><!-- /.modal-content -->
-    </div><!-- /.modal -->
-</div>
+			<!-- /.modal-content -->
+		</div>
+		<!-- /.modal -->
+	</div>
 
-<!-- jQuery 3 -->
-<script src="/jquery/dist/jquery.js"></script>
-<!-- Bootstrap 3.3.7 -->
-<script src="/bootstrap/dist/js/bootstrap.js"></script>
-<!-- DataTables -->
-<script src="/datatables.net/js/jquery.dataTables.js"></script>
-<script src="/datatables.net-bs/js/dataTables.bootstrap.js"></script>
-<!-- SlimScroll -->
-<script src="/js/jquery.slimscroll.js"></script>
-<!-- FastClick -->
-<script src="/js/fastclick.js"></script>
-<!-- AdminLTE App -->
-<script src="/js/adminlte.js"></script>
+	<!-- jQuery 3 -->
+	<script src="/jquery/dist/jquery.js"></script>
+	<!-- Bootstrap 3.3.7 -->
+	<script src="/bootstrap/dist/js/bootstrap.js"></script>
+	<!-- DataTables -->
+	<script src="/datatables.net/js/jquery.dataTables.js"></script>
+	<script src="/datatables.net-bs/js/dataTables.bootstrap.js"></script>
+	<!-- SlimScroll -->
+	<script src="/js/jquery.slimscroll.js"></script>
+	<!-- FastClick -->
+	<script src="/js/fastclick.js"></script>
+	<!-- AdminLTE App -->
+	<script src="/js/adminlte.js"></script>
 
-<script src="/js/home.js"></script>
+	<script src="/js/home.js"></script>
 
 
-<!--引入webuploader-->
-<script type="text/javascript" src="/webuploader/webuploader.js"></script>
+	<!--引入webuploader-->
+	<script type="text/javascript" src="/webuploader/webuploader.js"></script>
 
-<script src="/js/videoUpload.js"></script>
+	<script src="/js/videoUpload.js"></script>
 
 </body>
 </html>

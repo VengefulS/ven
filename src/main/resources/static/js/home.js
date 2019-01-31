@@ -274,6 +274,25 @@ function downloadVideos(v){
 	window.location.href="/videod/download?id="+v.id;
 }
 
+$("#addAtivity").click(function(){
+	$.ajax({
+            type: 'post',
+            contentType: 'application/json;charset=utf-8',
+            url: '/act/addActivity',
+            data: ({
+                            "activityName": $("#activityName").val(),
+                            "activityType": $("#activityType").val(),
+                            "activityPerson": $("#activityPerson").val(),
+                            "activitySite": $("#activitySite").val(),
+                            "activityBeginDate": $("#activityBeginDate").val(),
+                            "activityVideoGatherer": $("#activityVideoGatherer").val()
+                  }),
+            success: function (data) {
+               alert("111111");
+            }
+    })
+ });
+		
 /*function passActivityId(actId){
 	$.ajax({
 		url: "/videof/upload",

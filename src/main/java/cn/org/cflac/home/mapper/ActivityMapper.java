@@ -16,5 +16,8 @@ public interface ActivityMapper {
     // 分页查询数据
     List<Activity> findActivityList(Map map);
     // 查询总数量
-    Integer findActivityCount(Map map);
+    Integer findActivityCount(Map map);  
+    //添加活动
+    int insertActivity(Activity activity);
+    
 }

@@ -63,6 +63,14 @@ public class ActivityServiceImpl implements ActivityService{
 
 
 
+	@Override
+	public int addActivity(Activity activity) {
+		int ac = actMapper.insertActivity(activity);
+		return ac; 
+	}
+
+
+
 	
 
 }

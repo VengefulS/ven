@@ -18,6 +18,12 @@
       #{activityPerson,jdbcType=VARCHAR}, #{activitySite,jdbcType=VARCHAR}, #{activityBeginDate,jdbcType=DATE}, 
       #{activityEndDate,jdbcType=DATE})
   </insert>
+  <insert id="insertActivity" parameterType="cn.org.cflac.entity.Activity">
+    insert into activity_info (activity_id, activity_name, activity_type, 
+      activity_person, activity_site, activity_begin_date)
+    values (#{activityId,jdbcType=VARCHAR}, #{activityName,jdbcType=VARCHAR}, #{activityType,jdbcType=VARCHAR}, 
+      #{activityPerson,jdbcType=VARCHAR}, #{activitySite,jdbcType=VARCHAR}, #{activityBeginDate,jdbcType=DATE})
+  </insert>
   <insert id="insertSelective" parameterType="cn.org.cflac.entity.Activity">
     insert into activity_info
     <trim prefix="(" suffix=")" suffixOverrides=",">

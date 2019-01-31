@@ -21,7 +21,7 @@ public interface ActivityService {
     								  Integer start,
     								  Integer length,
     								  Integer draw);
-
+    int addActivity(Activity activity);
 
 
 }
