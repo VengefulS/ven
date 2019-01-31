@@ -74,6 +74,8 @@ public class ActivityController {
 	@ResponseBody
 	public String addActivity(@ModelAttribute Activity activity) {
 		activity.setActivityId(UUIDGenarator.nextUUID());
+		System.out.println(activity.getActivityId());
+		
 		activityService.addActivity(activity);
 		return "home";
 	}

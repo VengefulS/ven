@@ -26,7 +26,6 @@ public class VideoManangerApplicationTests {
 	}
 	
 	@Test
-	@Rollback(false)
 	public void test() throws ParseException {
 		Activity acti = new Activity();
 		

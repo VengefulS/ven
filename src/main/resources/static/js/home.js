@@ -278,18 +278,19 @@ function downloadVideos(v){
 $("#addAtivity").click(function(){
 	$.ajax({
             type: 'post',
-            contentType: 'application/json;charset=utf-8',
+            dataType: 'json',
             url: '/act/addActivity',
             data: ({
-                            "activityName": $("#activityName").val(),
-                            "activityType": $("#activityType").val(),
-                            "activityPerson": $("#activityPerson").val(),
-                            "activitySite": $("#activitySite").val(),
-                            "activityBeginDate": $("#activityBeginDate").val(),
-                            "activityVideoGatherer": $("#activityVideoGatherer").val()
+                     "activityName": $("#activityName").val(),
+                     "activityType": $("#activityType").val(),
+                     "activityPerson": $("#activityPerson").val(),
+                     "activitySite": $("#activitySite").val(),
+                     //"activityBeginDate": $("#activityBeginDate").val(),
+                     "activityVideoGatherer": $("#activityVideoGatherer").val()
                   }),
             success: function (data) {
-               alert("111111");
+               console.log($("#activityName").val);
+            	
             }
     })
  });
