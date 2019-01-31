@@ -276,17 +276,31 @@ function downloadVideos(v){
 }
 
 $("#addAtivity").click(function(){
+	var tt = $("#activityBeginDate").val();
+	var date = new Date(tt);
+	
+	  /*var datetime = ""; 
+	  //date.setTime(tt); 
+	  console.log(date);
+	  datetime += date.getFullYear();  //年 
+	  console.log(datetime)
+	  datetime += "-" + getMonth(date); //月  
+	  datetime += "-" + getDay(date);//日
+	  console.log(datetime);
+	  console.log(typeof(datetime));*/
+	
 	$.ajax({
-            type: 'post',
+            type: 'post',         
+            //contentType: 'application/json;charset=utf-8',
             dataType: 'json',
             url: '/act/addActivity',
             data: ({
-                     "activityName": $("#activityName").val(),
-                     "activityType": $("#activityType").val(),
-                     "activityPerson": $("#activityPerson").val(),
-                     "activitySite": $("#activitySite").val(),
-                     //"activityBeginDate": $("#activityBeginDate").val(),
-                     "activityVideoGatherer": $("#activityVideoGatherer").val()
+                            "activityName": $("#activityName").val(),
+                            "activityType": $("#activityType").val(),
+                            "activityPerson": $("#activityPerson").val(),
+                            "activitySite": $("#activitySite").val(),
+                            "activityBeginDate": date,
+                            "activityVideoGatherer": $("#activityVideoGatherer").val()
                   }),
             success: function (data) {
                console.log($("#activityName").val);
