@@ -85,13 +85,9 @@ public class ActivityController {
 				for(int  i=0;i<values.length;i++){
 					System.out.println("["+i+"]   "+paramName+"  "+values[i]);
 				}
-			}*/
-
-		
-		
+			}*/		
 		activity.setActivityId(UUIDGenarator.nextUUID());
-		System.out.println(activity.getActivityId());
-		
+		//System.out.println(activity.getActivityId());		
 		activityService.addActivity(activity);
 		return null;
 		

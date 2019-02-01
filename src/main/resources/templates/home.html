@@ -145,6 +145,72 @@
 		<!-- /.modal -->
 	</div>
 
+	<!-- 修改活动信息模态框(Modal) -->
+	<div class="modal fade" id="activityInfoModal"
+		data-backdrop="static" tabindex="-1" role="dialog"
+		aria-labelledby="myModalLabel" aria-hidden="true">
+		<div class="modal-dialog">
+			<div class="modal-content" style="width: 100%; height: 82%">
+				<div class="modal-header" style="width: 100%; height: 11%;">
+					<button type="button" class="close" data-dismiss="modal"
+						aria-hidden="true">&times;</button>
+					<h4 class="modal-title">修改活动信息</h4>
+				</div>
+				<div class="modal-body" style="overflow: auto; width: 100%; height: 89%;">
+					<div class="form-group">
+						<label for="activityName" class="col-sm-2 control-label">活动名称</label>
+						<div class="col-sm-10">
+							<input type="text" class="form-control" id="activityName"
+								placeholder="请输入活动名称">
+						</div>
+					</div>
+					<div class="form-group">
+						<label for="activityType" class="col-sm-2 control-label">门类</label>
+						<div class="col-sm-10">
+							<input type="text" class="form-control" id="activityType"
+								placeholder="请输入门类">
+						</div>
+					</div>
+					<div class="form-group">
+						<label for="activityPerson" class="col-sm-2 control-label">相关人物</label>
+						<div class="col-sm-10">
+							<input type="text" class="form-control" id="activityPerson"
+								placeholder="请输入相关人物">
+						</div>
+					</div>
+					<div class="form-group">
+						<label for="activitySite" class="col-sm-2 control-label">地点</label>
+						<div class="col-sm-10">
+							<input type="text" class="form-control" id="activitySite"
+								placeholder="请输入地点">
+						</div>
+					</div>
+					<div class="form-group">
+						<label for="activityBeginDate" class="col-sm-2 control-label">时间</label>
+						<div class="col-sm-10">
+							<input type="text" class="form-control" id="activityBeginDate"
+								placeholder="请输入活动时间 格式为例：2019-01-01">
+						</div>
+					</div>
+					<div class="form-group">
+						<label for="activityVideoGatherer" class="col-sm-2 control-label">采集人</label>
+						<div class="col-sm-10">
+							<input type="text" class="form-control" id="activityVideoGatherer"
+								placeholder="请输入采集人">
+						</div>
+					</div>
+				</div>
+				<div class="modal-footer" style="width: 100%; height: 13%;">
+					<button type="button" class="btn btn-primary" id="updateAtivity" data-dismiss="modal">保存</button>
+					<button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+				</div>
+			</div>
+			<!-- /.modal-content -->
+		</div>
+		<!-- /.modal -->
+	</div>
+	
+
 	<!-- 视频列表模态框（Modal） -->
 	<div class="modal fade" id="videoListModal" data-backdrop="static"
 		tabindex="-2" role="dialog" aria-labelledby="myModalLabel"

@@ -142,7 +142,14 @@ function query(search){
 		}
 		],
 		// 从右向左第二列列描述  加按钮
-		"columnDefs" : [{
+		"columnDefs" : [
+			{
+				"targets" : -3,
+				"render" : function(data, type, full, meta) {
+					var ret = "<button id="+full.activityId+" name="+full.activityName+" class = \"btn btn-primary btn-xs\" type=\"button\"  data-toggle=\"modal\" data-target=\"#activityInfoModal\"><span class=\"glyphicon glyphicon-plus\" onClick=\"modalActivity(this)\" ></span>修改活动信息</button>"
+					return ret;
+				}				
+			},{
 			"targets" : -2,
 			"render" : function(data, type, full, meta) {
 				var ret = "<button id="+full.activityId+" name="+full.activityName+" class = \"btn btn-default btn-sm btn-tmodal btn-actRelId\" type=\"button\"  data-toggle=\"modal\" data-target=\"#videoListModal\" onClick=\"modalVideo(this)\"  ><span class=\"glyphicon glyphicon-play\"></span> </button>"
@@ -292,7 +299,7 @@ $("#addAtivity").click(function(){
 	$.ajax({
             type: 'post',         
             //contentType: 'application/json;charset=utf-8',
-            dataType: 'json',
+            dataType: 'text',
             url: '/act/addActivity',
             data: ({
                             "activityName": $("#activityName").val(),
@@ -303,10 +310,11 @@ $("#addAtivity").click(function(){
                             "activityVideoGatherer": $("#activityVideoGatherer").val()
                   }),
             success: function (data) {
-               console.log($("#activityName").val);
-            	
+            	alert("添加成功");
+               //console.log($("#activityName").val);               
             }
     })
+    
  });
 		
 /*function passActivityId(actId){
