@@ -9,14 +9,19 @@ package cn.org.cflac.home.controller;
 import java.util.Enumeration;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
+import org.hibernate.annotations.Parameter;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.web.servlet.server.Session;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
+
+import com.alibaba.fastjson.JSONObject;
 
 import cn.org.cflac.entity.Activity;
 import cn.org.cflac.entity.Paging;
@@ -91,6 +96,35 @@ public class ActivityController {
 		activityService.addActivity(activity);
 		return "success";
 		
+	}
+	
+	@RequestMapping(value="/findOneAc",method=RequestMethod.POST)
+	@ResponseBody
+	public String findOneAc(@RequestParam(value="activityId") String activityId){
+		
+		Activity act = activityService.findActivityById(activityId);
+		
+		JSONObject result = new JSONObject();
+		result.put("activityId", activityId);
+		result.put("activityVideoGatherer", act.getActivityVideoGatherer());
+		result.put("activityBeginDate",act.getDisplayActivityBeginDate());
+		result.put("activitySite", act.getActivitySite());
+		result.put("activityPerson", act.getActivityPerson());
+		result.put("activityType", act.getActivityType());
+		result.put("activityName", act.getActivityName());
+		String res = result.toJSONString();
+		System.out.println(res);
+		return res;
+		
+	}
+	
+	@RequestMapping(value="/updateActivity",method=RequestMethod.POST)
+	@ResponseBody
+	public String updateActivity(@ModelAttribute Activity activity) {
+		
+		activityService.updateActivity(activity);
+		
+		return "success";
 	}
 	
 }

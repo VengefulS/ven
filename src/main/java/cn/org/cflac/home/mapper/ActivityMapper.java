@@ -18,6 +18,10 @@ public interface ActivityMapper {
     // 查询总数量
     Integer findActivityCount(Map map);  
     //添加活动
-    int insertActivity(Activity activity);
+    Integer insertActivity(Activity activity);
+    //查找一个活动
+    Activity findActivityById(String activityId);
+    //更新一个活动
+    Integer updateActivity(Activity activity);
     
 }

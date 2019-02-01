@@ -4,7 +4,8 @@
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <title>Home</title>
-<meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no"
+<meta
+	content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no"
 	name="viewport">
 <link rel="stylesheet" href="/bootstrap/dist/css/bootstrap.css">
 <link rel="stylesheet" href="/font-awesome/css/font-awesome.css">
@@ -49,8 +50,8 @@
 						<div class="box">
 
 							<!-- 添加活动按钮 -->
-							<button type="button" class="btn bg-primary"
-								data-toggle="modal" data-target="#addActivityListModal">
+							<button type="button" class="btn bg-primary" data-toggle="modal"
+								data-target="#addActivityListModal">
 								<span class="glyphicon glyphicon-plus" aria-hidden="true"></span>添加活动
 							</button>
 
@@ -91,7 +92,8 @@
 						aria-hidden="true">&times;</button>
 					<h4 class="modal-title">添加一个活动</h4>
 				</div>
-				<div class="modal-body" style="overflow: auto; width: 100%; height: 89%;">
+				<div class="modal-body"
+					style="overflow: auto; width: 100%; height: 89%;">
 					<div class="form-group">
 						<label for="activityName" class="col-sm-2 control-label">活动名称</label>
 						<div class="col-sm-10">
@@ -130,13 +132,14 @@
 					<div class="form-group">
 						<label for="activityVideoGatherer" class="col-sm-2 control-label">采集人</label>
 						<div class="col-sm-10">
-							<input type="text" class="form-control" id="activityVideoGatherer"
-								placeholder="请输入采集人">
+							<input type="text" class="form-control"
+								id="activityVideoGatherer" placeholder="请输入采集人">
 						</div>
 					</div>
 				</div>
 				<div class="modal-footer" style="width: 100%; height: 13%;">
-					<button type="button" class="btn btn-primary" id="addAtivity" data-dismiss="modal">添加</button>
+					<button type="button" class="btn btn-primary" id="addAtivity"
+						data-dismiss="modal">添加</button>
 					<button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
 				</div>
 			</div>
@@ -146,9 +149,9 @@
 	</div>
 
 	<!-- 修改活动信息模态框(Modal) -->
-	<div class="modal fade" id="activityInfoModal"
-		data-backdrop="static" tabindex="-1" role="dialog"
-		aria-labelledby="myModalLabel" aria-hidden="true">
+	<div class="modal fade" id="activityInfoModal" data-backdrop="static"
+		tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+		aria-hidden="true">
 		<div class="modal-dialog">
 			<div class="modal-content" style="width: 100%; height: 82%">
 				<div class="modal-header" style="width: 100%; height: 11%;">
@@ -156,52 +159,55 @@
 						aria-hidden="true">&times;</button>
 					<h4 class="modal-title">修改活动信息</h4>
 				</div>
-				<div class="modal-body" style="overflow: auto; width: 100%; height: 89%;">
+				<div class="modal-body"
+					style="overflow: auto; width: 100%; height: 89%;">
 					<div class="form-group">
 						<label for="activityName" class="col-sm-2 control-label">活动名称</label>
 						<div class="col-sm-10">
-							<input type="text" class="form-control" id="activityName"
+							<input type="text" class="form-control" id="activityNameUp"
 								placeholder="请输入活动名称">
 						</div>
 					</div>
 					<div class="form-group">
 						<label for="activityType" class="col-sm-2 control-label">门类</label>
 						<div class="col-sm-10">
-							<input type="text" class="form-control" id="activityType"
+							<input type="text" class="form-control" id="activityTypeUp"
 								placeholder="请输入门类">
 						</div>
 					</div>
 					<div class="form-group">
 						<label for="activityPerson" class="col-sm-2 control-label">相关人物</label>
 						<div class="col-sm-10">
-							<input type="text" class="form-control" id="activityPerson"
+							<input type="text" class="form-control" id="activityPersonUp"
 								placeholder="请输入相关人物">
 						</div>
 					</div>
 					<div class="form-group">
 						<label for="activitySite" class="col-sm-2 control-label">地点</label>
 						<div class="col-sm-10">
-							<input type="text" class="form-control" id="activitySite"
+							<input type="text" class="form-control" id="activitySiteUp"
 								placeholder="请输入地点">
 						</div>
 					</div>
 					<div class="form-group">
 						<label for="activityBeginDate" class="col-sm-2 control-label">时间</label>
 						<div class="col-sm-10">
-							<input type="text" class="form-control" id="activityBeginDate"
+							<input type="text" class="form-control" id="activityBeginDateUp"
 								placeholder="请输入活动时间 格式为例：2019-01-01">
 						</div>
 					</div>
 					<div class="form-group">
 						<label for="activityVideoGatherer" class="col-sm-2 control-label">采集人</label>
 						<div class="col-sm-10">
-							<input type="text" class="form-control" id="activityVideoGatherer"
-								placeholder="请输入采集人">
+							<input type="text" class="form-control"
+								id="activityVideoGathererUp" placeholder="请输入采集人">
 						</div>
 					</div>
 				</div>
+				<input type="hidden" id="activityIdUp"/>
 				<div class="modal-footer" style="width: 100%; height: 13%;">
-					<button type="button" class="btn btn-primary" id="updateAtivity" data-dismiss="modal">保存</button>
+					<button type="button" class="btn btn-primary" id="updateAtivity"
+						data-dismiss="modal">保存</button>
 					<button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
 				</div>
 			</div>
@@ -209,7 +215,7 @@
 		</div>
 		<!-- /.modal -->
 	</div>
-	
+
 
 	<!-- 视频列表模态框（Modal） -->
 	<div class="modal fade" id="videoListModal" data-backdrop="static"

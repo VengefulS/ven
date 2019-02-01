@@ -127,6 +127,24 @@
 	limit #{start},#{length}
 	<!-- WHERE ROWNUM <![CDATA[ <= (#{end})) TL WHERE RN >= #{start}]]> -->
 </select>
-	
+
+<select id="findActivityById" resultType="cn.org.cflac.entity.Activity">
+	select activity_name,activity_type,activity_person,activity_site,activity_begin_date,activity_video_gatherer
+	from activity_info
+	where activity_id = #{activityId}
+</select>
+
+<update id="updateActivity" parameterType="cn.org.cflac.entity.Activity">
+	update activity_info
+	<set>
+		<if test="activityName !=null">activity_name = #{activityName},</if>
+		<if test="activityType !=null">activity_type = #{activityType},</if>
+		<if test="activityPerson !=null">activity_person = #{activityPerson},</if>
+		<if test="activitySite !=null">activity_site = #{activitySite},</if>
+		<if test="activityBeginDate !=null">activity_begin_date = #{activityBeginDate},</if>
+		<if test="activityVideoGatherer !=null">activity_video_gatherer = #{activityVideoGatherer}</if>
+	</set>
+	where activity_id = #{activityId}
+</update>	
  
 </mapper>

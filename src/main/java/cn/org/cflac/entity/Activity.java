@@ -3,6 +3,8 @@ package cn.org.cflac.entity;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
 public class Activity {
     private String activityId;
 
@@ -13,7 +15,7 @@ public class Activity {
     private String activityPerson;
 
     private String activitySite;
-
+    
     private Date activityBeginDate;
 
     private String activityVideoGatherer;

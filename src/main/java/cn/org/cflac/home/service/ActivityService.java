@@ -21,7 +21,11 @@ public interface ActivityService {
     								  Integer start,
     								  Integer length,
     								  Integer draw);
+    //添加活动
     int addActivity(Activity activity);
-
+    //查找一个活动
+    Activity findActivityById(String activityId);
+    //更新一个活动
+    void updateActivity(Activity activity);
 
 }

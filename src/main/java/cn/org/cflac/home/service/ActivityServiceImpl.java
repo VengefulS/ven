@@ -71,6 +71,22 @@ public class ActivityServiceImpl implements ActivityService{
 
 
 
+	@Override
+	public Activity findActivityById(String activityId) {
+		
+		return actMapper.findActivityById(activityId);
+	}
+
+
+
+	@Override
+	public void updateActivity(Activity activity) {
+		 actMapper.updateActivity(activity);
+		
+	}
+
+
+
 	
 
 }
