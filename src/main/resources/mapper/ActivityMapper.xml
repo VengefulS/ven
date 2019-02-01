@@ -123,7 +123,7 @@
 			'%Y-%m-%d')
 		</if>
 	</where>
-	order by L.activity_begin_date 
+	order by L.activity_begin_date desc
 	limit #{start},#{length}
 	<!-- WHERE ROWNUM <![CDATA[ <= (#{end})) TL WHERE RN >= #{start}]]> -->
 </select>

@@ -309,9 +309,9 @@ $("#addAtivity").click(function(){
                             "activityBeginDate": date,
                             "activityVideoGatherer": $("#activityVideoGatherer").val()
                   }),
-            success: function (data) {
-            	alert("添加成功");
-               //console.log($("#activityName").val);               
+            success: function (data) {            
+               alert("添加成功");
+               //console.log($("#activityName").val());
             }
     })
     
