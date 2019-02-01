@@ -128,6 +128,12 @@ function query(search){
 			"defaultContent" : "",
 			"visible" : true
 		},{
+			"title" : "修改活动信息",
+			"type" : "html",
+			"data" : "",
+			"defaultContent" : "",
+			"visible" : true
+		},{
 			"title" : "预览",
 			"type" : "html",
 			"data" : "",
@@ -141,12 +147,12 @@ function query(search){
 			"visible" : true
 		}
 		],
-		// 从右向左第二列列描述  加按钮
+		// 从右向左第三列列描述  加按钮
 		"columnDefs" : [
 			{
 				"targets" : -3,
 				"render" : function(data, type, full, meta) {
-					var ret = "<button id="+full.activityId+" name="+full.activityName+" class = \"btn btn-primary btn-xs\" type=\"button\"  data-toggle=\"modal\" data-target=\"#activityInfoModal\"><span class=\"glyphicon glyphicon-plus\" onClick=\"modalActivity(this)\" ></span>修改活动信息</button>"
+					var ret = "<button id="+full.activityId+" name="+full.activityName+" class = \"btn btn-primary btn-sm\" type=\"button\"  data-toggle=\"modal\" data-target=\"#activityInfoModal\"><span class=\"glyphicon glyphicon-edit\" onClick=\"modalActivity(this)\" ></span>修改</button>"
 					return ret;
 				}				
 			},{
