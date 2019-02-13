@@ -6,14 +6,10 @@ package cn.org.cflac.home.controller;
 
 
 
-import java.util.Enumeration;
+
 
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
-
-import org.hibernate.annotations.Parameter;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.web.servlet.server.Session;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -127,4 +123,13 @@ public class ActivityController {
 		return "success";
 	}
 	
+	@RequestMapping(value="/loginName",method=RequestMethod.POST)
+	@ResponseBody
+	public String loginName(HttpServletRequest req) {
+		Object loginName = req.getSession().getAttribute("name");
+		JSONObject result = new JSONObject();
+		result.put("loginName", loginName);
+		String res = result.toJSONString();
+		return res;
+	}
 }
