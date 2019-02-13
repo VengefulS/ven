@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="cn.org.cflac.home.dao.UserMapper">
+<mapper namespace="cn.org.cflac.home.mapper.UserMapper">
   <resultMap id="BaseResultMap" type="cn.org.cflac.entity.User">
     <result column="user_id" jdbcType="VARCHAR" property="userId" />
     <result column="user_loginname" jdbcType="VARCHAR" property="userLoginname" />
@@ -44,4 +44,7 @@
       </if>
     </trim>
   </insert>
+  <select id="getUser" resultType="cn.org.cflac.entity.User">
+		SELECT user_loginname,user_password,user_name FROM user WHERE user_loginname=#{userLoginname} AND user_password=#{userPassword}
+  </select>
 </mapper>

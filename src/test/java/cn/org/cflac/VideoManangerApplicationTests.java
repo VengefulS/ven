@@ -20,7 +20,9 @@ import org.springframework.test.context.junit4.SpringRunner;
 import com.alibaba.fastjson.JSONObject;
 
 import cn.org.cflac.entity.Activity;
+import cn.org.cflac.entity.User;
 import cn.org.cflac.home.service.ActivityService;
+import cn.org.cflac.home.service.UserService;
 import cn.org.cflac.util.UUIDGenarator;
 
 @RunWith(SpringRunner.class)
@@ -29,6 +31,10 @@ public class VideoManangerApplicationTests {
 	
 	@Autowired
 	private ActivityService activityService;
+	
+	@Autowired
+	private UserService userSercice;
+	
 	@Test
 	public void contextLoads() {
 	}
@@ -81,13 +87,24 @@ public class VideoManangerApplicationTests {
 	}
 	
 	@Test
-	@Rollback(false)
+	//@Rollback(false)
 	public void test3() throws Exception {
 		Activity b = activityService.findActivityById("13d86f070be14feab54523e7f3e866c0");
 		b.setActivityName("test");
 		System.out.println(b.getActivityName());
 		activityService.updateActivity(b);
 		System.out.println(b.getActivityName());
+	}
+	
+	@Test
+	public void test4() {
+		
+		
+		String userLoginname = "yyy";
+		String userPassword = "123456";
+		User u = userSercice.getUser(userLoginname, userPassword);
+		System.out.println(u.getUserName());
+
 	}
 
 }
