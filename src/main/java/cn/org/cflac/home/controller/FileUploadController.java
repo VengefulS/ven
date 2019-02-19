@@ -22,6 +22,7 @@ import javax.servlet.http.HttpServletResponse;
 
 
 
+
 import com.alibaba.fastjson.JSONObject;
 
 import org.apache.log4j.Logger;
@@ -38,6 +39,7 @@ import org.springframework.web.multipart.commons.CommonsMultipartResolver;
 import cn.org.cflac.home.service.VideoService;
 import cn.org.cflac.util.BuildJsonOfObject;
 import cn.org.cflac.util.Ffmpeg;
+import cn.org.cflac.util.Path;
 import cn.org.cflac.util.UUIDGenarator;
 
 
@@ -71,9 +73,9 @@ public class FileUploadController {
 		String name = files.getOriginalFilename();
 		
 		String uuid = UUIDGenarator.nextUUID();
-		String path = "D://www"; 
+		String path = Path.UPLOAD_PATH;
 		String folder = name.split("\\.")[0];
-		String picPath ="D://www/"+folder+".jpg";
+		String picPath =Path.UPLOAD_PATH+folder+".jpg";
 		//"D://www"       "D://www"+folder+".jpg"
 		//"http://10.1.100.152/opt/lar/files/videomanager/videoresource"
 		//"http://10.1.100.152/opt/lar/files/videomanager/imgresource/"+folder+".jpg"
@@ -133,38 +135,5 @@ public class FileUploadController {
 		bAOutputStream.close();
 		return data;
 	}*/
- //这个方法没用到
-/*	@RequestMapping(value = "/uploadservlet", method = RequestMethod.POST, produces = "text/html;charset=utf-8")
-	protected String uploadServlet(HttpServletRequest request, HttpServletResponse response)
-			throws ServletException, IOException {
-		JSONObject json=new JSONObject();
-		response.setCharacterEncoding("utf-8");
-		String msg = "添加成功";
-		log.info("-------------------开始调用上传文件uploadservlet接口-------------------");
-		try {
-			if (request instanceof MultipartHttpServletRequest) {
-				MultipartHttpServletRequest mr = (MultipartHttpServletRequest) request;
-				List<MultipartFile> multipartFile = mr.getFiles("myfile");
-				if (null != multipartFile && !multipartFile.isEmpty()) {
-					MultipartFile file = multipartFile.get(0);
-					String name = file.getOriginalFilename();
-					String path = this.getClass().getClassLoader().getResource("/").getPath();
-					int index = path.indexOf("Shopping");
-					path = path.substring(0, index + "Shopping".length()) + "/WebContent/resources/upload/";
-					path = path + File.separator + name;
-					File uploadFile = new File(path);
-					if(FileCopyUtils.copy(file.getInputStream(), new FileOutputStream(uploadFile))>0)
-					{
-						json.put("path",path);
-					}
-				
-				}
-			}
-		} catch (Exception e) {
-			msg = "上传失败";
-		}
-		log.info("-------------------结束调用上传文件uploadservlet接口-------------------");
-		json.put("msg", msg);
-		return BuildJsonOfObject.buildJsonOfJsonObject(json);
-	}*/
+
 }

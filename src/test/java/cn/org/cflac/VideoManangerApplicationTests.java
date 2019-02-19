@@ -100,10 +100,10 @@ public class VideoManangerApplicationTests {
 	public void test4() {
 		
 		
-		String userLoginname = "yyy";
-		String userPassword = "123456";
+		String userLoginname = "atom";
+		String userPassword = "e10adc3949ba59abbe56e057f20f883e";
 		User u = userSercice.getUser(userLoginname, userPassword);
-		System.out.println(u.getUserName());
+		//System.out.println(u.getUserName());
 
 	}
 

@@ -1,5 +1,6 @@
 package cn.org.cflac.home.service;
 
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -14,9 +15,11 @@ public class UserServiceImpl implements UserService {
 	UserMapper userMapper;
 
 	@Override
-	public User getUser(String userLoginname, String userPassword) {
-		userPassword=MD5Util.getMD5(userPassword);		
-		return userMapper.getUser(userLoginname, userPassword);
+	public User getUser(String userLoginname,String userPassword) {
+		userPassword=MD5Util.getMD5(userPassword);	
+		/*System.out.println("userPassword:"+userPassword);
+		User user = userMapper.getUser(userLoginname, userPassword);*/
+		return userMapper.getUser(userLoginname,userPassword);
 	}
 
 }

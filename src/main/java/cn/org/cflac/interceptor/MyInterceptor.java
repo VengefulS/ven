@@ -13,7 +13,7 @@ public class MyInterceptor implements HandlerInterceptor {
 	public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler)
 			throws Exception {
 		Object LoginName = request.getSession().getAttribute("name");
-		System.out.println(LoginName);
+		//System.out.println(LoginName);
 		if (LoginName == null) {
 			//request.getRequestDispatcher("/login.html").forward(request,response);
 			response.sendRedirect("/");

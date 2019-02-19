@@ -1,5 +1,8 @@
 package cn.org.cflac.home.controller;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
@@ -16,7 +19,6 @@ import cn.org.cflac.home.service.UserService;
 
 @Controller
 public class LoginController {
-	
 	@Autowired
 	private UserService userService;
 	
@@ -29,14 +31,14 @@ public class LoginController {
 		
 		String userLoginname = req.getParameter("userLoginname");
 		String userPassword = req.getParameter("userPassword");
-		System.out.println(userLoginname);
-		System.out.println(userPassword);
+		//System.out.println(userLoginname);
+		//System.out.println(userPassword);
 		User user = userService.getUser(userLoginname, userPassword );
 		if(null == user) {
 			return "login";
 		}
 		session.setAttribute("name", user.getUserName());
-		System.out.println(session.getAttribute("name"));
+		//System.out.println(session.getAttribute("name"));
 		return "home";
 		
 	

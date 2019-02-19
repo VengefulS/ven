@@ -70,52 +70,5 @@ public class VideoController {
 		System.out.println(uuid);
 	}
 	
-	
-/*    
-    @RequestMapping("/fileUpload")
-    @ResponseBody 
-    public String fileUpload(@RequestParam("fileName") MultipartFile file,
-    		HttpServletRequest request 
-    		){
 
-
-    	 Enumeration<String > enums = request.getParameterNames();
- 		while(enums.hasMoreElements()){
- 			String  paramName=(String)enums.nextElement();
- 			String[]  values=request.getParameterValues(paramName);
- 			for(int  i=0;i<values.length;i++){
- 				System.out.println("["+i+"]   "+paramName+"  "+values[i]);
- 			}
- 		}
-    	
-    	
-        if(file.isEmpty()){
-            return "false";
-        }
-        String fileName = file.getOriginalFilename();
-        int size = (int) file.getSize();
-        System.out.println(fileName + "-->" + size);
-        String folder = fileName.split("\\.")[0];
-        
-        String path = "F:/test/"+folder;
-        File dest = new File(path + "/" + fileName);
-        if(!dest.getParentFile().exists()){ //判断文件父目录是否存在
-            dest.getParentFile().mkdir();
-        }
-        try {
-            file.transferTo(dest); //保存文件
-            
-            return null;
-        } catch (IllegalStateException e) {
-            
-            e.printStackTrace();
-            return "false";
-        } catch (IOException e) {
-            
-            e.printStackTrace();
-            return "false";
-        }
-	
-	
-    }*/
 }

@@ -1,6 +1,8 @@
 package cn.org.cflac.home.mapper;
 
+
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
 
 import cn.org.cflac.entity.User;
 
@@ -10,5 +12,5 @@ public interface UserMapper {
 
     int insertSelective(User record);
     
-    User getUser(String userLoginname,String userPassword);
+    User getUser(@Param("userLoginname")String userLoginname,@Param("userPassword")String userPassword);
 }

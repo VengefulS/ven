@@ -12,10 +12,12 @@ public class Ffmpeg {
     int b = videoRealPath.lastIndexOf(".");
     String videoPicName =  videoRealPath.substring(a+1, b);
     //截图的路径（输出路径） 
-    String videoPicPath ="D://www"+videoPicName+".jpg";//"http://10.1.100.152/opt/lar/files/videomanager/imgresource/"+videoPicName+".jpg";
+    String videoPicPath =Path.UPLOAD_PATH+videoPicName+".jpg";//"http://10.1.100.152/opt/lar/files/videomanager/imgresource/"+videoPicName+".jpg";
     try {   
-        //调用批处理文件   
-        Runtime.getRuntime().exec("cmd /c start D://ffmpeg/ffmpeg.bat " + videoRealPath + " " + videoPicPath);   
+        //调用批处理文件   windows
+        //Runtime.getRuntime().exec("cmd /c start"+Path.FFMPEG_PATH + videoRealPath + " " + videoPicPath);
+        //调用批处理文件   linux
+        Runtime.getRuntime().exec("sh "+Path.FFMPEG_PATH + videoRealPath + " " + videoPicPath);
     } catch (IOException e) {   
         e.printStackTrace();   
     }
