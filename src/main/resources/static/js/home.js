@@ -187,7 +187,7 @@ function query(search) {
 									"render" : function(data, type, full, meta) {
 										var ret = "<button id="
 												+ full.activityId
-												+ " class = \"btn-download\" onClick=\"downloadVideos(this)\" ><span class=\"glyphicon glyphicon-download-alt\"></span> </button>"
+												+ " class = \"btn-download\" disabled = \"disabled\" title=\"没有权限! \" onClick=\"downloadVideos(this)\" ><span class=\"glyphicon glyphicon-download-alt\"></span> </button>"
 										/*
 										 * var btn = $("<button class = \"btn
 										 * btn-default btn-sm btn-tmodal\"

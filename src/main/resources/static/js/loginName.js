@@ -5,8 +5,18 @@ $(document).ready(function() {
 		dataType : "json",
 		async : false,
 		success : function(data) {
-			document.getElementsByTagName('b')[0].innerHTML=data.loginName;
+			
+			var loginName = data.loginName;
+			document.getElementsByTagName('b')[0].innerHTML=loginName;
+			if(loginName == "管理员"){				
+				$(".btn-download").removeAttr("title");
+				$(".btn-download").removeAttr("disabled");
+			}
+			
+			
 		}
 	});
+	
+	
 
 })
