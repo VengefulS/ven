@@ -87,6 +87,14 @@ public class ActivityServiceImpl implements ActivityService{
 
 
 
+	@Override
+	public String findActivityNameById(String activityId) {
+		
+		return actMapper.findActivityNameById(activityId);
+	}
+
+
+
 	
 
 }

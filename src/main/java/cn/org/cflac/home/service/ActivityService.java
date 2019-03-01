@@ -25,6 +25,7 @@ public interface ActivityService {
     int addActivity(Activity activity);
     //查找一个活动
     Activity findActivityById(String activityId);
+    String findActivityNameById(String activityId);
     //更新一个活动
     void updateActivity(Activity activity);
 

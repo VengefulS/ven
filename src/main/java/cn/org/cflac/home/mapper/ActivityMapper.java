@@ -21,6 +21,7 @@ public interface ActivityMapper {
     Integer insertActivity(Activity activity);
     //查找一个活动
     Activity findActivityById(String activityId);
+    String findActivityNameById(String activityId);
     //更新一个活动
     Integer updateActivity(Activity activity);
     

@@ -58,11 +58,6 @@ public class VideoController {
 	}
 	
 	
-	
-	
-	
-	
-	
 	public static void main(String[] args) {
 		String fileName = "qweqw.mp4";
 		String uuid = UUID.randomUUID().toString().replaceAll("-","");

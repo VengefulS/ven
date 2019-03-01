@@ -9,16 +9,16 @@ var uploader = WebUploader.create({
     // swf文件路径
     swf: '/webupload/Uploader.swf',
 
-    // 文件接收服务端。
-    server: 'http://localhost:8080/videof/upload',
+    // 文件接收服务端。'http://localhost:8080/videof/upload'
+    server: 'http://10.1.100.152:8998/videof/upload',
 
     // 选择文件的按钮。可选。
     // 内部根据当前运行是创建，可能是input元素，也可能是flash.
     pick: '#picker',
     // 视频格式
     accept: {
-        title: 'Video',
-        extensions: 'avi,mp4,swf,flv,rmvb,wmv,asf,mpeg,rm,mkv,f4v,m4v,3gp',
+        title: 'Videos',
+        extensions: 'MTS,avi,mp4,swf,flv,rmvb,asf,mpeg,rm,mkv,f4v,m4v,3gp',
        mimeTypes: 'video/*'
     },
     // 不压缩image, 默认如果是jpeg，文件上传前会压缩一把再上传！

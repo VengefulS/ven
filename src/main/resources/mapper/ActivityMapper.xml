@@ -134,6 +134,10 @@
 	where activity_id = #{activityId}
 </select>
 
+<select id="findActivityNameById" resultType="java.lang.String">
+	select activity_name from activity_info where activity_id = #{activityId}
+</select>
+
 <update id="updateActivity" parameterType="cn.org.cflac.entity.Activity">
 	update activity_info
 	<set>

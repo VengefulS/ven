@@ -324,13 +324,21 @@ function videoPlay(url, picUrl, name) {
 	$("#videoModal").modal('show');
 
 	$(".modal-videoName").html(name);
-
-	$("#videoPlay1").attr("src", url);
-	$("#videoPlay1").attr("poster", picUrl);
+	var txt1 = '';
+	var txt11 = '\<video id="videoplayid1"  controls="controls" autoplay="autoplay" name="media"  height="98%" width="100%">'
+		+ '\<source src="'
+		+ url
+		+ '"'
+		+ ' type="video/mp4">'
+		+ '\</video>';
+$(".video-source1").append(txt11);
+	
+	
+	//$(".video-source1").find("video").find("source").attr("src", url);
+	//$("#videoPlay1").attr("poster", picUrl);
 
 	$(".videoPlay-close").click(function() {
-		$("#videoPlay1").attr("src", "");
-		$("#videoPlay1").attr("poster", "");
+		$(".video-source1").append(txt1);
 	})
 }
 
@@ -392,7 +400,19 @@ $("#addAtivity").click(function() {
 
 });
 
-
+//点击关闭视频按钮
+$(".videoPlay-close1").click(function(){
+	var videoObj = document.getElementById('videoplayid1');
+    if (videoObj) {
+        videoObj.pause();
+    }
+    $("#videoplayid1").remove();
+	
+});
+//点击关闭添加视频窗口按钮刷新视频列表
+$(".addVideoModal-close").click(function(){
+	window.opener.location.reload(); 
+})
 
 /*
  * function passActivityId(actId){ $.ajax({ url: "/videof/upload", type: "POST",

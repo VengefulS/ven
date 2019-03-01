@@ -5,6 +5,7 @@ package cn.org.cflac.home.controller;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -12,6 +13,12 @@ import java.util.Map;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
+
+
+
+
+
 
 
 
@@ -36,6 +43,7 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.multipart.commons.CommonsMultipartResolver;
 
+import cn.org.cflac.home.service.ActivityService;
 import cn.org.cflac.home.service.VideoService;
 import cn.org.cflac.util.BuildJsonOfObject;
 import cn.org.cflac.util.Ffmpeg;
@@ -54,6 +62,8 @@ public class FileUploadController {
 	@Autowired
 	private VideoService videoService;
 	
+	@Autowired
+	private ActivityService activityService;
 	 
 	public FileUploadController() {
 		this.log = Logger.getLogger(this.getClass());
@@ -66,7 +76,7 @@ public class FileUploadController {
 		JSONObject json=new JSONObject();
 		response.setCharacterEncoding("utf-8");
 		String msg = "添加成功";
-		log.info("-------------------开始调用上传文件upload接口-------------------");
+		log.info("--------开始调用上传文件upload接口-----------");
 		Map<String,String> map = new HashMap();
 		Map<String,String> mapRel = new HashMap();
 		try{
@@ -75,28 +85,43 @@ public class FileUploadController {
 		String uuid = UUIDGenarator.nextUUID();
 		String path = Path.UPLOAD_PATH;
 		String folder = name.split("\\.")[0];
-		String picPath =Path.UPLOAD_PATH+folder+".jpg";
-		//"D://www"       "D://www"+folder+".jpg"
-		//"http://10.1.100.152/opt/lar/files/videomanager/videoresource"
-		//"http://10.1.100.152/opt/lar/files/videomanager/imgresource/"+folder+".jpg"
-		path = path + "/" +name;
-		//"/" + folder+ 
-		System.out.println("folder:"+folder);
-		System.out.println("path:"+path);
-		//调用方法为上传的视频生成一个缩略图然后存到picPath中
-		String videoPicPath = Ffmpeg.createImg(path);
-		System.out.println("videoPicPath:"+videoPicPath);
 		
 		CommonsMultipartResolver multipartResolver = new CommonsMultipartResolver();
 	    MultipartHttpServletRequest multiReq = multipartResolver.resolveMultipart(request);
 	    String relActId = multiReq.getParameter("relActId");
 	    System.out.println("relActId:"+relActId);
+	    
+	    String actName = activityService.findActivityNameById(relActId);
+		System.out.println("controller中actName是："+actName);
+		
+		String path2 = path + "/"+actName+"/" +folder+"/"+folder+".mp4";//.mp4格式的文件地址
+		path = path +"/"+actName+ "/" +folder+"/"+name;//存视频的地址 
+		
+		//向数据库中存的地址是在nginx中配好的
+		//String nPath = Path.PIC_UPLOAD_PATH + "/" +folder+"/"+folder+".mp4";//数据库中存的地址应为播放的 即MP4格式的视频地址
+		//"/" + folder+ 
 		
 		
+		int a = path.lastIndexOf("/");
+	    int b = path.lastIndexOf(".");
+	    String videoPicName =  path.substring(a+1, b);
+	    
+		//调用方法为上传的视频生成一个缩略图然后存到picPath中--------------
+
 		
+		
+	    
+	    
+	    String videoPicPath1 =Path.PIC_UPLOAD_PATH+"/"+actName+"/"+folder+"/"+videoPicName+".jpg";
+		
+	    String videoMp4Path = Path.PIC_UPLOAD_PATH+ "/"+actName+"/" +folder+"/"+folder+".mp4";
+	    
+	    String videoPicPath =Path.UPLOAD_PATH+"/"+actName+"/"+folder+"/"+videoPicName+".jpg";
+	    
+	    
 		map.put("uuid", uuid);
-		map.put("videoAddress", path);
-		map.put("videoPicAddress", videoPicPath);
+		map.put("videoAddress", videoMp4Path);
+		map.put("videoPicAddress", videoPicPath1);
 		videoService.insertVideo(map);
 		/*String relActId = file.*/
 		String uuidRel = UUIDGenarator.nextUUID();
@@ -106,18 +131,24 @@ public class FileUploadController {
 		videoService.insertRel(mapRel);
 		
 		File uploadFile = new File(path);
+		
 		if(!uploadFile.getParentFile().exists()){ //判断文件父目录是否存在
 			uploadFile.getParentFile().mkdirs();
         }
 		files.transferTo(uploadFile);
+		System.out.println("files.transferTo() 方法调用结束---视频文件已经上传--开始转码并生成缩略图");
+		String msg1 = Ffmpeg.createImg(path,folder,videoPicName,videoPicPath);
+		System.out.println("videoPicPath:"+videoPicPath1+msg1);
 		
+		String msg2 = Ffmpeg.toMp4(path,folder,path2);
+		System.out.println("toMp4   videoMp4Path:"+videoMp4Path+msg2);
 		
 		}catch(Exception e){
 			msg="添加失败";
 			e.printStackTrace();
 			
 		}
-		log.info("-------------------结束调用上传文件upload接口-------------------");
+		log.info("--------结束调用上传文件upload接口-------");
 		json.put("msg", msg);
 		
 		//return videoService.insertVideo(map);
