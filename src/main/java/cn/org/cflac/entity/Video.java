@@ -1,5 +1,6 @@
 package cn.org.cflac.entity;
 
+import java.sql.Timestamp;
 import java.util.Date;
 
 public class Video {
@@ -9,9 +10,21 @@ public class Video {
     
     private String videoPicAddress;
 
-    private Date videoUploadTime;
+    private Timestamp videoUploadTime;
+    
+    private String videoTransform;
+    
+    private String invalid;
 
-    public String getVideoId() {
+    public String getInvalid() {
+		return invalid;
+	}
+
+	public void setInvalid(String invalid) {
+		this.invalid = invalid;
+	}
+
+	public String getVideoId() {
         return videoId;
     }
 
@@ -43,7 +56,15 @@ public class Video {
         return videoUploadTime;
     }
 
-    public void setVideoUploadTime(Date videoUploadTime) {
+    public void setVideoUploadTime(Timestamp videoUploadTime) {
         this.videoUploadTime = videoUploadTime;
     }
+
+	public String getVideoTransform() {
+		return videoTransform;
+	}
+
+	public void setVideoTransform(String videoTransform) {
+		this.videoTransform = videoTransform;
+	}
 }

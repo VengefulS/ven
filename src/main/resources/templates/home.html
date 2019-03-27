@@ -10,9 +10,11 @@
 <link rel="stylesheet" href="/bootstrap/dist/css/bootstrap.css">
 <link rel="stylesheet" href="/font-awesome/css/font-awesome.css">
 <link rel="stylesheet" href="/css/ionicons.css">
-<link rel="stylesheet"
-	href="/datatables.net-bs/css/dataTables.bootstrap.css">
+<link rel="stylesheet" href="/css/mask.css">
+<link rel="stylesheet" href="/datatables.net-bs/css/dataTables.bootstrap.css">
+<link rel="stylesheet" href="/bootstrap-datetimepicker/bootstrap-datetimepicker.min.css">
 <link rel="stylesheet" href="/css/AdminLTE.css">
+<link rel="stylesheet" href="/css/bootstrap-select.min.css" >
 <link rel="stylesheet" href="/css/_all-skins.css">
 <link rel="stylesheet" type="text/css"
 	href="/webuploader/webuploader.css">
@@ -33,10 +35,14 @@
 				<div class="navbar-custom-menu">
 					<ul class="nav navbar-nav">
 						<!-- User Account: style can be found in dropdown.less -->
-						<li class="dropdown user user-menu"><a href="/home"
-							class="dropdown-toggle" data-toggle="dropdown"> <span
-								class="hidden-xs">欢迎:<b></b></span>
+						<li class="dropdown user user-menu">
+						<a href="/home" class="dropdown-toggle" data-toggle="dropdown">
+						
+							 <span class="hidden-xs">欢迎:<b></b></span>
 						</a></li>
+						<li>
+						<a href="/login" id="logout">注销</a>
+						</li>
 					</ul>
 				</div>
 			</nav>
@@ -81,7 +87,7 @@
 
 	</div>
 
-	<!-- 活动列表模态框(Modal) -->
+	<!-- 添加活动列表模态框(Modal) -->
 	<div class="modal fade" id="addActivityListModal"
 		data-backdrop="static" tabindex="-1" role="dialog"
 		aria-labelledby="myModalLabel" aria-hidden="true">
@@ -101,11 +107,23 @@
 								placeholder="请输入活动名称">
 						</div>
 					</div>
-					<div class="form-group">
+					<div class="form-group ">
 						<label for="activityType" class="col-sm-2 control-label">门类</label>
 						<div class="col-sm-10">
-							<input type="text" class="form-control" id="activityType"
-								placeholder="请输入门类">
+							<div class="form-group " style="margin-bottom:0px">
+								<select class="selectpicker show-tick" title="请选择门类" data-size="5" id="activityType">
+									<option>1</option>
+									<option>2</option>
+									<option>3</option>
+									<option>4</option>
+									<option>5</option>
+									<option>6</option>
+									<option>7</option>
+								</select>
+							</div>
+
+							<!-- <input type="text" class="form-control" id="activityType"
+								placeholder="请输入门类"> -->
 						</div>
 					</div>
 					<div class="form-group">
@@ -125,8 +143,15 @@
 					<div class="form-group">
 						<label for="activityBeginDate" class="col-sm-2 control-label">时间</label>
 						<div class="col-sm-10">
-							<input type="text" class="form-control" id="activityBeginDate"
-								placeholder="请输入活动时间 格式为例：2019-01-01">
+							 <!--指定 date标记-->
+            			<div class='input-group date' id='datetimepicker11'>
+            			<input type='text' class="form-control" id="activityBeginDateUp" placeholder="请选择活动时间"/>
+            			<span class="input-group-addon">
+            			<span class="glyphicon glyphicon-calendar"></span>
+            			</span>
+            			</div>
+							<!-- <input type="text" class="form-control" id="activityBeginDate"
+								placeholder="请选择活动时间 格式为例：2019-01-01"> -->
 						</div>
 					</div>
 					<div class="form-group">
@@ -171,8 +196,19 @@
 					<div class="form-group">
 						<label for="activityType" class="col-sm-2 control-label">门类</label>
 						<div class="col-sm-10">
-							<input type="text" class="form-control" id="activityTypeUp"
-								placeholder="请输入门类">
+						<div class="form-group " style="margin-bottom:0px">
+								<select class="selectpicker show-tick" id="activityTypeUp"  data-size="5">
+									<option>1</option>
+									<option>2</option>
+									<option>3</option>
+									<option>4</option>
+									<option>5</option>
+									<option>6</option>
+									<option>7</option>
+								</select>
+							</div>
+							<!-- <input type="text" class="form-control" id="activityTypeUp"
+								placeholder="请输入门类"> -->
 						</div>
 					</div>
 					<div class="form-group">
@@ -192,8 +228,14 @@
 					<div class="form-group">
 						<label for="activityBeginDate" class="col-sm-2 control-label">时间</label>
 						<div class="col-sm-10">
-							<input type="text" class="form-control" id="activityBeginDateUp"
-								placeholder="请输入活动时间 格式为例：2019-01-01">
+						 <!--指定 date标记-->
+            			<div class='input-group date' id='datetimepicker1'>
+            			<input type='text' class="form-control" id="activityBeginDateUp"></input>
+            			<span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span></span>
+            			</div>
+
+							<!-- <input type="text" class="form-control" id="activityBeginDateUp"
+								placeholder="请输入活动时间 格式为例：2019-01-01"> -->
 						</div>
 					</div>
 					<div class="form-group">
@@ -221,7 +263,7 @@
 	<div class="modal fade" id="videoListModal" data-backdrop="static"
 		tabindex="-2" role="dialog" aria-labelledby="myModalLabel"
 		aria-hidden="true">
-		<div class="modal-dialog">
+		<div class="modal-dialog" style="width: 1000px;">
 			<div class="modal-content" style="width: 100%; height: 82%">
 				<div class="modal-header" style="width: 100%; height: 11%;">
 					<button type="button" class="close" data-dismiss="modal"
@@ -233,7 +275,8 @@
 					name="modal-activityId"
 					style="overflow: auto; width: 100%; height: 430px;"></div>
 
-				<div class="modal-footer" style="width: 100%; height: 13%;">
+				<div class="modal-footer " style="width: 100%; height: 13%;">
+				<div class="modal-list-footer" style="float:left"></div>
 					<button type="button" class="btn btn-primary" data-dismiss="modal">确认</button>
 					<button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
 				</div>
@@ -305,21 +348,26 @@
 	<!-- DataTables -->
 	<script src="/datatables.net/js/jquery.dataTables.js"></script>
 	<script src="/datatables.net-bs/js/dataTables.bootstrap.js"></script>
-	<!-- SlimScroll -->
+	
 	<script src="/js/jquery.slimscroll.js"></script>
-	<!-- FastClick -->
+	
 	<script src="/js/fastclick.js"></script>
-	<!-- AdminLTE App -->
+	<script src="/js/jquery.ui.core.js"></script>
+
 	<script src="/js/adminlte.js"></script>
 
 	<script src="/js/home.js"></script>
 	<script src="/js/loginName.js"></script>
-
+	<script src="/js/moment-with-locales.min.js"></script>
+	<script src="/bootstrap-datetimepicker/bootstrap-datetimepicker.js"></script>
+	<script src="/bootstrap-datetimepicker/locales/bootstrap-datetimepicker.zh-CN.js"></script>
 
 	<!--引入webuploader-->
 	<script type="text/javascript" src="/webuploader/webuploader.js"></script>
 
 	<script src="/js/videoUpload.js"></script>
-
+	<script src="/js/bootstrap-select.js"></script>
+	<script src="/js/defaults-zh_CN.js"></script>
+	
 </body>
 </html>

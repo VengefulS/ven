@@ -1,5 +1,6 @@
 package cn.org.cflac.entity;
 
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
@@ -72,8 +73,15 @@ public class Activity {
         return activityBeginDate;
     }
 
+    //将前台日历组件传入的String类型的日期 在这里转换为Date类型
     public void setActivityBeginDate(Date activityBeginDate) {
-        this.activityBeginDate = activityBeginDate;
+    	/*Date date;
+		try {
+			date = new SimpleDateFormat("yyyy-MM-dd").parse(activityBeginDate);
+		} catch (ParseException e) {
+			e.printStackTrace();
+		}*/
+		this.activityBeginDate = activityBeginDate;
     }
 
 	public String getActivityVideoGatherer() {

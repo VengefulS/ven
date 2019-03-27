@@ -9,13 +9,6 @@ import org.apache.logging.log4j.Logger;
 
 
 
-
-
-
-
-
-
-
 public class Ffmpeg {
 	
 	
@@ -137,7 +130,7 @@ public static void ffutil(Process process){
 	//String videoMp4Path = Path.PIC_UPLOAD_PATH+ "/" +folder+"/"+folder+".mp4";
 	try {   
 		System.out.println("command2 start---------");
-		String command2 = "ffmpeg -i "+ url +" -c:v libx264 -strict -2 -s 1280x720 -b 1000k "+path2;    	
+		String command2 = "ffmpeg -threads 4 -i "+ url +" -c:v libx264 -strict -2 -s 1280x720 -b:v 1000k "+path2;    	
     	
     	System.out.println("command2 end-------");
     	

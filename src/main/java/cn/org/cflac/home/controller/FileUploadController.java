@@ -70,7 +70,7 @@ public class FileUploadController {
 	}
  
 	@RequestMapping(value = "/upload", method = RequestMethod.POST)
-	public String upload(@RequestParam("file")MultipartFile files,
+	public JSONObject upload(@RequestParam("file")MultipartFile files,
 			HttpServletRequest request, 
 			HttpServletResponse response) throws IOException {
 		JSONObject json=new JSONObject();
@@ -98,8 +98,6 @@ public class FileUploadController {
 		path = path +"/"+actName+ "/" +folder+"/"+name;//存视频的地址 
 		
 		//向数据库中存的地址是在nginx中配好的
-		//String nPath = Path.PIC_UPLOAD_PATH + "/" +folder+"/"+folder+".mp4";//数据库中存的地址应为播放的 即MP4格式的视频地址
-		//"/" + folder+ 
 		
 		
 		int a = path.lastIndexOf("/");
@@ -139,10 +137,12 @@ public class FileUploadController {
 		System.out.println("files.transferTo() 方法调用结束---视频文件已经上传--开始转码并生成缩略图");
 		String msg1 = Ffmpeg.createImg(path,folder,videoPicName,videoPicPath);
 		System.out.println("videoPicPath:"+videoPicPath1+msg1);
-		
-		String msg2 = Ffmpeg.toMp4(path,folder,path2);
-		System.out.println("toMp4   videoMp4Path:"+videoMp4Path+msg2);
-		
+		/*String msg2 = Ffmpeg.toMp4(path,folder,path2);
+		System.out.println("Ffmpeg.toMp4 path="+path);
+		System.out.println("Ffmpeg.toMp4 folder="+folder);
+		System.out.println("Ffmpeg.toMp4 path2="+path2);
+		System.out.println("toMp4   videoMp4Path:"+videoMp4Path+msg2);*/
+		json.put("videoId", uuid);
 		}catch(Exception e){
 			msg="添加失败";
 			e.printStackTrace();
@@ -152,19 +152,38 @@ public class FileUploadController {
 		json.put("msg", msg);
 		
 		//return videoService.insertVideo(map);
-		return BuildJsonOfObject.buildJsonOfJsonObject(json);
+		return json;
 		
 	}
- 
-	/*private byte[] inputStreamToByte(InputStream is) throws IOException {
-		ByteArrayOutputStream bAOutputStream = new ByteArrayOutputStream();
-		int ch;
-		while ((ch = is.read()) != -1) {
-			bAOutputStream.write(ch);
-		}
-		byte data[] = bAOutputStream.toByteArray();
-		bAOutputStream.close();
-		return data;
-	}*/
-
+	
+	@RequestMapping(value = "/toMp4", method = RequestMethod.POST)
+	public JSONObject toMp4(@RequestParam("videoName")String videoName,
+			@RequestParam("actName")String actName,@RequestParam("videoId")String videoId,
+			HttpServletRequest request,HttpServletResponse response) throws IOException {
+		
+		String folder = videoName.split("\\.")[0];
+		
+		/*CommonsMultipartResolver multipartResolver = new CommonsMultipartResolver();
+	    MultipartHttpServletRequest multiReq = multipartResolver.resolveMultipart(request);
+	    String relActId = multiReq.getParameter("relActId");*/
+	    
+	    
+		String path =Path.UPLOAD_PATH;;
+		String path2 = path + "/"+actName+"/" +folder+"/"+folder+".mp4";//.mp4格式的文件地址
+		path = path +"/"+actName+ "/" +folder+"/"+videoName;//存视频的地址 
+		
+		String msg2 = Ffmpeg.toMp4(path,folder,path2);
+		System.out.println("Ffmpeg.toMp4 path="+path);
+		System.out.println("Ffmpeg.toMp4 folder="+folder);
+		System.out.println("Ffmpeg.toMp4 path2="+path2);
+		Map videoMap = new HashMap<String, String>();
+		videoMap.put("videoId", videoId);
+		videoMap.put("videoTransform", "Y");
+		videoService.updateVideoTransform(videoMap);
+		//response.setStatus(HttpServletResponse.SC_OK);
+		JSONObject json = new JSONObject();
+		json.put("result",msg2);
+		json.put("status","200");
+		return json;
+	}
 }

@@ -22,5 +22,8 @@ public interface VideoMapper {
 	
 	//向关联表插入数据
 	public int insertActivityVideoRel(Map relMap);
-    
+	
+	public int updateVideoTransform(Map videoMap);
+	
+	public int deleteVideoById(String videoId);
 }

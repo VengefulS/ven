@@ -8,9 +8,9 @@
     <result column="video_upload_time" jdbcType="DATE" property="videoUploadTime" />
   </resultMap>
   <insert id="insertVideo" parameterType="cn.org.cflac.entity.Video">
-    insert into activity_video (video_id, video_address, video_pic_address,video_upload_time)
+    insert into activity_video (video_id, video_address, video_pic_address,video_upload_time,video_transform,invalid)
     values (#{uuid}, #{videoAddress}
-    , #{videoPicAddress}, NOW())
+    , #{videoPicAddress}, NOW(),'N','N')
   </insert>
   
     <insert id="insertActivityVideoRel" parameterType="cn.org.cflac.entity.Relationship">
@@ -22,7 +22,7 @@
 
   
   <select id="findVideoByActid" parameterType="java.util.Map" resultType="cn.org.cflac.entity.Video">
-  SELECT V.video_id,V.video_address,V.video_pic_address,V.video_upload_time from activity_video V where V.video_id in (
+  SELECT V.video_id,V.video_address,V.video_pic_address,V.video_upload_time,V.video_transform from activity_video V where V.video_id in (
 	SELECT
 	R.video_id 
 	FROM
@@ -32,6 +32,27 @@
 	R.activity_id = #{activityId}
 	</if>
 	</where>
-	) ORDER BY video_upload_time DESC
+	)
+	and	V.invalid = 'N' ORDER BY video_upload_time DESC
   </select>
+  
+  <update id="updateVideoTransform" parameterType="java.util.Map">
+		update activity_video
+		<set>
+			video_transform = #{videoTransform}
+		</set>
+		where video_id = #{videoId}
+	</update>
+	
+	  <update id="deleteVideoById" parameterType="String">
+		update activity_video
+		<set>
+			invalid = '0'
+		</set>
+		where video_id = #{videoId}
+	</update>
+	
+	
+	
+	
 </mapper>

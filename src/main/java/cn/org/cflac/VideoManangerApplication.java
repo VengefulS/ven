@@ -9,6 +9,8 @@ import org.springframework.boot.web.servlet.MultipartConfigFactory;
 import org.springframework.boot.web.servlet.support.SpringBootServletInitializer;
 import org.springframework.context.annotation.Bean;
 
+import cn.org.cflac.util.Path;
+
 
 
 @SpringBootApplication
@@ -20,7 +22,7 @@ public class VideoManangerApplication extends SpringBootServletInitializer{
 	 @Bean
 	 MultipartConfigElement multipartConfigElement() {
 	    MultipartConfigFactory factory = new MultipartConfigFactory();
-	    factory.setLocation("/opt/lar/files/videomanager");
+	    factory.setLocation(Path.TEMP_PATH);
 	    return factory.createMultipartConfig();
 	}
 	

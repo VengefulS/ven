@@ -57,6 +57,15 @@ public class VideoController {
 		
 	}
 	
+	@RequestMapping(value="/deleteVideoById")
+	@ResponseBody
+	public String DeleteVideoById(@RequestParam(value = "videoId") String  videoId){
+		videoService.deleteVideoById(videoId);
+		
+		
+		return null;
+		
+	}
 	
 	public static void main(String[] args) {
 		String fileName = "qweqw.mp4";

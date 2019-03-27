@@ -1,0 +1,32 @@
+spring:
+  thymeleaf:
+    prefix: classpath:/templates/
+    suffix: .html
+    cache: false
+
+      
+
+  datasource:
+    name: video
+    url: jdbc:mysql://localhost:3306/spzy?useUnicode=true&characterEncoding=utf8&serverTimezone=GMT
+    username: root
+    password: spzy1234
+    driver-class-name: com.mysql.cj.jdbc.Driver
+
+  servlet:
+    multipart:
+      max-file-size: 2048MB
+      max-request-size: 2048MB
+      enabled:  true
+        
+
+mybatis:
+  configuration:
+    map-underscore-to-camel-case: true
+  mapper-locations: mapper/*.xml
+  typeAliasesPackage: cn.org.cflac.entity
+    
+
+
+    
+

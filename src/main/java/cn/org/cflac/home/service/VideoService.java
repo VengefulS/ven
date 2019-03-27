@@ -15,5 +15,9 @@ public interface VideoService {
 	Map insertVideo(Map videoMap);
 	 
 	Map insertRel(Map relMap);
+	
+	int updateVideoTransform(Map videoMap);
+	
+	int deleteVideoById(String videoId);
 	 
 }

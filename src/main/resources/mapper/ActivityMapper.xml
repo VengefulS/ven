@@ -112,7 +112,7 @@
 	from activity_info L 
 	<where>
 		<if test="search != null">
-			L.activity_name like concat('%',#{search},'%') OR L.activity_video_gatherer like concat('%',#{search},'%')
+			L.activity_name like concat('%',#{search},'%') OR L.activity_video_gatherer like concat('%',#{search},'%') OR L.activity_person like concat('%',#{search},'%')
 		</if>
 		 <if test="logdate != null and logdate.length > 0">
 			and date_format(L.activity_begin_date, '%Y-%m-%d') = #{logdate}

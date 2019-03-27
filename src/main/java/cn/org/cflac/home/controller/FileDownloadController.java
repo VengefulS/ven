@@ -25,6 +25,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import cn.org.cflac.entity.Paging;
 import cn.org.cflac.entity.Video;
+import cn.org.cflac.home.service.ActivityService;
 import cn.org.cflac.home.service.VideoService;
 import cn.org.cflac.util.DownloadHelp;
 import cn.org.cflac.util.Path;
@@ -35,6 +36,8 @@ public class FileDownloadController {
 	@Autowired
 	private VideoService videoService;
 	
+	@Autowired
+	private ActivityService activityService;
 	//普通java文件下载方法，适用于所有框架  
 	@RequestMapping("/download")
     public String downloadFiles(HttpServletRequest request,HttpServletResponse res) throws IOException {
@@ -55,7 +58,9 @@ public class FileDownloadController {
         //创建压缩文件需要的空的zip包  
         //String zipBasePath=request.getSession().getServletContext().getRealPath("/upload/zip");  
         // System.out.println(zipBasePath);
-        String zipName = "video.zip";
+        
+        String zipName1 = activityService.findActivityNameById(actId)+"活动视频.zip";
+        String zipName = new String(zipName1.getBytes("utf-8"),"ISO-8859-1");
         String zipFilePath = Path.DOWNLOAD_ZIP_PATH+"/"+zipName;  
         System.out.println("zipFilePath = "+zipFilePath);
         //request.getServletContext().getRealPath("/");
@@ -65,7 +70,7 @@ public class FileDownloadController {
         Paging<Video> pp = videoService.findVideoByActid(actId);
         
         for (Video video : pp.getData()) {
-        	String ss = "99/resource/";
+        	String ss = Path.CUT_PATH;
         	int n = video.getVideoAddress().lastIndexOf(".");
         	int m = video.getVideoAddress().indexOf(ss);
         	String addr1 =video.getVideoAddress().substring(m+11, n)+".MTS";
@@ -88,7 +93,7 @@ public class FileDownloadController {
         //创建zip文件输出流  
         ZipOutputStream zos = new ZipOutputStream(new FileOutputStream(zip));
         
-        this.zipFile(zipBasePath,zipName, zipFilePath,filePaths,zos);
+        this.zipFile(zipBasePath,zipName , zipFilePath,filePaths,zos);
         zos.close();
         res.setHeader("Content-disposition", "attachment;filename="+zipName);//设置下载的压缩文件名称
 
@@ -157,18 +162,7 @@ public class FileDownloadController {
         }  
         return null;
     }
-public static void main(String[] args) {
-	String a = "http://10.1.100.152:8999/resource/mmmm/00038/00038.MTS";
-	String ss = "99/resource/";
-	int n = a.lastIndexOf(".");
-	int m = a.indexOf(ss);
-	System.out.println(m);
-	System.out.println(n);
-	String addr =a.substring(m+11, n)+".MTS";
-	System.out.println("addr = "+addr);
-	
-	
-}
+
 
    
 	

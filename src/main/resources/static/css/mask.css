@@ -1,0 +1,72 @@
+/*图片遮罩层*/
+
+  .mask-video{
+    text-align: right;
+    /* overflow: hidden; */
+    position: relative;
+    width: 20%;
+    right: 0;
+    
+  }
+  .mask-video:before{
+    content: "";
+    width: 10%;
+    height: 100%;
+    background: #000;
+    position: absolute;
+    top: 0;
+    right: 0;
+    opacity: 0;
+    transition: all 500ms cubic-bezier(0.47, 0, 0.745, 0.715) 0s;
+  }
+   .mask-video:hover:before{
+    width: 20%;
+    right: 0;
+    opacity: 0.3;
+  }
+   .mask-video img{
+    width: 100%;
+    height: auto;
+  } 
+  .mask-video .mask-video-content{
+    width: 20%;
+    color: #fff;
+    position: absolute;
+    top: 0;
+    right: 0;
+  }
+  .mask-video .title{
+    line-height: 50%;
+    text-transform: uppercase;
+    margin: 0;
+    opacity: 0;
+    transition: all 0.5s ease 0s;
+  }
+  .mask-video:hover .title{
+    opacity: 0.3;
+    transition-delay: 0.1s;
+  }
+  
+ 
+  
+     .mask-video-content:hover .delspan{
+  color:#ff0000;
+  opacity: 1;
+  font-size:24px;
+  } 
+
+  @media only screen and (max-width:100%){
+    .mask-video{ margin-bottom: 30px; }
+  }
+
+   .delspan{
+  color: #ffffff;
+  font-size:22px;
+  top:50%;
+  right:20%;
+  } 
+  
+  .videoslt{
+  cursor:pointer;
+  margin-top:0px;
+  }
