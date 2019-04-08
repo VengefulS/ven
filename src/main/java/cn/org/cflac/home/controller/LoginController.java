@@ -48,19 +48,7 @@ public class LoginController {
 		return null;
 		
 	
-		/***
-		String userLoginname = u.getUserLoginname();
-		System.out.println(userLoginname);
-		String userPassword = u.getUserPassword();
-		System.out.println(userPassword);
-		User user = userService.getUser(userLoginname, userPassword);
-		if(null == user) {
-			return "redirect:/login";
-		}
-		session.setAttribute("name", user.getUserName());
-		return "redirect:/home";		
-	}
-	*****/
+	
 	}
 	@RequestMapping(value="/logout")
 	public ModelAndView logout(HttpServletRequest request){

@@ -10,7 +10,7 @@ var uploader = WebUploader.create({
     swf: '/webupload/Uploader.swf',
 
     // 文件接收服务端。
-    server: 'http://10.1.11.120:8080/videof/upload',
+    server: 'http://localhost:8080/videof/upload',
     //server: 'http://10.1.11.120:8080/videof/upload',
     // http://localhost:8080/videof/upload
     //http://10.1.100.152:8998/videof/upload

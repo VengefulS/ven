@@ -58,13 +58,14 @@ public class FileDownloadController {
         //创建压缩文件需要的空的zip包  
         //String zipBasePath=request.getSession().getServletContext().getRealPath("/upload/zip");  
         // System.out.println(zipBasePath);
-        
-        String zipName1 = activityService.findActivityNameById(actId)+"活动视频.zip";
+        //activityService.findActivityNameById(actId)+"video.zip"
+        String zipName1 = activityService.findActivityNameById(actId)+".zip";
         String zipName = new String(zipName1.getBytes("utf-8"),"ISO-8859-1");
+        System.out.println("zipName="+zipName);
         String zipFilePath = Path.DOWNLOAD_ZIP_PATH+"/"+zipName;  
         System.out.println("zipFilePath = "+zipFilePath);
         //request.getServletContext().getRealPath("/");
-        System.out.println(request.getServletContext().getRealPath("/"));
+        //System.out.println(request.getServletContext().getRealPath("/"));
         //创建需要下载的文件路径的集合 
         List<String> filePaths = new ArrayList<String>();  
         Paging<Video> pp = videoService.findVideoByActid(actId);
