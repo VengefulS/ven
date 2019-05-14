@@ -25,7 +25,6 @@ var uploader = WebUploader.create({
         extensions: 'MTS',
        mimeTypes: '/*'
     },
-    // 不压缩image, 默认如果是jpeg，文件上传前会压缩一把再上传！
     resize: false
     //{Boolean} [可选] [默认值：false] 是否要分片处理大文件上传。
     //chunked: true ,
@@ -42,6 +41,12 @@ var uploader = WebUploader.create({
 
 //当有文件被添加进队列的时候
 uploader.on( 'fileQueued', function( file ) {
+	//console.log(uploader.md5File(file.source));
+	console.log("fileName="+file.name);
+	
+	var actName = $(".modal-actName").text();
+	console.log("actName="+actName);
+
     $("#thelist").append( '<div id="' + file.id + '" class="item">' +
         '<h4 class="info">' + file.name + '</h4>' +
         '<p class="state">等待上传...</p>' +
@@ -97,7 +102,7 @@ uploader.on( 'uploadBeforeSend', function( block, data ) {
     data.relActId = document.getElementsByName("modal-activityId")[0].id;
 });
 
-
+	
 
 $("#ctlBtn").on('click', function() {
 		uploader.upload();

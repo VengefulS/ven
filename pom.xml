@@ -113,7 +113,7 @@
    			<groupId>org.springframework.boot</groupId>
   			<artifactId>spring-boot-starter-tomcat</artifactId>
    			<scope>provided</scope>
-		</dependency>  <!-- 生产上需要注释掉  因为生产环境不需要自带的tomcat插件 -->
+		</dependency>  
 		<dependency>
     		<groupId>javax.servlet</groupId>
     		<artifactId>javax.servlet-api</artifactId>

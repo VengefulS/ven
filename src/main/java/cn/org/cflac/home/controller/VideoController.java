@@ -59,8 +59,13 @@ public class VideoController {
 	
 	@RequestMapping(value="/deleteVideoById")
 	@ResponseBody
-	public String DeleteVideoById(@RequestParam(value = "videoId") String  videoId){
-		videoService.deleteVideoById(videoId);
+	public String DeleteVideoById(@RequestParam(value = "videoId") String  videoId,
+			@RequestParam(value = "actId") String  actId){
+		
+		Map<String,String> delVideoMap = new HashMap<String, String>();
+		delVideoMap.put("videoId", videoId);
+		delVideoMap.put("actId", actId);
+		videoService.deleteVideoById(delVideoMap);
 		
 		
 		return null;

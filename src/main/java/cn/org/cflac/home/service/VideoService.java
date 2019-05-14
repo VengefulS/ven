@@ -18,6 +18,7 @@ public interface VideoService {
 	
 	int updateVideoTransform(Map videoMap);
 	
-	int deleteVideoById(String videoId);
+	int deleteVideoById(Map delVideoMap);
 	 
+	String isrepByAddress(String fileMd5);
 }

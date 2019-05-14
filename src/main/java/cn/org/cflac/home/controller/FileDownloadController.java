@@ -49,12 +49,12 @@ public class FileDownloadController {
         /* List list = */
          
         
-         //方法1：IO流实现下载的功能  
+         //IO流实现下载的功能  
         res.setContentType("text/html; charset=UTF-8"); //设置编码字符  
         res.setContentType("application/octet-stream"); //设置内容类型为下载类型  
         OutputStream out = res.getOutputStream();   //创建页面返回方式为输出流，会自动弹出下载框   
 
-        //方法1-3：将附件中多个文件进行压缩，批量打包下载文件
+        //将附件中多个文件进行压缩，批量打包下载文件
         //创建压缩文件需要的空的zip包  
         //String zipBasePath=request.getSession().getServletContext().getRealPath("/upload/zip");  
         // System.out.println(zipBasePath);

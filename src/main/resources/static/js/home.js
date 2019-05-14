@@ -2,7 +2,7 @@ $(document).ready(function() {
 	var table;
 	query();
 	$("#findAll_filter .input-sm").attr({
-		'placeholder' : '按活动名称和采集人查找'
+		'placeholder' : '按名称、采集人和相关人物查找'
 	});
 })
 
@@ -67,11 +67,17 @@ function query(search) {
 								"sNext" : "下页",
 								"sLast" : "末页"
 							},
+							
 							"oAria" : {
 								"sSortAscending" : ": 以升序排列此列",
 								"sSortDescending" : ": 以降序排列此列"
 							}
 						},
+						/*createdRow: function ( row, data, index ) {
+				            if ( index %2 == 0 ) {
+				                $('td', row).css('font-weight',"bold").css("background-color","#cac1c1");
+				            }
+				        },*/
 
 						// 异步请求
 						"ajax" : {
@@ -96,55 +102,65 @@ function query(search) {
 							"type" : "html",
 							"data" : "activityName",
 							"defaultContent" : "",
-							"visible" : true
+							"visible" : true,
+							"orderable": true,"width":"185px",
+							"word-wrap": "break-word"
 						}, {
 							"title" : "开始时间",
 							"type" : "html",
 							"data" : "displayActivityBeginDate",
 							"defaultContent" : "",
-							"visible" : true
+							"visible" : true,
+							"orderable": true,"width":"130px"
 						}, {
 							"title" : "活动地点",
 							"type" : "html",
 							"data" : "activitySite",
 							"defaultContent" : "",
-							"visible" : true
+							"visible" : true,
+							"orderable": true,"width":"140px"
 						}, {
 							"title" : "活动门类",
 							"type" : "html",
 							"data" : "activityType",
 							"defaultContent" : "",
-							"visible" : true
+							"visible" : true,
+							"orderable": true,"width":"100px"
 						}, {
 							"title" : "相关人物",
 							"type" : "html",
 							"data" : "activityPerson",
 							"defaultContent" : "",
-							"visible" : true
+							"visible" : true,
+							"orderable": true,"width":"135px"
 						}, {
 							"title" : "视频采集人",
 							"type" : "html",
 							"data" : "activityVideoGatherer",
 							"defaultContent" : "",
-							"visible" : true
+							"visible" : true,
+							"orderable": true,"width":"100px"
 						}, {
 							"title" : "修改活动信息",
 							"type" : "html",
 							"data" : "",
 							"defaultContent" : "",
-							"visible" : true
+							"visible" : true,
+							"orderable": true,"width":"100px"
 						}, {
 							"title" : "预览",
 							"type" : "html",
 							"data" : "",
 							"defaultContent" : "",
-							"visible" : true
+							"visible" : true,
+							"orderable": true,"width":"60px"
 						}, {
 							"title" : "批量下载",
 							"type" : "html",
 							"data" : "",
 							"defaultContent" : "",
-							"visible" : true
+							"visible" : true,
+							"orderable": true,"width":"80px"
 						} ],
 						// 从右向左第三列列描述 加按钮
 						"columnDefs" : [
@@ -201,19 +217,7 @@ function query(search) {
 									}
 
 								} ]
-					/*
-					 * , // 最后列描述 加按钮 "columnDefs" : [{ "targets" : -1, "render" :
-					 * function(data, type, full, meta) { var ret = "<button
-					 * id="+full.activityId+" name="+full.activityName+" class =
-					 * \"btn-download\" ><span class=\"glyphicon
-					 * glyphicon-download-alt\"></span> </button>" var btn =
-					 * $("<button class = \"btn btn-default btn-sm btn-tmodal\"
-					 * type=\"button\" data-toggle=\"modal\"
-					 * data-target=\"#videoModal\" onClick=\"modalVideo(this)\">
-					 * </button>") btn.data("id",actid); btn.append("<span
-					 * class=\"glyphicon glyphicon-play\"></span>"); return
-					 * ret; } }]
-					 */
+					
 
 					}).api();
 
@@ -539,7 +543,8 @@ function deleteVideoById(vid){
 			dataType : 'text',
 			url : '/video/deleteVideoById',
 			data : ({
-				"videoId" : vid			
+				"videoId" : vid,
+				"actId" : $(".modal-activityId").attr("id")
 			}),
 			success : function(data) {
 				var act = {};
@@ -553,3 +558,4 @@ function deleteVideoById(vid){
 		})
 	}
 }
+

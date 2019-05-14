@@ -15,6 +15,10 @@ public class Video {
     private String videoTransform;
     
     private String invalid;
+    
+    private String videoMD5;
+    
+    
 
     public String getInvalid() {
 		return invalid;
@@ -66,5 +70,13 @@ public class Video {
 
 	public void setVideoTransform(String videoTransform) {
 		this.videoTransform = videoTransform;
+	}
+
+	public String getVideoMD5() {
+		return videoMD5;
+	}
+
+	public void setVideoMD5(String videoMD5) {
+		this.videoMD5 = videoMD5;
 	}
 }

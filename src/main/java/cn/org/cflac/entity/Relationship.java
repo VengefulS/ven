@@ -8,6 +8,11 @@ public class Relationship {
 	 private String activityId;
 	    
 	 private String videoId;
+	 
+	 private String invalid;
+	 
+	 
+	 
 
 	public String getId() {
 		return id;
@@ -31,6 +36,14 @@ public class Relationship {
 
 	public void setVideoId(String videoId) {
 		this.videoId = videoId;
+	}
+
+	public String getInvalid() {
+		return invalid;
+	}
+
+	public void setInvalid(String invalid) {
+		this.invalid = invalid;
 	}
 	 
 	 

@@ -15,7 +15,7 @@ public class Path {
 	
 	public static final String DOWNLOAD_ZIP_PATH = "F:/opt/lar/files/videomanager/videoresource/tempzip"; 
 	// /opt/lar/files/videomanager/videoresource/tempzip
-	//public static final String DOWNLOAD_ZIP_PATH ="/opt/lar/files/videomanager/videoresource/tempzip";
+	//public static final String DOWNLOAD_ZIP_PATH ="F:/opt/lar/files/videomanager/videoresource/tempzip";
 	
 	
 	

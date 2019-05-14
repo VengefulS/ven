@@ -7,6 +7,7 @@ import java.util.Map;
 
 
 
+
 import org.apache.ibatis.annotations.Mapper;
 
 import cn.org.cflac.entity.Video;
@@ -25,5 +26,7 @@ public interface VideoMapper {
 	
 	public int updateVideoTransform(Map videoMap);
 	
-	public int deleteVideoById(String videoId);
+	public int deleteVideoById(Map delVideoMap);
+
+	public String queryCountByMd5(String fileMd5);
 }

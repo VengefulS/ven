@@ -16,6 +16,7 @@ import org.springframework.stereotype.Service;
 
 
 
+
 import cn.org.cflac.entity.Paging;
 import cn.org.cflac.entity.Video;
 import cn.org.cflac.home.mapper.VideoMapper;
@@ -67,11 +68,17 @@ public class VideoServiceImpl implements VideoService {
 	}
 
 	@Override
-	public int deleteVideoById(String videoId) {
+	public int deleteVideoById(Map delVideoMap) {
 		// TODO Auto-generated method stub
 		
-		videoMapper.deleteVideoById(videoId);
+		videoMapper.deleteVideoById(delVideoMap);
 		return 0;
+	}
+
+	@Override
+	public String isrepByAddress(String fileMd5) {
+		// TODO Auto-generated method stub
+		return videoMapper.queryCountByMd5(fileMd5);
 	}
 
 

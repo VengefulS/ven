@@ -30,10 +30,13 @@ import javax.servlet.http.HttpServletResponse;
 
 
 
+
+
 import com.alibaba.fastjson.JSONObject;
 
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.util.DigestUtils;
 import org.springframework.util.FileCopyUtils;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -81,7 +84,9 @@ public class FileUploadController {
 		Map<String,String> mapRel = new HashMap();
 		try{
 		String name = files.getOriginalFilename();
-		
+		String fileMd5 = DigestUtils.md5DigestAsHex(files.getInputStream());
+		String vid = videoService.isrepByAddress(fileMd5);
+		System.out.println("count="+vid);
 		String uuid = UUIDGenarator.nextUUID();
 		String path = Path.UPLOAD_PATH;
 		String folder = name.split("\\.")[0];
@@ -90,6 +95,18 @@ public class FileUploadController {
 	    MultipartHttpServletRequest multiReq = multipartResolver.resolveMultipart(request);
 	    String relActId = multiReq.getParameter("relActId");
 	    System.out.println("relActId:"+relActId);
+	    if(vid!=null){
+	    
+	    	System.out.println("if判断中  vid的值  ="+vid);
+	    	mapRel.put("uuid", uuid);
+	    	mapRel.put("activityId", relActId);
+	    	mapRel.put("videoId", vid);
+	    	
+	    	videoService.insertRel(mapRel);
+	    	
+	    	
+	    	return null;
+	    }
 	    
 	    String actName = activityService.findActivityNameById(relActId);
 		System.out.println("controller中actName是："+actName);
@@ -120,6 +137,7 @@ public class FileUploadController {
 		map.put("uuid", uuid);
 		map.put("videoAddress", videoMp4Path);
 		map.put("videoPicAddress", videoPicPath1);
+		map.put("videoMD5", fileMd5);
 		videoService.insertVideo(map);
 		/*String relActId = file.*/
 		String uuidRel = UUIDGenarator.nextUUID();
@@ -170,13 +188,13 @@ public class FileUploadController {
 	    
 		String path =Path.UPLOAD_PATH;;
 		String path2 = path + "/"+actName+"/" +folder+"/"+folder+".mp4";//.mp4格式的文件地址
-		path = path +"/"+actName+ "/" +folder+"/"+videoName;//存视频的地址 
+		path = path +"/"+actName+ "/" +folder+"/"+videoName;//存视频的地址
 		
 		String msg2 = Ffmpeg.toMp4(path,folder,path2);
 		System.out.println("Ffmpeg.toMp4 path="+path);
 		System.out.println("Ffmpeg.toMp4 folder="+folder);
 		System.out.println("Ffmpeg.toMp4 path2="+path2);
-		Map videoMap = new HashMap<String, String>();
+		HashMap<String, String> videoMap = new HashMap<String, String>();
 		videoMap.put("videoId", videoId);
 		videoMap.put("videoTransform", "Y");
 		videoService.updateVideoTransform(videoMap);
@@ -186,4 +204,28 @@ public class FileUploadController {
 		json.put("status","200");
 		return json;
 	}
+	
+	
+	/*@RequestMapping(value = "/isrep")
+	public int isrep(@RequestParam("videoName")String videoName,
+			@RequestParam("actName")String actName,
+			HttpServletRequest request,HttpServletResponse response) throws IOException {
+		String msg ="ok";
+		String folder = videoName.split("\\.")[0];
+		System.out.println("videoName="+videoName);
+		HashMap<String, String> vmap = new HashMap<String, String>();
+		String qbo = actName+"/"+folder+"/"+videoName;
+		
+		System.out.println("actname/folder/videoname="+qbo);
+		int count = videoService.isrepByAddress(qbo);
+		
+		System.out.println("count="+count);
+		
+		JSONObject json = new JSONObject();
+		json.put("result",msg);
+		json.put("status","200");
+		return count;
+	}*/
+	
+	
 }
