@@ -8,7 +8,12 @@ package cn.org.cflac.home.controller;
 
 
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
+
 import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -114,6 +119,12 @@ public class ActivityController {
 		
 	}
 	
+	
+	
+	
+	
+	
+	
 	@RequestMapping(value="/updateActivity",method=RequestMethod.POST)
 	@ResponseBody
 	public String updateActivity(@ModelAttribute Activity activity) {
@@ -131,5 +142,42 @@ public class ActivityController {
 		result.put("loginName", loginName);
 		String res = result.toJSONString();
 		return res;
+	}
+	
+	
+	
+	
+	/*@RequestMapping(value="/findActivityListByVideoTag",method=RequestMethod.POST)
+	@ResponseBody
+	public String findActivityListByVideoTag2(@RequestParam(value="tag") String tagName){
+		
+		String actId;
+		actId = activityService.findActivityListByVideoTag(tagName);
+		
+		return null;
+		
+	}*/
+	
+	@RequestMapping(value="/findActivityListByVideoTag")
+	@ResponseBody
+	public Paging<Activity> findActivityListByVideoTag(Integer draw,
+            @RequestParam(value="tag",required = false) String tagName,
+            @RequestParam(value = "start",defaultValue = "0") Integer index,
+            @RequestParam(value = "length",defaultValue = "10") Integer size
+            ){
+		/*Integer draw,*/
+		/*@RequestParam(value = "search[value]",required = false) String search,*/
+		/*@RequestParam(value = "start",defaultValue = "0") Integer index,
+            @RequestParam(value = "length",defaultValue = "10") Integer size*/
+		
+		
+		System.out.println("视频的tag搜索："+tagName);
+		Paging<Activity> paging = null;
+        try {
+            paging = activityService.findActivityList2(tagName, index, size, draw);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return paging;
 	}
 }

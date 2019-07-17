@@ -6,6 +6,7 @@ import java.util.Map;
 import org.apache.ibatis.annotations.Mapper;
 
 import cn.org.cflac.entity.Activity;
+import cn.org.cflac.entity.Paging;
 
 
 @Mapper
@@ -24,5 +25,13 @@ public interface ActivityMapper {
     String findActivityNameById(String activityId);
     //更新一个活动
     Integer updateActivity(Activity activity);
+    
+  //根据视频标签查活动列表
+    Paging<Activity> findActivityListByVideoTag(String tagName);
+
+	List<Activity> findActivityList2(Map<String, Object> map);
+
+	Integer findActivityCount2(Map<String, Object> map1);
+    
     
 }

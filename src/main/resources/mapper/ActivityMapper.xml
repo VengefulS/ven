@@ -1,154 +1,237 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD com.example.Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="cn.org.cflac.home.mapper.ActivityMapper">
-  <resultMap id="BaseResultMap" type="cn.org.cflac.entity.Activity">
-    <result column="activity_id" jdbcType="VARCHAR" property="activityId" />
-    <result column="activity_name" jdbcType="VARCHAR" property="activityName" />
-    <result column="activity_type" jdbcType="VARCHAR" property="activityType" />
-    <result column="activity_person" jdbcType="VARCHAR" property="activityPerson" />
-    <result column="activity_site" jdbcType="VARCHAR" property="activitySite" />
-    <result column="activity_begin_date" jdbcType="DATE" property="activityBeginDate" />
-    <result column="activity_end_date" jdbcType="DATE" property="activityEndDate" />
-    <result column="activity_video_gatherer" jdbcType="VARCHAR" property="activityVideoGatherer" />
-  </resultMap>
-  <insert id="insert" parameterType="cn.org.cflac.entity.Activity">
-    insert into activity_info (activity_id, activity_name, activity_type, 
-      activity_person, activity_site, activity_begin_date, 
-      activity_end_date)
-    values (#{activityId,jdbcType=VARCHAR}, #{activityName,jdbcType=VARCHAR}, #{activityType,jdbcType=VARCHAR}, 
-      #{activityPerson,jdbcType=VARCHAR}, #{activitySite,jdbcType=VARCHAR}, #{activityBeginDate,jdbcType=DATE}, 
-      #{activityEndDate,jdbcType=DATE})
-  </insert>
-  <insert id="insertActivity" parameterType="cn.org.cflac.entity.Activity">
-    insert into activity_info (activity_id, activity_name, activity_type, 
-      activity_person, activity_site, activity_begin_date,activity_video_gatherer)
-    values (#{activityId,jdbcType=VARCHAR}, #{activityName,jdbcType=VARCHAR}, #{activityType,jdbcType=VARCHAR}, 
-      #{activityPerson,jdbcType=VARCHAR}, #{activitySite,jdbcType=VARCHAR}, #{activityBeginDate,jdbcType=DATE},#{activityVideoGatherer,jdbcType=VARCHAR})
-  </insert>
-  <insert id="insertSelective" parameterType="cn.org.cflac.entity.Activity">
-    insert into activity_info
-    <trim prefix="(" suffix=")" suffixOverrides=",">
-      <if test="activityId != null">
-        activity_id,
-      </if>
-      <if test="activityName != null">
-        activity_name,
-      </if>
-      <if test="activityType != null">
-        activity_type,
-      </if>
-      <if test="activityPerson != null">
-        activity_person,
-      </if>
-      <if test="activitySite != null">
-        activity_site,
-      </if>
-      <if test="activityBeginDate != null">
-        activity_begin_date,
-      </if>
-      <if test="activityEndDate != null">
-        activity_end_date,
-      </if>
-      <if test="activityVideoGatherer != null">
-        activity_video_gatherer,
-      </if>
-    </trim>
-    <trim prefix="values (" suffix=")" suffixOverrides=",">
-      <if test="activityId != null">
-        #{activityId,jdbcType=VARCHAR},
-      </if>
-      <if test="activityName != null">
-        #{activityName,jdbcType=VARCHAR},
-      </if>
-      <if test="activityType != null">
-        #{activityType,jdbcType=VARCHAR},
-      </if>
-      <if test="activityPerson != null">
-        #{activityPerson,jdbcType=VARCHAR},
-      </if>
-      <if test="activitySite != null">
-        #{activitySite,jdbcType=VARCHAR},
-      </if>
-      <if test="activityBeginDate != null">
-        #{activityBeginDate,jdbcType=DATE},
-      </if>
-      <if test="activityEndDate != null">
-        #{activityEndDate,jdbcType=DATE},
-      </if>
-      <if test="activityVideoGatherer != null">
-        #{activityVideoGatherer,jdbcType=VARCHAR},
-      </if>
-    </trim>
-  </insert>
-	<resultMap id="result" type="cn.org.cflac.entity.Activity">
-		<result column="name" property="name" />
-		<result column="password" property="password" />
-		<result column="number" property="number" />
- 
+	<resultMap id="BaseResultMap" type="cn.org.cflac.entity.Activity">
+		<result column="activity_id" jdbcType="VARCHAR" property="activityId" />
+		<result column="activity_name" jdbcType="VARCHAR" property="activityName" />
+		<result column="activity_type" jdbcType="VARCHAR" property="activityType" />
+		<result column="activity_person" jdbcType="VARCHAR" property="activityPerson" />
+		<result column="activity_site" jdbcType="VARCHAR" property="activitySite" />
+		<result column="activity_begin_date" jdbcType="DATE"
+			property="activityBeginDate" />
+		<result column="activity_end_date" jdbcType="DATE" property="activityEndDate" />
+		<result column="activity_video_gatherer" jdbcType="VARCHAR"
+			property="activityVideoGatherer" />
 	</resultMap>
- 
-	<select id="findAll" parameterType="String" resultMap="result">
-		SELECT * FROM activity_info
-	</select>
-	<select id="findActivityCount" parameterType="java.util.Map" resultType="java.lang.Integer">
+	<insert id="insert" parameterType="cn.org.cflac.entity.Activity">
+		insert into activity_info
+		(activity_id, activity_name, activity_type,
+		activity_person,
+		activity_site, activity_begin_date,
+		activity_end_date)
+		values
+		(#{activityId,jdbcType=VARCHAR}, #{activityName,jdbcType=VARCHAR},
+		#{activityType,jdbcType=VARCHAR},
+		#{activityPerson,jdbcType=VARCHAR},
+		#{activitySite,jdbcType=VARCHAR}, #{activityBeginDate,jdbcType=DATE},
+		#{activityEndDate,jdbcType=DATE})
+	</insert>
+	<insert id="insertActivity" parameterType="cn.org.cflac.entity.Activity">
+		insert into
+		activity_info (activity_id, activity_name, activity_type,
+		activity_person, activity_site,
+		activity_begin_date,activity_video_gatherer)
+		values
+		(#{activityId,jdbcType=VARCHAR}, #{activityName,jdbcType=VARCHAR},
+		#{activityType,jdbcType=VARCHAR},
+		#{activityPerson,jdbcType=VARCHAR},
+		#{activitySite,jdbcType=VARCHAR},
+		#{activityBeginDate,jdbcType=DATE},#{activityVideoGatherer,jdbcType=VARCHAR})
+	</insert>
+	<insert id="insertSelective" parameterType="cn.org.cflac.entity.Activity">
+		insert into activity_info
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="activityId != null">
+				activity_id,
+			</if>
+			<if test="activityName != null">
+				activity_name,
+			</if>
+			<if test="activityType != null">
+				activity_type,
+			</if>
+			<if test="activityPerson != null">
+				activity_person,
+			</if>
+			<if test="activitySite != null">
+				activity_site,
+			</if>
+			<if test="activityBeginDate != null">
+				activity_begin_date,
+			</if>
+			<if test="activityEndDate != null">
+				activity_end_date,
+			</if>
+			<if test="activityVideoGatherer != null">
+				activity_video_gatherer,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="activityId != null">
+				#{activityId,jdbcType=VARCHAR},
+			</if>
+			<if test="activityName != null">
+				#{activityName,jdbcType=VARCHAR},
+			</if>
+			<if test="activityType != null">
+				#{activityType,jdbcType=VARCHAR},
+			</if>
+			<if test="activityPerson != null">
+				#{activityPerson,jdbcType=VARCHAR},
+			</if>
+			<if test="activitySite != null">
+				#{activitySite,jdbcType=VARCHAR},
+			</if>
+			<if test="activityBeginDate != null">
+				#{activityBeginDate,jdbcType=DATE},
+			</if>
+			<if test="activityEndDate != null">
+				#{activityEndDate,jdbcType=DATE},
+			</if>
+			<if test="activityVideoGatherer != null">
+				#{activityVideoGatherer,jdbcType=VARCHAR},
+			</if>
+		</trim>
+	</insert>
+	<!-- <resultMap id="result" type="cn.org.cflac.entity.Activity"> <result 
+		column="name" property="name" /> <result column="password" property="password" 
+		/> <result column="number" property="number" /> </resultMap> <select id="findAll" 
+		parameterType="String" resultMap="result"> SELECT * FROM activity_info </select> -->
+	<select id="findActivityCount" parameterType="java.util.Map"
+		resultType="java.lang.Integer">
 		SELECT count(1)
-        FROM activity_info
-        <where>
-            <if test="search != null and search.length > 0">
-                activity_name = #{activityName}
-            </if>
-            <if test="logdate != null and logdate.length > 0">
-                and date_format(activity_begin_date, '%Y-%m-%d') = #{logdate}
-            </if>
-            <if test="starttime != null and starttime.length > 0 or endtime != null and endtime.length > 0">
-                and activity_begin_date BETWEEN str_to_date(#{starttime}, '%Y-%m-%d') AND str_to_date(#{endtime},
-                '%Y-%m-%d')
-            </if>
-        </where>
+		FROM activity_info
+		<where>
+			<if test="search != null and search.length > 0">
+				activity_name = #{activityName}
+			</if>
+			<if test="logdate != null and logdate.length > 0">
+				and date_format(activity_begin_date, '%Y-%m-%d') =
+				#{logdate}
+			</if>
+			<if
+				test="starttime != null and starttime.length > 0 or endtime != null and endtime.length > 0">
+				and activity_begin_date BETWEEN str_to_date(#{starttime},
+				'%Y-%m-%d')
+				AND str_to_date(#{endtime},
+				'%Y-%m-%d')
+			</if>
+		</where>
 	</select>
-	<select id="findActivityList" parameterType="java.util.Map" resultType="cn.org.cflac.entity.Activity">
-	SELECT L.activity_id,L.activity_name,L.activity_type,L.activity_person,L.activity_site,
-	 L.activity_begin_date,L.activity_video_gatherer
-	from activity_info L 
-	<where>
-		<if test="search != null">
-			L.activity_name like concat('%',#{search},'%') OR L.activity_video_gatherer like concat('%',#{search},'%') OR L.activity_person like concat('%',#{search},'%')
-		</if>
-		 <if test="logdate != null and logdate.length > 0">
-			and date_format(L.activity_begin_date, '%Y-%m-%d') = #{logdate}
-		</if>
-		<if test="starttime != null and starttime.length > 0 or endtime != null and endtime.length > 0">
-			and L.activity_begin_date BETWEEN str_to_date(#{starttime}, '%Y-%m-%d')
-			AND str_to_date(#{endtime},
-			'%Y-%m-%d')
-		</if>
-	</where>
-	order by L.activity_begin_date desc
-	limit #{start},#{length}
-	<!-- WHERE ROWNUM <![CDATA[ <= (#{end})) TL WHERE RN >= #{start}]]> -->
-</select>
+	<select id="findActivityList" parameterType="java.util.Map"
+		resultType="cn.org.cflac.entity.Activity">
+		SELECT
+		L.activity_id,L.activity_name,L.activity_type,L.activity_person,L.activity_site,
+		L.activity_begin_date,L.activity_video_gatherer
+		from activity_info L
+		<where>
+			<if test="search != null">
+				L.activity_name like concat('%',#{search},'%') OR
+				L.activity_video_gatherer like
+				concat('%',#{search},'%') OR
+				L.activity_person like
+				concat('%',#{search},'%')
+			</if>
+			<if test="logdate != null and logdate.length > 0">
+				and date_format(L.activity_begin_date, '%Y-%m-%d') =
+				#{logdate}
+			</if>
+			<if
+				test="starttime != null and starttime.length > 0 or endtime != null and endtime.length > 0">
+				and L.activity_begin_date BETWEEN str_to_date(#{starttime},
+				'%Y-%m-%d')
+				AND str_to_date(#{endtime},
+				'%Y-%m-%d')
+			</if>
+		</where>
+		order by L.activity_begin_date desc
+		limit #{start},#{length}
+		<!-- WHERE ROWNUM <![CDATA[ <= (#{end})) TL WHERE RN >= #{start}]]> -->
+	</select>
 
-<select id="findActivityById" resultType="cn.org.cflac.entity.Activity">
-	select activity_name,activity_type,activity_person,activity_site,activity_begin_date,activity_video_gatherer
-	from activity_info
-	where activity_id = #{activityId}
-</select>
+	<select id="findActivityById" resultType="cn.org.cflac.entity.Activity">
+		select
+		activity_name,activity_type,activity_person,activity_site,activity_begin_date,activity_video_gatherer
+		from activity_info
+		where activity_id = #{activityId}
+	</select>
 
-<select id="findActivityNameById" resultType="java.lang.String">
-	select activity_name from activity_info where activity_id = #{activityId}
-</select>
+	<select id="findActivityNameById" resultType="java.lang.String">
+		select
+		activity_name from activity_info where activity_id = #{activityId}
+	</select>
 
-<update id="updateActivity" parameterType="cn.org.cflac.entity.Activity">
-	update activity_info
-	<set>
-		<if test="activityName !=null">activity_name = #{activityName},</if>
-		<if test="activityType !=null">activity_type = #{activityType},</if>
-		<if test="activityPerson !=null">activity_person = #{activityPerson},</if>
-		<if test="activitySite !=null">activity_site = #{activitySite},</if>
-		<if test="activityBeginDate !=null">activity_begin_date = #{activityBeginDate},</if>
-		<if test="activityVideoGatherer !=null">activity_video_gatherer = #{activityVideoGatherer}</if>
-	</set>
-	where activity_id = #{activityId}
-</update>	
- 
+	<update id="updateActivity" parameterType="cn.org.cflac.entity.Activity">
+		update activity_info
+		<set>
+			<if test="activityName !=null">activity_name = #{activityName},</if>
+			<if test="activityType !=null">activity_type = #{activityType},</if>
+			<if test="activityPerson !=null">activity_person = #{activityPerson},</if>
+			<if test="activitySite !=null">activity_site = #{activitySite},</if>
+			<if test="activityBeginDate !=null">activity_begin_date = #{activityBeginDate},</if>
+			<if test="activityVideoGatherer !=null">activity_video_gatherer = #{activityVideoGatherer}</if>
+		</set>
+		where activity_id = #{activityId}
+	</update>
+
+
+	<!-- 按视频标签查出活动条数 -->
+	<select id="findActivityCount2" parameterType="java.util.Map"
+		resultType="java.lang.Integer">
+		SELECT
+		COUNT(1)
+		FROM
+		activity_video_rel AS avr
+		WHERE
+		avr.video_id IN (
+		SELECT
+		vtr.video_id
+		FROM
+		video_tag_rel AS vtr
+		WHERE
+		vtr.tag_id IN (
+		SELECT
+		vt.tag_id
+		FROM
+		video_tag AS vt
+		WHERE
+		vt.tag_name like
+		concat('%',#{tagName},'%')
+		AND
+		vt.invalid ='Y'
+		)
+		)
+	</select>
+
+	<select id="findActivityList2" parameterType="java.util.Map"
+		resultType="cn.org.cflac.entity.Activity">
+		select
+		a.activity_name,a.activity_type,a.activity_person,a.activity_site,a.activity_begin_date,a.activity_video_gatherer
+		from
+		activity_info a WHERE activity_id in (
+		SELECT
+		avr.activity_id
+		FROM
+		activity_video_rel AS avr
+		WHERE
+		avr.video_id IN (
+		SELECT
+		vtr.video_id
+		FROM
+		video_tag_rel AS vtr
+		WHERE
+		vtr.tag_id IN (
+		SELECT
+		vt.tag_id
+		FROM
+		video_tag AS vt
+		WHERE
+		vt.tag_name IN(#{tagName})
+		AND
+		vt.invalid ='Y'
+		)
+		)
+		)order by a.activity_begin_date desc
+		
+	</select>
 </mapper>

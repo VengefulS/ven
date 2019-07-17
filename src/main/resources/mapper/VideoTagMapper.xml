@@ -1,15 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="cn.org.cflac.home.mapper.VideoTagMapper">
-	<resultMap id="BaseResultMap"
-		type="cn.org.cflac.entity.VideoTag">
+	<resultMap id="BaseResultMap" type="cn.org.cflac.entity.VideoTag">
 		<id column="tag_id" jdbcType="VARCHAR" property="tagId" />
 		<result column="tag_name" jdbcType="VARCHAR" property="tagName" />
 		<result column="invalid" jdbcType="CHAR" property="invalid" />
 	</resultMap>
 
-	<select id="findAidListByVtn" parameterType="String"
-		resultType="java.util.List">
+	<select id="findAidListByVtn1" parameterType="String" resultType="java.util.List">
 		SELECT avr.activity_id FROM activity_video_rel AS avr
 		<where>
 			avr.video_id IN (SELECT vtr.video_id FROM video_tag_rel AS vtr
@@ -22,4 +20,30 @@
 			</where>
 		</where>
 	</select>
+	<select id="findAidListByVtn" parameterType="String" resultType="java.util.List">
+		SELECT
+		avr.activity_id
+		FROM
+		activity_video_rel AS avr
+		WHERE
+		avr.video_id IN (
+		SELECT
+		vtr.video_id
+		FROM
+		video_tag_rel AS vtr
+		WHERE
+		vtr.tag_id IN (
+		SELECT
+		vt.tag_id
+		FROM
+		video_tag AS vt
+		WHERE
+		vt.tag_name IN (#{videoTag,jdbcType=VARCHAR})
+		AND
+		vt.invalid ='Y'
+		)
+		)
+	</select>
+
+
 </mapper>

@@ -62,7 +62,7 @@ public class ActivityServiceImpl implements ActivityService{
 	}
 
 
-
+ 
 	@Override
 	public int addActivity(Activity activity) {
 		int ac = actMapper.insertActivity(activity);
@@ -95,6 +95,45 @@ public class ActivityServiceImpl implements ActivityService{
 
 
 
+	/*@Override 
+	public String findActivityListByVideoTag(String tagName) {
+		
+		return actMapper.findActivityListByVideoTag(tagName);
+	}
+*/
+
+
 	
 
-}
+	@Override
+	public Paging<Activity> findActivityList2(String tagName, Integer draw,
+			Integer start, Integer length) {
+
+
+		// 将参数放进map中
+        Map<String, Object> map = new HashMap<>();
+        Map<String, Object> map1 = new HashMap<>();
+        List<Activity> list = null;
+        map.put("tagName", tagName);
+        
+       
+        map.put("start", start);
+        map.put("length",length);
+
+        map1.put("tagName", tagName);
+        /*map1.put("logdate", logdate);
+        map1.put("starttime", starttime);
+        map1.put("endtime", endtime); *///
+        Integer count = null;
+        try {
+            list = actMapper.findActivityList2(map);
+            count = actMapper.findActivityCount2(map1);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        Paging paging = new Paging(start, length, count, draw);
+        paging.setRecordsFiltered(count);
+        paging.setData(list);
+        return paging;
+
+	}}
