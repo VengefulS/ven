@@ -5007,3 +5007,12 @@ table.text-center th {
 .ddb div {
 	width: 100%;
 }
+
+#div-videoSearch input {
+	float:right;
+	height: 30px;
+	width: 260px;
+	margin: 2px 11px 2px 6px;
+	padding: 5px 10px;
+	font-size: 12px;
+}

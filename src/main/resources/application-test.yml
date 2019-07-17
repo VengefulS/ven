@@ -25,3 +25,9 @@ mybatis:
     map-underscore-to-camel-case: true
   mapper-locations: mapper/*.xml
   typeAliasesPackage: cn.org.cflac.entity
+
+  
+pic_upload_path: http://10.1.100.152:9000/resource
+upload_path: /opt/lar/files/videomanager/videoresource
+download_zip_path: /opt/lar/files/videomanager/videoresource/tempzip
+temp_path: /opt/lar/files/videomanager

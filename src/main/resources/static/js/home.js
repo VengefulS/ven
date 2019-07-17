@@ -44,9 +44,9 @@ function query(search) {
 						"sPaginationType" : "full_numbers",
 						// 是否启动过滤、搜索功能
 						"bFilter" : false,
-						/*
-						 * //智能搜索 "search": { "smart": true, },
-						 */
+						
+						 "search": { "smart": true, },//智能搜索
+						 
 						// 国际化配置
 						"language" : {
 							"sProcessing" : "处理中...",
@@ -56,7 +56,7 @@ function query(search) {
 							"sInfoEmpty" : "显示第 0 至 0 项结果，共 0 项",
 							"sInfoFiltered" : "(由 _MAX_ 项结果过滤)",
 							"sInfoPostFix" : "",
-							"sSearch" : "搜索:",
+							"sSearch" : "活动搜索:",
 							"sUrl" : "",
 							"sEmptyTable" : "表中数据为空",
 							"sLoadingRecords" : "载入中...",
@@ -104,42 +104,45 @@ function query(search) {
 							"defaultContent" : "",
 							"visible" : true,
 							"orderable": true,"width":"185px",
-							"word-wrap": "break-word"
+							"word-wrap": "break-word",
+							"searchable": true,
 						}, {
 							"title" : "开始时间",
 							"type" : "html",
 							"data" : "displayActivityBeginDate",
 							"defaultContent" : "",
 							"visible" : true,
-							"orderable": true,"width":"130px"
+							"orderable": true,"width":"130px",
 						}, {
 							"title" : "活动地点",
 							"type" : "html",
 							"data" : "activitySite",
 							"defaultContent" : "",
 							"visible" : true,
-							"orderable": true,"width":"140px"
+							"orderable": true,"width":"140px",
 						}, {
 							"title" : "活动门类",
 							"type" : "html",
 							"data" : "activityType",
 							"defaultContent" : "",
 							"visible" : true,
-							"orderable": true,"width":"100px"
+							"orderable": true,"width":"100px",
 						}, {
 							"title" : "相关人物",
 							"type" : "html",
 							"data" : "activityPerson",
 							"defaultContent" : "",
 							"visible" : true,
-							"orderable": true,"width":"135px"
+							"orderable": true,"width":"135px",
+							"searchable": true,
 						}, {
 							"title" : "视频采集人",
 							"type" : "html",
 							"data" : "activityVideoGatherer",
 							"defaultContent" : "",
 							"visible" : true,
-							"orderable": true,"width":"100px"
+							"orderable": true,"width":"100px",
+							"searchable": true,
 						}, {
 							"title" : "修改活动信息",
 							"type" : "html",
@@ -531,6 +534,63 @@ $('.shade2').remove();
 function alertA(){
 	alert("AAAAAAAAAAAAAA");
 }
+
+
+//oninput  onpropertychange ==========================根据标签查视频===========
+
+$('#input-videoSearch').bind('input propertychange', function() {
+	var tag = this.value;
+	var dataJson;
+	$.ajax({
+		url : '/act/findActivityListByVideoTag',  //'/videoTag/findActivityByTag',  
+		type : 'post',
+		async : false,
+		dataType : "json",
+		dataFilter : function(data, type) {
+			console.log("执行ajax--viseoSearch");
+			var json = JSON.parse(data);
+			var returnData = {};
+			returnData.draw = json.draw;
+			returnData.recordsTotal = json.recordsTotal;
+			returnData.recordsFiltered = json.recordsFiltered;
+			returnData.data = json.data;
+			return JSON.stringify(returnData);
+		},
+		
+		data : ({
+			"tag" : tag
+		})
+		
+	})
+	//table.ajax.url(dataJson).reload
+	//videoSearch(this.value);
+	
+});
+
+/*"ajax" : {
+	"url" : "/act/findAll",
+	"type" : "POST",
+	"async" : false,
+	"dataType" : "json",
+	"dataFilter" : function(data, type) {
+		console.log("执行ajax");
+		var json = JSON.parse(data);
+		var returnData = {};
+		returnData.draw = json.draw;
+		returnData.recordsTotal = json.recordsTotal;
+		returnData.recordsFiltered = json.recordsFiltered;
+		returnData.data = json.data;
+		return JSON.stringify(returnData);
+	}
+
+*/
+
+
+
+
+
+
+
 function deleteVideoById(vid){
 	//alert("此视频vid="+vid);
 	var r=confirm("是否确认删除该视频？")

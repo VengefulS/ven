@@ -27,6 +27,8 @@ mybatis:
   typeAliasesPackage: cn.org.cflac.entity
     
 
-
-    
+pic_upload_path: http://localhost:9000/resource
+upload_path: F:/opt/lar/files/videomanager/videoresource
+download_zip_path: F:/opt/lar/files/videomanager/videoresource/tempzip
+temp_path: F:/opt/lar/files/videomanager
 

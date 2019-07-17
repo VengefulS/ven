@@ -7,8 +7,11 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.builder.SpringApplicationBuilder;
 import org.springframework.boot.web.servlet.MultipartConfigFactory;
 import org.springframework.boot.web.servlet.support.SpringBootServletInitializer;
+import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.PropertySource;
 
+import cn.org.cflac.home.controller.ActivityController;
 import cn.org.cflac.util.Path;
 
 
@@ -34,7 +37,8 @@ public class VideoManangerApplication extends SpringBootServletInitializer{
     }
 	
 	public static void main(String[] args) {
-		SpringApplication.run(VideoManangerApplication.class, args);
+		ApplicationContext context = SpringApplication.run(VideoManangerApplication.class, args);
 		System.out.println("springboot 已启动！");
+		System.out.println(Path.PIC_UPLOAD_PATH);
 	}
 }
