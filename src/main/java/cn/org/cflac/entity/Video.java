@@ -19,8 +19,10 @@ public class Video {
     private String videoMD5;
     
     
+    
 
-    public String getInvalid() {
+
+	public String getInvalid() {
 		return invalid;
 	}
 
