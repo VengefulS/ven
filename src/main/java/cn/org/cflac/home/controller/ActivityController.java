@@ -70,7 +70,7 @@ public class ActivityController {
 		System.out.println("length="+size);
 		*/
 		
-		System.out.println(search);
+		System.out.println("search:"+search);
 		Paging<Activity> paging = null;
         try {
             paging = activityService.findActivityList(search ,activityName, logdate, starttime, endtime, index, size, draw);
@@ -163,14 +163,16 @@ public class ActivityController {
 	public Paging<Activity> findActivityListByVideoTag(Integer draw,
             @RequestParam(value="tag",required = false) String tagName,
             @RequestParam(value = "start",defaultValue = "0") Integer index,
-            @RequestParam(value = "length",defaultValue = "10") Integer size
+            @RequestParam(value = "length",defaultValue = "10") Integer size,
+            HttpServletRequest request
             ){
+		
 		/*Integer draw,*/
 		/*@RequestParam(value = "search[value]",required = false) String search,*/
 		/*@RequestParam(value = "start",defaultValue = "0") Integer index,
             @RequestParam(value = "length",defaultValue = "10") Integer size*/
-		
-		
+		String url = request.getServletPath(); 
+		System.out.println(url);
 		System.out.println("视频的tag搜索："+tagName);
 		Paging<Activity> paging = null;
         try {

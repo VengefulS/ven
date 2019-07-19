@@ -33,7 +33,7 @@ public interface ActivityService {
     //String findActivityListByVideoTag(String tagName);
 
 	Paging<Activity> findActivityList2(String tagName,
-										Integer draw,
-	    								Integer start,
-	    								Integer length);
+			Integer start,
+			Integer length,
+			Integer draw);
 }
