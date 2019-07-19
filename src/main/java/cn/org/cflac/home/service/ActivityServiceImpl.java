@@ -106,8 +106,7 @@ public class ActivityServiceImpl implements ActivityService{
 	
 
 	@Override
-	public Paging<Activity> findActivityList2(String tagName, Integer draw,
-			Integer start, Integer length) {
+	public Paging<Activity> findActivityList2(String tagName, Integer start,Integer length, Integer draw) {
 
 
 		// 将参数放进map中

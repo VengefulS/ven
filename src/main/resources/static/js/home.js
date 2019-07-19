@@ -9,7 +9,8 @@ $(document).ready(function() {
 function query(search) {
 	// console.log(search);
 	table = $("#findAll")
-			.dataTable(
+			.DataTable(
+
 					{
 						// 是否使用服务器端处理模式（依赖paging）
 						"serverSide" : true,
@@ -44,9 +45,11 @@ function query(search) {
 						"sPaginationType" : "full_numbers",
 						// 是否启动过滤、搜索功能
 						"bFilter" : false,
-						
-						 "search": { "smart": true, },//智能搜索
-						 
+
+						"search" : {
+							"smart" : true,
+						},// 智能搜索
+
 						// 国际化配置
 						"language" : {
 							"sProcessing" : "处理中...",
@@ -67,17 +70,17 @@ function query(search) {
 								"sNext" : "下页",
 								"sLast" : "末页"
 							},
-							
+
 							"oAria" : {
 								"sSortAscending" : ": 以升序排列此列",
 								"sSortDescending" : ": 以降序排列此列"
 							}
 						},
-						/*createdRow: function ( row, data, index ) {
-				            if ( index %2 == 0 ) {
-				                $('td', row).css('font-weight',"bold").css("background-color","#cac1c1");
-				            }
-				        },*/
+						/*
+						 * createdRow: function ( row, data, index ) { if (
+						 * index %2 == 0 ) { $('td',
+						 * row).css('font-weight',"bold").css("background-color","#cac1c1"); } },
+						 */
 
 						// 异步请求
 						"ajax" : {
@@ -103,67 +106,76 @@ function query(search) {
 							"data" : "activityName",
 							"defaultContent" : "",
 							"visible" : true,
-							"orderable": true,"width":"185px",
-							"word-wrap": "break-word",
-							"searchable": true,
+							"orderable" : true,
+							"width" : "185px",
+							"word-wrap" : "break-word",
+							"searchable" : true,
 						}, {
 							"title" : "开始时间",
 							"type" : "html",
 							"data" : "displayActivityBeginDate",
 							"defaultContent" : "",
 							"visible" : true,
-							"orderable": true,"width":"130px",
+							"orderable" : true,
+							"width" : "130px",
 						}, {
 							"title" : "活动地点",
 							"type" : "html",
 							"data" : "activitySite",
 							"defaultContent" : "",
 							"visible" : true,
-							"orderable": true,"width":"140px",
+							"orderable" : true,
+							"width" : "140px",
 						}, {
 							"title" : "活动门类",
 							"type" : "html",
 							"data" : "activityType",
 							"defaultContent" : "",
 							"visible" : true,
-							"orderable": true,"width":"100px",
+							"orderable" : true,
+							"width" : "100px",
 						}, {
 							"title" : "相关人物",
 							"type" : "html",
 							"data" : "activityPerson",
 							"defaultContent" : "",
 							"visible" : true,
-							"orderable": true,"width":"135px",
-							"searchable": true,
+							"orderable" : true,
+							"width" : "135px",
+							"searchable" : true,
 						}, {
 							"title" : "视频采集人",
 							"type" : "html",
 							"data" : "activityVideoGatherer",
 							"defaultContent" : "",
 							"visible" : true,
-							"orderable": true,"width":"100px",
-							"searchable": true,
+							"orderable" : true,
+							"width" : "100px",
+							"searchable" : true,
 						}, {
 							"title" : "修改活动信息",
 							"type" : "html",
 							"data" : "",
 							"defaultContent" : "",
 							"visible" : true,
-							"orderable": true,"width":"100px"
+							"orderable" : true,
+							"width" : "100px"
 						}, {
 							"title" : "预览",
 							"type" : "html",
 							"data" : "",
 							"defaultContent" : "",
 							"visible" : true,
-							"orderable": true,"width":"60px"
+							"orderable" : true,
+							"width" : "60px"
 						}, {
 							"title" : "批量下载",
 							"type" : "html",
 							"data" : "",
 							"defaultContent" : "",
 							"visible" : true,
-							"orderable": true,"width":"80px"
+							"orderable" : true,
+							"width" : "80px"
 						} ],
 						// 从右向左第三列列描述 加按钮
 						"columnDefs" : [
@@ -220,19 +232,17 @@ function query(search) {
 									}
 
 								} ]
-					
 
-					}).api();
-
+					});
 }
 
-/*修改   活动列表 */
+/* 修改 活动列表 */
 
 function modalActivity(act) {
-	
-	var typeObj=document.getElementById('activityTypeUp');
-	//$("#datetimeStart").datetimepicker("setDate", new Date());
-	//$("#activityBeginDateUp").val(data.activityBeginDate),
+
+	var typeObj = document.getElementById('activityTypeUp');
+	// $("#datetimeStart").datetimepicker("setDate", new Date());
+	// $("#activityBeginDateUp").val(data.activityBeginDate),
 	$.ajax({
 		url : "/act/findOneAc",
 		type : "POST",
@@ -242,27 +252,28 @@ function modalActivity(act) {
 			"activityId" : act.id
 		},
 		success : function(data) {
-			var tt1 =data.activityBeginDate;
+			var tt1 = data.activityBeginDate;
 			var date = new Date(tt1);
-			$("#activityNameUp").val(data.activityName), 
-			$('#activityTypeUp').selectpicker('val',(data.activityType)),
-			$("#activityPersonUp").val(data.activityPerson),
-			$("#activitySiteUp").val(data.activitySite),
-			$("#datetimepicker1").datetimepicker("setDate",date),
-			$("#activityVideoGathererUp").val(data.activityVideoGatherer),
-			$("#activityIdUp").val(data.activityId)
+			$("#activityNameUp").val(data.activityName), $('#activityTypeUp')
+					.selectpicker('val', (data.activityType)), $(
+					"#activityPersonUp").val(data.activityPerson), $(
+					"#activitySiteUp").val(data.activitySite), $(
+					"#datetimepicker1").datetimepicker("setDate", date),
+					$("#activityVideoGathererUp").val(
+							data.activityVideoGatherer), $("#activityIdUp")
+							.val(data.activityId)
 		}
 	});
-	//typeObj.setAttribute('title',data.activityType)
-	//console.log($("#activityTypeUp").val());
+	// typeObj.setAttribute('title',data.activityType)
+	// console.log($("#activityTypeUp").val());
 
 }
 $("#updateAtivity").click(function() {
 	var tt = $("#datetimepicker1").find("input").val();
-	//$("#datetimepicker1").data("datetimepicker").getDate();这种也行
-	console.log("activityBeginDateUp = "+activityBeginDateUp);
+	// $("#datetimepicker1").data("datetimepicker").getDate();这种也行
+	console.log("activityBeginDateUp = " + activityBeginDateUp);
 	var date = new Date(tt);
-	console.log("date:"+date);
+	console.log("date:" + date);
 
 	$.ajax({
 		type : 'post',
@@ -281,7 +292,6 @@ $("#updateAtivity").click(function() {
 			window.location.reload()
 		}
 	})
-	
 
 });
 
@@ -294,7 +304,8 @@ function modalVideo(act) {
 	$('#myModalLabel').html(act.name);
 
 	$(".modal-activityId").attr("id", act.id);
-	$.ajax({
+	$
+			.ajax({
 				url : "/video/findVideoByActid",
 				type : "POST",
 				dataType : "json",
@@ -310,42 +321,55 @@ function modalVideo(act) {
 					var vid = '';
 					for (var i = 0; i < data.data.length; i++) {
 						vid = data.data[i].videoId;
-						
+
 						va = data.data[i].videoAddress;
 						vb = "";
 						vpa = data.data[i].videoPicAddress;
 						vpb = "img/timg.jpg";
-						if(data.data[i].videoTransform == 'Y')	{
-							/*txt = '\<div class="col-sm-8 col-md-4 modal-pic " id="modalDiv'+i+'" \>'
-								+ '\<a href="#" class="thumbnail" onClick="videoPlay(\''
-								+ va + '\',\'' + vpa + '\')" onmouseover="over('+i+')" onmouseout="out('+i+')" \>'
-								+ '\<img src="' + vpa + '" alt="视频缩略图"  \>\</a\>'
-								+ '\</div\>';
+						if (data.data[i].videoTransform == 'Y') {
+							/*
+							 * txt = '\<div class="col-sm-8 col-md-4 modal-pic "
+							 * id="modalDiv'+i+'" \>' + '\<a href="#"
+							 * class="thumbnail" onClick="videoPlay(\'' + va +
+							 * '\',\'' + vpa + '\')" onmouseover="over('+i+')"
+							 * onmouseout="out('+i+')" \>' + '\<img src="' +
+							 * vpa + '" alt="视频缩略图" \>\</a\>' + '\</div\>';
+							 * $('.modal-video').append(txt);
+							 * onmouseover="over('+i+')" onmouseout="out('+i+')"
+							 */
+							// \<a href="#" style="word-wrap:break-word;"
+							// class="btn btn-danger"
+							// onClick="alertB()"\>删除\</a\>
+							txt = '\<div class="col-sm-8 col-md-4 modal-pic " id="modalDiv'
+									+ i
+									+ '" \>'
+									+ '\<div class="mask-video"\>'
+									+ '\<img class ="thumbnail videoslt" src="'
+									+ vpa
+									+ '" alt="视频缩略图"  onClick="videoPlay(\''
+									+ va
+									+ '\',\''
+									+ vpa
+									+ '\')"  \>'
+									+ '\<div class="mask-video-content videoslt" onClick="deleteVideoById(\''
+									+ vid
+									+ '\')"\>'
+									+ '\<span class="title glyphicon glyphicon-remove delspan" \>\</span\>'
+									+ '\</div\>' + '\</div\>' + '\</div\>';
 							$('.modal-video').append(txt);
-							onmouseover="over('+i+')" onmouseout="out('+i+')"
-							*/
-							//\<a href="#" style="word-wrap:break-word;" class="btn btn-danger" onClick="alertB()"\>删除\</a\>
-							txt = '\<div class="col-sm-8 col-md-4 modal-pic " id="modalDiv'+i+'" \>'
-							+'\<div class="mask-video"\>'
-							+ '\<img class ="thumbnail videoslt" src="' + vpa + '" alt="视频缩略图"  onClick="videoPlay(\''
-							+ va + '\',\'' + vpa + '\')"  \>'
-							+'\<div class="mask-video-content videoslt" onClick="deleteVideoById(\''
-							+vid+'\')"\>'
-				            +'\<span class="title glyphicon glyphicon-remove delspan" \>\</span\>'
-				            +'\</div\>'
-				            +'\</div\>'
-							+ '\</div\>';
-						$('.modal-video').append(txt);
-						}
-						else	{
+						} else {
 							txt = '\<div class="col-sm-8 col-md-4 modal-pic " \>'
-								+ '\<a href="#" class="thumbnail" onClick="videoPlay2(\''
-								+ va + '\',\'' + vpb + '\')" \>'
-								+ '\<img src="' + vpb + '" alt="视频缩略图"\>\</a\>'
-								+ '\</div\>';
+									+ '\<a href="#" class="thumbnail" onClick="videoPlay2(\''
+									+ va
+									+ '\',\''
+									+ vpb
+									+ '\')" \>'
+									+ '\<img src="'
+									+ vpb
+									+ '" alt="视频缩略图"\>\</a\>' + '\</div\>';
 							$('.modal-video').append(txt);
 						}
-						
+
 					}
 				},
 				error : function(e) {
@@ -357,12 +381,12 @@ function modalVideo(act) {
 
 	var txtend = '\<button type="button" class="btn btn-info" onClick=addVideo()\>'
 			+ '\<span class="glyphicon glyphicon-plus"\>'
-			+ '\</span\>添加视频' 
+			+ '\</span\>添加视频'
 			+ '\</button\>';
-	
+
 	$('.modal-list-footer').empty();
 	$('.modal-list-footer').append(txtend);
-	
+
 	/*
 	 * var actId = act.id; passActivityId(actId);
 	 */
@@ -376,23 +400,18 @@ function videoPlay(url, picUrl, name) {
 	$(".modal-videoName").html(name);
 	var txt1 = '';
 	var txt11 = '\<video id="videoplayid1"  controls="controls" autoplay="autoplay" name="media"  height="98%" width="100%">'
-		+ '\<source src="'
-		+ url
-		+ '"'
-		+ ' type="video/mp4">'
-		+ '\</video>';
-$(".video-source1").append(txt11);
-	
-	
-	//$(".video-source1").find("video").find("source").attr("src", url);
-	//$("#videoPlay1").attr("poster", picUrl);
+			+ '\<source src="' + url + '"' + ' type="video/mp4">' + '\</video>';
+	$(".video-source1").append(txt11);
+
+	// $(".video-source1").find("video").find("source").attr("src", url);
+	// $("#videoPlay1").attr("poster", picUrl);
 
 	$(".videoPlay-close").click(function() {
 		$(".video-source1").append(txt1);
 	})
 }
 
-function videoPlay2(){
+function videoPlay2() {
 	alert("转码中。。。");
 }
 
@@ -421,7 +440,7 @@ function downloadVideos(v) {
 }
 
 $("#addAtivity").click(function() {
-	var t =$("#datetimepicker11").find("input").val();
+	var t = $("#datetimepicker11").find("input").val();
 	var date1 = new Date(t);
 
 	/*
@@ -446,97 +465,98 @@ $("#addAtivity").click(function() {
 		}),
 		success : function(data) {
 			window.location.reload()
-			//alert("添加成功");
+			// alert("添加成功");
 			// console.log($("#activityName").val());
 		}
 	})
 
 });
 
-//点击关闭视频按钮
-$(".videoPlay-close1").click(function(){
+// 点击关闭视频按钮
+$(".videoPlay-close1").click(function() {
 	var videoObj = document.getElementById('videoplayid1');
-    if (videoObj) {
-        videoObj.pause();
-    }
-    $("#videoplayid1").remove();
-	
+	if (videoObj) {
+		videoObj.pause();
+	}
+	$("#videoplayid1").remove();
+
 });
-//点击关闭添加视频窗口按钮刷新视频列表
-$(".addVideoModal-close").click(function(){
+// 点击关闭添加视频窗口按钮刷新视频列表
+$(".addVideoModal-close").click(function() {
 	var act = {};
 	var a = $(".modal-activityId").attr("id");
 	var b = $(".btn-click-to-list").attr("name");
-	act["id"]=a;
-	act["name"]=b;
+	act["id"] = a;
+	act["name"] = b;
 	modalVideo(act)
 })
-//#datetimepicker1 #activityBeginDateUp 日期选择
-$(function(){
-$('#datetimepicker1').datetimepicker({
-		format: 'yyyy-mm-dd',
-        locale: moment.locale('zh-cn'),
-        minView: "month",
-        language: 'zh-CN',
-        //initialDate: new Date(),
-        autoclose: true
-    });
+// #datetimepicker1 #activityBeginDateUp 日期选择
+$(function() {
+	$('#datetimepicker1').datetimepicker({
+		format : 'yyyy-mm-dd',
+		locale : moment.locale('zh-cn'),
+		minView : "month",
+		language : 'zh-CN',
+		// initialDate: new Date(),
+		autoclose : true
+	});
 
-$('#datetimepicker11').datetimepicker({
-	format: 'yyyy-mm-dd',
-    locale: moment.locale('zh-cn'),
-    minView: "month",
-    language: 'zh-CN',
-    autoclose: true,
-    //initialDate:new Date(),//初始时间
-    todayBtn: true
-    
-});
+	$('#datetimepicker11').datetimepicker({
+		format : 'yyyy-mm-dd',
+		locale : moment.locale('zh-cn'),
+		minView : "month",
+		language : 'zh-CN',
+		autoclose : true,
+		// initialDate:new Date(),//初始时间
+		todayBtn : true
+
+	});
 })
 
-//用户注销
-$("#logout").click(function(){
+// 用户注销
+$("#logout").click(function() {
 	$.ajax({
-		url:"/logout",
+		url : "/logout",
 		type : "POST",
 		dataType : "json",
 		async : false
 	});
 })
 
-//鼠标悬停
+// 鼠标悬停
 function over(x) {
-	 $("<div class='shade' style='opacity:0.35;background:red;' ></div><img class='shade1' src='/img/add.gif'  onClick='maskClick()' />").css({ 
-		 "position":"absolute", 
-		 "top":"0", 
-		 "right":"0", 
-		 "height":"100%",
-		 "width":"30%",
-		 "zIndex":"100	"
-		 //"pointer-events": "none"
-		 }).appendTo('#modalDiv'+x); 
-	 
-    }
+	$(
+			"<div class='shade' style='opacity:0.35;background:red;' ></div><img class='shade1' src='/img/add.gif'  onClick='maskClick()' />")
+			.css({
+				"position" : "absolute",
+				"top" : "0",
+				"right" : "0",
+				"height" : "100%",
+				"width" : "30%",
+				"zIndex" : "100	"
+			// "pointer-events": "none"
+			}).appendTo('#modalDiv' + x);
 
-//遮罩层点击事件
-function maskClick(){
+}
+
+// 遮罩层点击事件
+function maskClick() {
 	alert("11111111111111");
 }
 
 function out(x) {
-	 
-$('.shade').remove();
-$('.shade1').remove();
-$('.shade2').remove();
-       console.log("out");
+
+	$('.shade').remove();
+	$('.shade1').remove();
+	$('.shade2').remove();
+	console.log("out");
 }
 
-function alertA(){
+function alertA() {
 	alert("AAAAAAAAAAAAAA");
 }
 
-
-//oninput  onpropertychange ==========================根据标签查视频===========
+// oninput onpropertychange ==========================根据标签查视频===========
 
 $('#input-videoSearch').bind('input propertychange', function() {
 	var tag = this.value;
@@ -554,6 +574,7 @@ $('#input-videoSearch').bind('input propertychange', function() {
 			returnData.recordsTotal = json.recordsTotal;
 			returnData.recordsFiltered = json.recordsFiltered;
 			returnData.data = json.data;
+			dataJson = json.data;
 			return JSON.stringify(returnData);
 		},
 		
@@ -562,41 +583,26 @@ $('#input-videoSearch').bind('input propertychange', function() {
 		})
 		
 	})
-	//table.ajax.url(dataJson).reload
-	//videoSearch(this.value);
+	table.clear().ajax.url(dataJson).load();
 	
 });
 
-/*"ajax" : {
-	"url" : "/act/findAll",
-	"type" : "POST",
-	"async" : false,
-	"dataType" : "json",
-	"dataFilter" : function(data, type) {
-		console.log("执行ajax");
-		var json = JSON.parse(data);
-		var returnData = {};
-		returnData.draw = json.draw;
-		returnData.recordsTotal = json.recordsTotal;
-		returnData.recordsFiltered = json.recordsFiltered;
-		returnData.data = json.data;
-		return JSON.stringify(returnData);
-	}
+/*
+ * "ajax" : { "url" : "/act/findAll", "type" : "POST", "async" : false,
+ * "dataType" : "json", "dataFilter" : function(data, type) {
+ * console.log("执行ajax"); var json = JSON.parse(data); var returnData = {};
+ * returnData.draw = json.draw; returnData.recordsTotal = json.recordsTotal;
+ * returnData.recordsFiltered = json.recordsFiltered; returnData.data =
+ * json.data; return JSON.stringify(returnData); }
+ * 
+ */
 
-*/
+function deleteVideoById(vid) {
+	// alert("此视频vid="+vid);
+	var r = confirm("是否确认删除该视频？")
+	console.log("rrrrrrrrrr=" + r)
+	if (r) {
 
-
-
-
-
-
-
-function deleteVideoById(vid){
-	//alert("此视频vid="+vid);
-	var r=confirm("是否确认删除该视频？")
-	console.log("rrrrrrrrrr="+r)
-	if(r){
-		
 		$.ajax({
 			type : 'post',
 			// $('#activityTypeUp').selectpicker('val',(data.activityType)),
@@ -610,12 +616,11 @@ function deleteVideoById(vid){
 				var act = {};
 				var a = $(".modal-activityId").attr("id");
 				var b = $(".btn-click-to-list").attr("name");
-				act["id"]=a;
-				act["name"]=b;
+				act["id"] = a;
+				act["name"] = b;
 				modalVideo(act)
-				
+
 			}
 		})
 	}
 }
-
