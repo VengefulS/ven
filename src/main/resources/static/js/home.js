@@ -558,6 +558,7 @@ $('#input-videoSearch').bind('input propertychange', function() {
 		$("#findAll_filter .input-sm").attr({
 			'placeholder' : '按名称、采集人和相关人物查找'
 		});
+		$("#findAll_filter .input-sm").attr("oninput","ssOninput()");
 	}else{
 		$("#findAll_filter .input-sm").attr("disabled",true);
 		table.ajax.url(url).load();
