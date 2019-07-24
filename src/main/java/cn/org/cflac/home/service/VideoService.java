@@ -21,4 +21,9 @@ public interface VideoService {
 	int deleteVideoById(Map delVideoMap);
 	 
 	String isrepByAddress(String fileMd5);
+	
+	Paging<Video> queryAllVideo(String search,
+			  Integer start,
+			  Integer length,
+			  Integer draw);
 }

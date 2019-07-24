@@ -549,15 +549,18 @@ function alertA(){
 
 
 //oninput  onpropertychange ==========================根据标签查视频===========
+
 $('#input-videoSearch').bind('input propertychange', function() {
 	var tag = this.value;
 	url ="/act/findActivityListByVideoTag?tag="+tag;
+	
 	if($("#input-videoSearch").val()==""){
 		$("#findAll_filter .input-sm").attr("disabled",false);
 		query();
 		$("#findAll_filter .input-sm").attr({
 			'placeholder' : '按名称、采集人和相关人物查找'
 		});
+		$("#findAll_filter .input-sm").attr("oninput","ssOninput()");
 	}else{
 		$("#findAll_filter .input-sm").attr("disabled",true);
 		table.ajax.url(url).load();

@@ -205,37 +205,50 @@
 
 	<select id="findActivityList2" parameterType="java.util.Map"
 		resultType="cn.org.cflac.entity.Activity">
-		select
-		a.activity_name,a.activity_type,a.activity_person,a.activity_site,a.activity_begin_date,a.activity_video_gatherer
-		from
-		activity_info a WHERE activity_id in (
+		SELECT
+		a.activity_id,
+		a.activity_name,
+		a.activity_type,
+		a.activity_person,
+		a.activity_site,
+		a.activity_begin_date,
+		a.activity_video_gatherer
+		FROM
+		activity_info a
+		WHERE
+		activity_id IN (
 		SELECT
 		avr.activity_id
 		FROM
 		activity_video_rel AS avr
 		WHERE
-		avr.video_id IN (
-		SELECT
-		vtr.video_id
-		FROM
-		video_tag_rel AS vtr
-		WHERE
-		vtr.tag_id IN (
-		SELECT
-		vt.tag_id
-		FROM
-		video_tag AS vt
-		WHERE
-		vt.tag_name IN
+		avr.video_id IN
 		(
-		#{tagName}
-        )
+		SELECT
+		video_id
+		FROM
+		(
+		SELECT
+		vtr.video_id,
+		GROUP_CONCAT( vt.tag_name ) AS
+		tag_names
+		FROM
+		video_tag_rel vtr,
+		video_tag vt
+		WHERE
+		vtr.tag_id = vt.tag_id
+		GROUP BY
+		video_id
+		) aa
+		WHERE
 		
-		AND
-		vt.invalid ='Y'
+		aa.tag_names LIKE concat('%',#{tagName},'%')
+
+
 		)
 		)
-		)order by a.activity_begin_date desc
-		
+		ORDER BY
+		a.activity_begin_date DESC
+
 	</select>
 </mapper>

@@ -171,8 +171,8 @@ public class ActivityController {
 		/*@RequestParam(value = "search[value]",required = false) String search,*/
 		/*@RequestParam(value = "start",defaultValue = "0") Integer index,
             @RequestParam(value = "length",defaultValue = "10") Integer size*/
-		String url = request.getServletPath(); 
-		System.out.println(url);
+		/*String url = request.getServletPath(); 
+		System.out.println(url);*/
 		Paging<Activity> paging = null;
 //		String[] tags = tagName.split("，");
 //		for (String tn : tags) {
@@ -183,12 +183,21 @@ public class ActivityController {
 //            e.printStackTrace();
 //        }
 //		}
+		/*String url = request.getServletPath(); 
+		System.out.println(url);*/
+		/*String url = request.getServletPath(); 
+		System.out.println(url);*/
+		/*String url = request.getServletPath(); 
+		System.out.println(url);*/
+		/*String url = request.getServletPath(); 
+		System.out.println(url);*/
 		System.out.println("视频的tag搜索："+tagName);
-		try {
-          paging = activityService.findActivityList2(tagName, index, size, draw);
-      } catch (Exception e) {
-          e.printStackTrace();
-      }
-		return paging;
+		Paging<Activity> paging = null;
+        try {
+            paging = activityService.findActivityList2(tagName, index, size, draw);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return paging;
 	}
 }
