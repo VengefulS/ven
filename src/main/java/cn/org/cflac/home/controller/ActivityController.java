@@ -173,13 +173,22 @@ public class ActivityController {
             @RequestParam(value = "length",defaultValue = "10") Integer size*/
 		String url = request.getServletPath(); 
 		System.out.println(url);
-		System.out.println("视频的tag搜索："+tagName);
 		Paging<Activity> paging = null;
-        try {
-            paging = activityService.findActivityList2(tagName, index, size, draw);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        return paging;
+//		String[] tags = tagName.split("，");
+//		for (String tn : tags) {
+//			System.out.println("视频的tag搜索："+tn);		
+//        try {
+//            paging = activityService.findActivityList2(tn, index, size, draw);
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//        }
+//		}
+		System.out.println("视频的tag搜索："+tagName);
+		try {
+          paging = activityService.findActivityList2(tagName, index, size, draw);
+      } catch (Exception e) {
+          e.printStackTrace();
+      }
+		return paging;
 	}
 }

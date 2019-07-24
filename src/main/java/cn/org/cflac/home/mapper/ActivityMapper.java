@@ -32,6 +32,5 @@ public interface ActivityMapper {
 	List<Activity> findActivityList2(Map<String, Object> map);
 
 	Integer findActivityCount2(Map<String, Object> map1);
-    
-    
+       
 }

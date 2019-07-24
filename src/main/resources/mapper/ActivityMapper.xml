@@ -226,7 +226,11 @@
 		FROM
 		video_tag AS vt
 		WHERE
-		vt.tag_name IN(#{tagName})
+		vt.tag_name IN
+		(
+		#{tagName}
+        )
+		
 		AND
 		vt.invalid ='Y'
 		)
