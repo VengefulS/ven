@@ -1,5 +1,6 @@
 package cn.org.cflac.home.service;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -108,21 +109,23 @@ public class ActivityServiceImpl implements ActivityService{
 	@Override
 	public Paging<Activity> findActivityList2(String tagName, Integer start,Integer length, Integer draw) {
 
+		//处理传过来的tagName
+		List<String> tagNames = new ArrayList<String>();
+		String[] ts = tagName.split(" ");
+		for (String s : ts) {
+			tagNames.add(s);
+		}
 
 		// 将参数放进map中
         Map<String, Object> map = new HashMap<>();
         Map<String, Object> map1 = new HashMap<>();
         List<Activity> list = null;
+      
         map.put("tagName", tagName);
-        
-       
         map.put("start", start);
         map.put("length",length);
-
+        
         map1.put("tagName", tagName);
-        /*map1.put("logdate", logdate);
-        map1.put("starttime", starttime);
-        map1.put("endtime", endtime); *///
         Integer count = null;
         try {
             list = actMapper.findActivityList2(map);

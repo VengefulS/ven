@@ -4,6 +4,8 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import org.apache.logging.log4j.Logger;
 
@@ -111,6 +113,7 @@ public static void ffutil(Process process){
     	      System.out.println(line);
     	   }
     	videoProcess.waitFor();
+    	br.close();
     	i = "----createImg 方法调用结束----";
     	//videoProcess.destroy();
     	//ffutil(videoProcess);//调用方法解决死锁
@@ -144,6 +147,7 @@ public static void ffutil(Process process){
     	videoProcess2.waitFor();
     	//videoProcess2.destroy();
     	//ffutil(videoProcess2);
+    	br.close();
     	i = "----toMp4 方法调用结束----";
     } catch (IOException e) {   
         e.printStackTrace();   
@@ -152,6 +156,38 @@ public static void ffutil(Process process){
 		e.printStackTrace();
 	}
 	return i;
+	}
+	//视频上传时调用获取视频时长
+	public static String getVideoTime(String url){
+		String i =null;
+		String videoTime = null;
+		try {
+			String command2 = "ffmpeg -i "+ url;    	
+	    	Process videoProcess3 = Runtime.getRuntime().exec(command2);
+	    	String line;
+	    	StringBuffer sb = new StringBuffer();
+	    	BufferedReader br= new BufferedReader(new InputStreamReader(videoProcess3.getErrorStream()));//,4096
+	    	   while ((line = br.readLine()) != null) {
+	    	      System.out.println(line);
+	    	      sb.append(line);
+	    	   }
+	    	   
+	    	   br.close();
+	    	   
+	    	   String regexDuration = "Duration: (.*?), start: (.*?), bitrate: (\\d*) kb\\/s";
+	    	   Pattern pattern = Pattern.compile(regexDuration);
+	    	   Matcher m = pattern.matcher(sb.toString());
+	    	   if(m.find()){
+	    		   videoTime = m.group(1);
+	    	   }
+	    	videoProcess3.waitFor();
+	    	i = "----getVideoTime 方法调用结束----";
+	    } catch (IOException e) {   
+	        e.printStackTrace();   
+	    } catch (InterruptedException e) {
+			e.printStackTrace();
+		}
+		return videoTime;
 	}
 	
 	

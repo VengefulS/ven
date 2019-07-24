@@ -8,8 +8,11 @@ import java.util.Map;
 
 
 
+
+
 import org.apache.ibatis.annotations.Mapper;
 
+import cn.org.cflac.entity.Activity;
 import cn.org.cflac.entity.Video;
 @Mapper
 public interface VideoMapper {
@@ -29,4 +32,9 @@ public interface VideoMapper {
 	public int deleteVideoById(Map delVideoMap);
 
 	public String queryCountByMd5(String fileMd5);
+	
+	//查询所有视频
+	List<Video> queryAllVideo(Map map);
+	// 查询总数量
+    Integer queryVideoCount(); 
 }

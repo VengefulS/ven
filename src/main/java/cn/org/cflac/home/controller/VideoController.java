@@ -79,5 +79,24 @@ public class VideoController {
 		System.out.println(uuid);
 	}
 	
+	
+	@RequestMapping(value="/queryAllVideo")
+	@ResponseBody
+	public Paging<Video> QueryAllVideo(Integer draw,
+			@RequestParam(value = "search[value]",required = false) String search,
+            @RequestParam(value = "start",defaultValue = "0") Integer index,
+            @RequestParam(value = "length",defaultValue = "10") Integer size){
+
+		
+		
+		System.out.println("search:"+search);
+		Paging<Video> paging = null;
+        try {
+            paging = videoService.queryAllVideo(search, index, size, draw);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return paging;
+	}
 
 }

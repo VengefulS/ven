@@ -20,5 +20,10 @@ public class HomeController {
 		return "login";
 		
 	}
-	
+	@RequestMapping("/video")
+	public String hello2(){
+		
+		return "video";
+		
+	}
 }

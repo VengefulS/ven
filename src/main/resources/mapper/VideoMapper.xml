@@ -7,6 +7,8 @@
     <result column="video_pic_address" jdbcType="VARCHAR" property="videoPicAddress" />
     <result column="video_upload_time" jdbcType="DATE" property="videoUploadTime" />
     <result column="video_md5" jdbcType="VARCHAR" property="videoMD5" />
+    <result column="video_name" jdbcType="VARCHAR" property="videoName" />
+    <result column="video_time" jdbcType="CHAR" property="videoTime" />
   </resultMap>
   <insert id="insertVideo" parameterType="cn.org.cflac.entity.Video">
     insert into activity_video (video_id, video_address, video_pic_address,video_upload_time,video_md5,video_transform,invalid)
@@ -66,7 +68,31 @@
 	
   	</select>
 	
+	<select id="queryVideoCount" resultType="java.lang.Integer">
+	select COUNT(1) from activity_video
+	</select>
 	
+	<select id="queryAllVideo" parameterType="java.util.Map" resultType="cn.org.cflac.entity.Video">
+	SELECT
+	V.video_id,
+	V.video_name,
+	V.video_address,
+	V.video_pic_address,
+	V.video_upload_time,
+	V.video_time
+FROM
+	activity_video V 
+WHERE
+	V.video_id IN (
+	SELECT R.video_id FROM activity_video_rel R WHERE R.invalid = 'N' 
+	) 
 	
+	<if test="search != null and search !='' ">
+		AND V.video_name like concat('%',#{search},'%') 
+	</if>
+	 AND V.invalid = 'N' 
+ORDER BY V.video_upload_time DESC
+limit #{start},#{length}
+	</select>
 	
 </mapper>

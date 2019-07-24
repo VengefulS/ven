@@ -549,9 +549,11 @@ function alertA(){
 
 
 //oninput  onpropertychange ==========================根据标签查视频===========
+
 $('#input-videoSearch').bind('input propertychange', function() {
 	var tag = this.value;
 	url ="/act/findActivityListByVideoTag?tag="+tag;
+	
 	if($("#input-videoSearch").val()==""){
 		$("#findAll_filter .input-sm").attr("disabled",false);
 		query();

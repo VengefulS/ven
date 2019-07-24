@@ -171,8 +171,8 @@ public class ActivityController {
 		/*@RequestParam(value = "search[value]",required = false) String search,*/
 		/*@RequestParam(value = "start",defaultValue = "0") Integer index,
             @RequestParam(value = "length",defaultValue = "10") Integer size*/
-		String url = request.getServletPath(); 
-		System.out.println(url);
+		/*String url = request.getServletPath(); 
+		System.out.println(url);*/
 		System.out.println("视频的tag搜索："+tagName);
 		Paging<Activity> paging = null;
         try {

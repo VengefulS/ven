@@ -1,6 +1,7 @@
 package cn.org.cflac.entity;
 
 import java.sql.Timestamp;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 public class Video {
@@ -10,7 +11,7 @@ public class Video {
     
     private String videoPicAddress;
 
-    private Timestamp videoUploadTime;
+    private Date videoUploadTime;
     
     private String videoTransform;
     
@@ -18,9 +19,34 @@ public class Video {
     
     private String videoMD5;
     
+    private String videoName;
     
+    private String videoTime;
+    
+    public String getDisplayVideoUploadTime(){
+    	SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+    	if(videoUploadTime != null){
+    	return	sdf.format(videoUploadTime);
+    	}
+    	return null;
+    }
     
 
+	public String getVideoName() {
+		return videoName;
+	}
+
+	public void setVideoName(String videoName) {
+		this.videoName = videoName;
+	}
+
+	public String getVideoTime() {
+		return videoTime;
+	}
+
+	public void setVideoTime(String videoTime) {
+		this.videoTime = videoTime;
+	}
 
 	public String getInvalid() {
 		return invalid;
