@@ -7,6 +7,28 @@
 		<result column="invalid" jdbcType="CHAR" property="invalid" />
 	</resultMap>
 
+	<insert id="insertVideoTag" parameterType="cn.org.cflac.entity.VideoTag">
+		INSERT INTO video_tag (tag_id, tag_name, invalid)
+		VALUES (#{tagId},#{tagName},'N')
+	</insert>
+	
+	<insert id="insertRelvt" parameterType="cn.org.cflac.entity.Relvt">
+		INSERT INTO video_tag_rel (rid,video_id,tag_id, invalid)
+		VALUES (#{rid},#{videoId},#{tagTd},'N')
+	</insert>
+	
+	<select id="findAllVideoTagName" resultType="String">
+		select tag_name from video_tag where invalid ='N'
+	</select>
+
+	<update id="deleteVideoTag" parameterType="java.util.Map">
+		update video_tag 
+			<set>
+				invalid = 'Y'
+			</set>
+			WHERE tag_name = #{tagName}
+	</update>
+
 	<select id="findAidListByVtn1" parameterType="String" resultType="java.util.List">
 		SELECT avr.activity_id FROM activity_video_rel AS avr
 		<where>
@@ -20,6 +42,7 @@
 			</where>
 		</where>
 	</select>
+	<!--  
 	<select id="findAidListByVtn" parameterType="String" resultType="java.util.List">
 		SELECT
 		avr.activity_id
@@ -44,6 +67,7 @@
 		)
 		)
 	</select>
-
+    -->
+    
 
 </mapper>

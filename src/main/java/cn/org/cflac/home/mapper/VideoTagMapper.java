@@ -1,21 +1,24 @@
 package cn.org.cflac.home.mapper;
 
 import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.annotations.Mapper;
 
-import cn.org.cflac.entity.VideoTag;
 
 @Mapper
 public interface VideoTagMapper {
     
-    //根据视频标签查到活动
-    List<String> findAidListByVtn(String videoTag);
+//    //根据视频标签查到活动
+//    List<String> findAidListByVtn(String videoTag);
+    //查询所有视频标签名称
+	List<String> findAllVideoTagName();
     //添加视频标签
-    Integer insertVideoTag(VideoTag videoTag);
+    Integer insertVideoTag(Map videoTag);
+    //添加视频标签关系
+    Integer insertRelvt(Map relvt);
     //删除视频标签
-    Integer deleteVideoTag(String invalid);
-    //修改视频标签
-    Integer updateVideoTag(String tagId,String tagName);
+    Integer deleteVideoTag(Map tagName);
+   
     
 }

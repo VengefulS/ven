@@ -198,7 +198,7 @@
 		vt.tag_name like
 		concat('%',#{tagName},'%')
 		AND
-		vt.invalid ='Y'
+		vt.invalid ='N'
 		)
 		)
 	</select>
@@ -237,6 +237,7 @@
 		video_tag vt
 		WHERE
 		vtr.tag_id = vt.tag_id
+		AND vt.invalid = 'N'
 		GROUP BY
 		video_id
 		) aa
