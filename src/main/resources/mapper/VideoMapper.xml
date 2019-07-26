@@ -1,98 +1,129 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="cn.org.cflac.home.mapper.VideoMapper">
-  <resultMap id="BaseResultMap" type="cn.org.cflac.entity.Video">
-    <result column="video_id" jdbcType="VARCHAR" property="videoId" />
-    <result column="video_address" jdbcType="VARCHAR" property="videoAddress" />
-    <result column="video_pic_address" jdbcType="VARCHAR" property="videoPicAddress" />
-    <result column="video_upload_time" jdbcType="DATE" property="videoUploadTime" />
-    <result column="video_md5" jdbcType="VARCHAR" property="videoMD5" />
-    <result column="video_name" jdbcType="VARCHAR" property="videoName" />
-    <result column="video_time" jdbcType="CHAR" property="videoTime" />
-  </resultMap>
-  <insert id="insertVideo" parameterType="cn.org.cflac.entity.Video">
-    insert into activity_video (video_id, video_address, video_pic_address,video_upload_time,video_md5,video_transform,invalid)
-    values (#{uuid}, #{videoAddress}
-    , #{videoPicAddress}, NOW(),#{videoMD5},'N','N')
-  </insert>
-  
-    <insert id="insertActivityVideoRel" parameterType="cn.org.cflac.entity.Relationship">
-    insert into activity_video_rel (id,activity_id, video_id, invalid)
-    values (#{uuid}, #{activityId}
-    , #{videoId}, 'N')
-  </insert>
-  
+	<resultMap id="BaseResultMap"
+		type="cn.org.cflac.entity.Video">
+		<result column="video_id" jdbcType="VARCHAR" property="videoId" />
+		<result column="video_address" jdbcType="VARCHAR"
+			property="videoAddress" />
+		<result column="video_pic_address" jdbcType="VARCHAR"
+			property="videoPicAddress" />
+		<result column="video_upload_time" jdbcType="DATE"
+			property="videoUploadTime" />
+		<result column="video_md5" jdbcType="VARCHAR"
+			property="videoMD5" />
+		<result column="video_name" jdbcType="VARCHAR"
+			property="videoName" />
+		<result column="video_time" jdbcType="CHAR"
+			property="videoTime" />
+	</resultMap>
+	<insert id="insertVideo"
+		parameterType="cn.org.cflac.entity.Video">
+		insert into activity_video (video_id, video_address,
+		video_pic_address,video_upload_time,video_md5,video_transform,invalid)
+		values (#{uuid}, #{videoAddress}
+		, #{videoPicAddress}, NOW(),#{videoMD5},'N','N')
+	</insert>
 
-  
-  <select id="findVideoByActid" parameterType="java.util.Map" resultType="cn.org.cflac.entity.Video">
-  SELECT V.video_id,V.video_address,V.video_pic_address,V.video_upload_time,V.video_transform from activity_video V where V.video_id in (
-	SELECT
-	R.video_id 
-	FROM
-	activity_video_rel R 
-	<where>
-	<if test="activityId != null">
-	R.activity_id = #{activityId}
-	</if>
-	</where>
-	and R.invalid = 'N'
-	)
-	and	V.invalid = 'N' ORDER BY video_upload_time DESC
-  </select>
-  
-  <update id="updateVideoTransform" parameterType="java.util.Map">
+	<insert id="insertActivityVideoRel"
+		parameterType="cn.org.cflac.entity.Relationship">
+		insert into activity_video_rel (id,activity_id, video_id, invalid)
+		values (#{uuid}, #{activityId}
+		, #{videoId}, 'N')
+	</insert>
+
+
+
+	<select id="findVideoByActid" parameterType="java.util.Map"
+		resultType="cn.org.cflac.entity.Video">
+		SELECT
+		V.video_id,V.video_address,V.video_pic_address,V.video_upload_time,V.video_transform
+		from activity_video V where V.video_id in (
+		SELECT
+		R.video_id
+		FROM
+		activity_video_rel R
+		<where>
+			<if test="activityId != null">
+				R.activity_id = #{activityId}
+			</if>
+		</where>
+		and R.invalid = 'N'
+		)
+		and V.invalid = 'N' ORDER BY video_upload_time DESC
+	</select>
+
+	<update id="updateVideoTransform" parameterType="java.util.Map">
 		update activity_video
 		<set>
 			video_transform = #{videoTransform}
 		</set>
 		where video_id = #{videoId}
 	</update>
-	
-	  <update id="deleteVideoById" parameterType="java.util.Map">
+
+	<update id="deleteVideoById" parameterType="java.util.Map">
 		update activity_video_rel
 		<set>
 			invalid = 'Y'
 		</set>
 		where video_id = #{videoId} and activity_id = #{actId}
 	</update>
-	
-	<select id="queryCountByMd5" parameterType="String" resultType="String">
-	SELECT
-	video_id
-	FROM
-	activity_video 
-	<where>
-	video_md5 = #{fileMd5}
-	</where>
-	and invalid = 'N'
-	
-  	</select>
-	
+
+	<select id="queryCountByMd5" parameterType="String"
+		resultType="String">
+		SELECT
+		video_id
+		FROM
+		activity_video
+		<where>
+			video_md5 = #{fileMd5}
+		</where>
+		and invalid = 'N'
+
+	</select>
+
 	<select id="queryVideoCount" resultType="java.lang.Integer">
-	select COUNT(1) from activity_video
+		select COUNT(1) from activity_video
 	</select>
-	
-	<select id="queryAllVideo" parameterType="java.util.Map" resultType="cn.org.cflac.entity.Video">
-	SELECT
-	V.video_id,
-	V.video_name,
-	V.video_address,
-	V.video_pic_address,
-	V.video_upload_time,
-	V.video_time
-FROM
-	activity_video V 
-WHERE
-	V.video_id IN (
-	SELECT R.video_id FROM activity_video_rel R WHERE R.invalid = 'N' 
-	) 
-	
-	<if test="search != null and search !='' ">
-		AND V.video_name like concat('%',#{search},'%') 
-	</if>
-	 AND V.invalid = 'N' 
-ORDER BY V.video_upload_time DESC
-limit #{start},#{length}
+
+	<select id="queryAllVideo" parameterType="java.util.Map"
+		resultType="cn.org.cflac.entity.Video">
+		SELECT
+		V.video_id,
+		V.video_name,
+		V.video_address,
+		V.video_pic_address,
+		V.video_upload_time,
+		V.video_time,
+		T.tag_names
+		FROM
+		activity_video V
+		LEFT JOIN(
+		SELECT
+		vtr.video_id,
+		GROUP_CONCAT(tag_name) AS tag_names
+		FROM
+		video_tag_rel vtr,
+		video_tag vt
+		WHERE
+		vtr.tag_id = vt.tag_id
+		AND vtr.invalid = 'N'
+		GROUP BY
+		vtr.video_id
+		) AS T
+		ON
+		V.video_id = T.video_id
+		WHERE
+		V.video_id IN (
+		SELECT R.video_id FROM activity_video_rel R WHERE R.invalid = 'N'
+		)
+
+		<if test="search != null and search !='' ">
+			AND V.video_name like concat('%',#{search},'%')
+		</if>
+		AND V.invalid = 'N'
+		ORDER BY V.video_upload_time DESC
+		limit #{start},#{length}
 	</select>
-	
+
 </mapper>

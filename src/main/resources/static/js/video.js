@@ -95,7 +95,7 @@ var datatables_options = {
 			"data" : "videoName",
 			"defaultContent" : "视频无名称",
 			"visible" : true,
-			"orderable": true,"width":"185px",
+			"orderable": true,"width":"135px",
 			"word-wrap": "break-word",
 			"searchable": true,
 		}, {
@@ -104,15 +104,22 @@ var datatables_options = {
 			"data" : "displayVideoUploadTime",
 			"defaultContent" : "",
 			"visible" : true,
-			"orderable": true,"width":"130px",
+			"orderable": true,"width":"100px",
 		}, {
 			"title" : "视频时长",
 			"type" : "html",
-			"data" : "videoTime",
+			"data" : "videoName",
 			"defaultContent" : "",
 			"visible" : true,
-			"orderable": true,"width":"140px",
-		},  {
+			"orderable": true,"width":"120px",
+		}, {
+			"title" : "视频标签",
+			"type" : "html",
+			"data" : "tagNames",
+			"defaultContent" : "视频无标签",
+			"visible" : true,
+			"orderable": true,"width":"100px",
+		},{
 			"title" : "下载",
 			"type" : "html",
 			"data" : "",

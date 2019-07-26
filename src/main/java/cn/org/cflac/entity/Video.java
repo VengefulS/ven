@@ -23,7 +23,21 @@ public class Video {
     
     private String videoTime;
     
-    public String getDisplayVideoUploadTime(){
+    private String tagNames;
+    
+    
+    
+    public String getTagNames() {
+		return tagNames;
+	}
+
+
+	public void setTagNames(String tagNames) {
+		this.tagNames = tagNames;
+	}
+
+
+	public String getDisplayVideoUploadTime(){
     	SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
     	if(videoUploadTime != null){
     	return	sdf.format(videoUploadTime);
