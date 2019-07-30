@@ -30,7 +30,7 @@
 	<div class="wrapper">
 		<header class="main-header">
 			<!-- Logo -->
-			<a href="/home" class="logo"> <span class="logo-lg">中国文艺网视频素材存储管理系统-视频列表</span>
+			<a href="/video" class="logo"> <span class="logo-lg">中国文艺网视频素材存储管理系统-视频列表</span>
 			</a>
 			<!-- Header Navbar: style can be found in header.less -->
 			<nav class="navbar navbar-static-top">
@@ -53,6 +53,19 @@
 				<div class="row">
 					<div class="col-xs-12">
 						<div class="box">
+						<a href="/home">
+							<button type="button" class="btn bg-primary">
+								<span class="glyphicon glyphicon-circle-arrow-left" aria-hidden="true"></span>查看全部活动
+							</button>
+						</a>
+						<div id="div-videoSearch" class="dataTables_filter" style="float:right;">
+								<div>
+								<div style="margin-top:5px; float: left;">视频搜索:</div>
+								<input id="input-videoSearch" type="search"
+									class="form-control input-sp" aria-controls="findAll" placeholder="按活动名称查找"
+									>
+								</div>
+							</div>
 							<!-- /.box-header -->
 							<div class="box-body">
 								<table id="findAllVideo"

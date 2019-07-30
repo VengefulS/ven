@@ -241,11 +241,8 @@
 		GROUP BY
 		video_id
 		) aa
-		WHERE
-		
+		WHERE		
 		aa.tag_names LIKE concat('%',#{tagName},'%')
-
-
 		)
 		)
 		ORDER BY

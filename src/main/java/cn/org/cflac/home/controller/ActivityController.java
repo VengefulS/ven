@@ -9,6 +9,7 @@ package cn.org.cflac.home.controller;
 
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -144,6 +145,16 @@ public class ActivityController {
 		return res;
 	}
 	
+	@RequestMapping(value="/aidAname",method=RequestMethod.POST)
+	@ResponseBody
+	public Map<String,Object> aidAname(HttpServletRequest req) {
+		Object activityId = req.getSession().getAttribute("aid");
+		Object activityName = req.getSession().getAttribute("aname");
+		Map<String, Object> map = new HashMap<String,Object>();
+		map.put("activityId", activityId);
+		map.put("activityName", activityName);
+		return map;
+	}
 	
 	
 	

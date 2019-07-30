@@ -26,4 +26,10 @@ public interface VideoService {
 			  Integer start,
 			  Integer length,
 			  Integer draw);
+	
+	//根据活动搜索视频
+	Paging<Video> findVideoByActid2(String activityId,
+			  Integer start,
+			  Integer length,
+			  Integer draw);
 }

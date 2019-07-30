@@ -23,7 +23,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
-import cn.org.cflac.entity.Activity;
 import cn.org.cflac.entity.Paging;
 import cn.org.cflac.entity.Video;
 import cn.org.cflac.home.service.VideoService;
@@ -97,6 +96,25 @@ public class VideoController {
             e.printStackTrace();
         }
         
+        return paging;
+	}
+	
+	@RequestMapping(value="/findVideoByActid2")
+	@ResponseBody
+	public Paging<Video> findActivityListByVideoTag(
+            @RequestParam(value="activityId",required = false) String activityId,
+            @RequestParam(value = "start",defaultValue = "0") Integer index,
+            @RequestParam(value = "length",defaultValue = "10") Integer size,
+            Integer draw,
+            HttpServletRequest request
+            ){
+		System.out.println("活动搜索："+activityId);
+		Paging<Video> paging = null;
+        try {
+            paging = videoService.findVideoByActid2(activityId, index, size,draw);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
         return paging;
 	}
 

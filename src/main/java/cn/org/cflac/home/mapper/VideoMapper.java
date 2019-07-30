@@ -36,5 +36,10 @@ public interface VideoMapper {
 	//查询所有视频
 	List<Video> queryAllVideo(Map map);
 	// 查询总数量
-    Integer queryVideoCount(); 
+    Integer queryVideoCount();
+    
+    //根据活动ID查询视频列表2
+    List<Video> findVideoByActid2(Map map);
+    //查询活动视频ID总数量
+    Integer findActivityCount2(Map map1);
 }

@@ -37,8 +37,26 @@
 	<select id="findVideoByActid" parameterType="java.util.Map"
 		resultType="cn.org.cflac.entity.Video">
 		SELECT
-		V.video_id,V.video_address,V.video_pic_address,V.video_upload_time,V.video_transform
-		from activity_video V where V.video_id in (
+		V.video_id,V.video_name,V.video_address,V.video_pic_address,V.video_upload_time,V.video_transform,T.tag_names
+		FROM
+		activity_video V 
+		LEFT JOIN(
+		SELECT
+		vtr.video_id,
+		GROUP_CONCAT(tag_name) AS tag_names
+		FROM
+		video_tag_rel vtr,
+		video_tag vt
+		WHERE
+		vtr.tag_id = vt.tag_id
+		AND vtr.invalid = 'N'
+		GROUP BY
+		vtr.video_id
+		) AS T
+		ON
+		V.video_id = T.video_id
+		WHERE V.video_id 
+		IN (
 		SELECT
 		R.video_id
 		FROM
@@ -51,6 +69,7 @@
 		and R.invalid = 'N'
 		)
 		and V.invalid = 'N' ORDER BY video_upload_time DESC
+		
 	</select>
 
 	<update id="updateVideoTransform" parameterType="java.util.Map">
@@ -119,11 +138,88 @@
 		)
 
 		<if test="search != null and search !='' ">
-			AND V.video_name like concat('%',#{search},'%')
+			AND T.tag_names like concat('%',#{search},'%')
 		</if>
 		AND V.invalid = 'N'
 		ORDER BY V.video_upload_time DESC
 		limit #{start},#{length}
+	</select>
+	
+	<!-- 带分页的活动查找 -->
+	<select id="findActivityCount2" parameterType="java.util.Map"
+		resultType="java.lang.Integer">
+		SELECT
+		COUNT(1)
+		FROM
+		activity_video V 
+		LEFT JOIN(
+		SELECT
+		vtr.video_id,
+		GROUP_CONCAT(tag_name) AS tag_names
+		FROM
+		video_tag_rel vtr,
+		video_tag vt
+		WHERE
+		vtr.tag_id = vt.tag_id
+		AND vtr.invalid = 'N'
+		GROUP BY
+		vtr.video_id
+		) AS T
+		ON
+		V.video_id = T.video_id
+		WHERE V.video_id 
+		IN (
+		SELECT
+		R.video_id
+		FROM
+		activity_video_rel R
+		<where>
+			<if test="activityId != null">
+				R.activity_id = #{activityId}
+			</if>
+		</where>
+		and R.invalid = 'N'
+		)
+		and V.invalid = 'N' 
+	</select>
+
+	<select id="findVideoByActid2" parameterType="java.util.Map"
+		resultType="cn.org.cflac.entity.Video">
+		SELECT
+		V.video_id,V.video_name,V.video_address,V.video_pic_address,V.video_upload_time,V.video_transform,T.tag_names
+		FROM
+		activity_video V 
+		LEFT JOIN(
+		SELECT
+		vtr.video_id,
+		GROUP_CONCAT(tag_name) AS tag_names
+		FROM
+		video_tag_rel vtr,
+		video_tag vt
+		WHERE
+		vtr.tag_id = vt.tag_id
+		AND vtr.invalid = 'N'
+		GROUP BY
+		vtr.video_id
+		) AS T
+		ON
+		V.video_id = T.video_id
+		WHERE V.video_id 
+		IN (
+		SELECT
+		R.video_id
+		FROM
+		activity_video_rel R
+		<where>
+			<if test="activityId != null">
+				R.activity_id = #{activityId}
+			</if>
+		</where>
+		and R.invalid = 'N'
+		)
+		and V.invalid = 'N' ORDER BY video_upload_time DESC
+		limit #{start},#{length}
+
 	</select>
 
 </mapper>

@@ -110,6 +110,32 @@ public class VideoServiceImpl implements VideoService {
         paging.setData(list);
         return paging;
 	}
+	
+	//根据活动找视频
+	@Override
+	public Paging<Video> findVideoByActid2(String activityId, Integer start,Integer length, Integer draw) {
+
+		// 将参数放进map中
+        Map<String, Object> map = new HashMap<>();
+        Map<String, Object> map1 = new HashMap<>();
+        List<Video> list = null;
+        map.put("activityId", activityId);
+        map.put("start", start);
+        map.put("length",length);
+
+        map1.put("activityId", activityId); 
+        Integer count = null;
+        try {
+            list = videoMapper.findVideoByActid2(map);
+            count = videoMapper.findActivityCount2(map1);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        Paging paging = new Paging(start, length, count, draw);
+        paging.setRecordsFiltered(count);
+        paging.setData(list);
+        return paging;
+	}
 
 
 }
