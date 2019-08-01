@@ -47,14 +47,24 @@ public class LoginController {
 		return null;
 	}
 
-	@RequestMapping(value = "/video/toV")
-	public String to(@Param(value = "aid") String aid, @Param(value = "aname") String aname, HttpSession session)
+	@RequestMapping(value = "/login/toV")
+	public String toV(@Param(value = "aid") String aid, @Param(value = "aname") String aname, HttpSession session)
 			throws IOException {
 		session.setAttribute("aid", aid);
 		session.setAttribute("aname", aname);
-		System.out.println("session.getAttribute('aid'):" + session.getAttribute("aid"));
-		System.out.println("session.getAttribute('aname'):" + session.getAttribute("aname"));
+//		System.out.println("session.getAttribute('aid'):" + session.getAttribute("aid"));
+//		System.out.println("session.getAttribute('aname'):" + session.getAttribute("aname"));
 		return "video";
+	}
+	
+	@RequestMapping(value = "/login/toH")
+	public String toH(HttpSession session)
+			throws IOException {
+		session.removeAttribute("aid");
+		session.removeAttribute("aname");
+//		System.out.println("session.getAttribute('aid'):" + session.getAttribute("aid"));
+//		System.out.println("session.getAttribute('aname'):" + session.getAttribute("aname"));
+		return "home";
 	}
 
 	@RequestMapping(value = "/logout")

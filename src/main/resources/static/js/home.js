@@ -267,7 +267,7 @@ function to(obj) {
 	var aid = obj.id;
 	var aname = obj.name;
 	$.ajax({
-		url : "/video/toV",
+		url : "/login/toV",
 		type : "POST",
 		async : false,
 		data : {
