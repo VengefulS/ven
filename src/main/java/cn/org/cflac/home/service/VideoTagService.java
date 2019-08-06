@@ -7,7 +7,10 @@ public interface VideoTagService {
 
 //	List<String> findAvrList(String videoTag);
 	List<String> findAllVideoTagName();
+	//
+	List<Map<String,String>> findAllVideoTag();
 	Map insertVideoTag(Map videoTag);
 	Map insertRelvt(Map relvt);
-	Integer deleteVideoTag(Map tagName);
+	Integer deleteVideoTag(String tagId);
+	Integer updateVideoTag(Map<String,String> videoTag);
 }

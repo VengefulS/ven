@@ -26,6 +26,7 @@ import org.springframework.web.multipart.MultipartFile;
 import cn.org.cflac.entity.Paging;
 import cn.org.cflac.entity.Video;
 import cn.org.cflac.home.service.VideoService;
+import cn.org.cflac.util.UUIDGenarator;
 
 @RestController
 @RequestMapping(value="/video")
@@ -68,6 +69,36 @@ public class VideoController {
 		
 		
 		return null;
+		
+	}
+	
+	@RequestMapping(value="/deleteMatchRelById")
+	@ResponseBody
+	public String deleteMatchRelById(@RequestParam(value = "videoId",required=false) String  videoId,
+			@RequestParam(value = "tagId",required=false) String  tagId){
+		
+		Map<String,String> delTagMap = new HashMap<String, String>();
+		delTagMap.put("videoId", videoId);
+		delTagMap.put("tagId", tagId);
+		//System.out.println(delTagMap.toString());
+		videoService.deleteTagById(delTagMap);	
+		return null;
+		
+	}
+	
+	@RequestMapping(value = "/addMatchRel")
+	@ResponseBody
+	public String matchRel(@RequestParam(value = "videoId",required=false) String  videoId,
+			@RequestParam(value = "tagId",required=false) String  tagId) {
+		
+		String rid = UUIDGenarator.nextUUID();
+		Map<String, String> matchMap = new HashMap<String, String>();
+		matchMap.put("rid", rid);
+		matchMap.put("videoId", videoId);
+		matchMap.put("tagId", tagId);
+		videoService.insertVideoTagRel(matchMap);
+		return null;
+		
 		
 	}
 	

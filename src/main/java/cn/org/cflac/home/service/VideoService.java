@@ -15,10 +15,13 @@ public interface VideoService {
 	Map insertVideo(Map videoMap);
 	 
 	Map insertRel(Map relMap);
+	Map<String,String> insertVideoTagRel(Map<String,String> relTagMap);
 	
 	int updateVideoTransform(Map videoMap);
 	
 	int deleteVideoById(Map delVideoMap);
+	
+	int deleteTagById(Map<String,String> delTagMap);
 	 
 	String isrepByAddress(String fileMd5);
 	

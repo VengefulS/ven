@@ -63,6 +63,13 @@ public class VideoServiceImpl implements VideoService {
 		
 		return relMap;
 	}
+	
+	@Override
+	public Map<String, String> insertVideoTagRel(Map<String, String> relTagMap) {
+		videoMapper.insertVideoTagRel(relTagMap);
+		return relTagMap;
+	}
+
 
 	@Override
 	public int updateVideoTransform(Map videoMap) {
@@ -74,6 +81,12 @@ public class VideoServiceImpl implements VideoService {
 	public int deleteVideoById(Map delVideoMap) {
 		
 		videoMapper.deleteVideoById(delVideoMap);
+		return 0;
+	}
+	
+	@Override
+	public int deleteTagById(Map<String, String> delTagMap) {
+		videoMapper.deleteTagById(delTagMap);
 		return 0;
 	}
 
@@ -136,6 +149,9 @@ public class VideoServiceImpl implements VideoService {
         paging.setData(list);
         return paging;
 	}
+
+	
+	
 
 
 }
