@@ -94,8 +94,9 @@ public class VideoController {
 	@RequestMapping(value = "/addMatchRel")
 	@ResponseBody
 	public String matchRel(@RequestParam(value = "videoId",required=false) String  videoId,
-			@RequestParam(value = "tagId",required=false) String  tagId) {
-		
+			@RequestParam(value = "tagName",required=false) String  tagName) {
+		String tagId = null;
+		tagId = videoTagService.findTagIdByName(tagName);
 		String rid = UUIDGenarator.nextUUID();
 		Map<String, String> matchMap = new HashMap<String, String>();
 		matchMap.put("rid", rid);
