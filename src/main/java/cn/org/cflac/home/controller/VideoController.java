@@ -26,6 +26,7 @@ import org.springframework.web.multipart.MultipartFile;
 import cn.org.cflac.entity.Paging;
 import cn.org.cflac.entity.Video;
 import cn.org.cflac.home.service.VideoService;
+import cn.org.cflac.home.service.VideoTagService;
 import cn.org.cflac.util.UUIDGenarator;
 
 @RestController
@@ -35,6 +36,8 @@ public class VideoController {
 
 	@Autowired
 	private VideoService videoService;
+	@Autowired
+	private VideoTagService videoTagService;
 	/**
 	 * 查询指定活动下的所有视频
 	 * @param activityId
@@ -72,11 +75,13 @@ public class VideoController {
 		
 	}
 	
-	@RequestMapping(value="/deleteMatchRelById")
+	@RequestMapping(value="/deleteMatchRelByName")
 	@ResponseBody
 	public String deleteMatchRelById(@RequestParam(value = "videoId",required=false) String  videoId,
-			@RequestParam(value = "tagId",required=false) String  tagId){
-		
+			@RequestParam(value = "tagName",required=false) String  tagName){		
+		String tagId = null;
+		tagId = videoTagService.findTagIdByName(tagName);
+		//System.out.println(tagId);
 		Map<String,String> delTagMap = new HashMap<String, String>();
 		delTagMap.put("videoId", videoId);
 		delTagMap.put("tagId", tagId);

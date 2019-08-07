@@ -27,9 +27,9 @@ public class VideoTagServiceImpl implements VideoTagService {
 	}
 	
 	@Override
-	public String findTagIdByName(String tagId) {
+	public String findTagIdByName(String tagName) {
 		
-		return videoTagMapper.findTagIdByName(tagId);
+		return videoTagMapper.findTagIdByName(tagName);
 		
 	}
 	

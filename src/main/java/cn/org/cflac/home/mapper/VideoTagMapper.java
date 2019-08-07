@@ -16,7 +16,7 @@ public interface VideoTagMapper {
 	//
 	List<Map<String,String>> findAllVideoTag();
 	//根据标签名字查标签ID
-	String findTagIdByName(String tagId);
+	String findTagIdByName(String tagName);
     //添加视频标签
     Integer insertVideoTag(Map videoTag);
     //添加视频标签关系
