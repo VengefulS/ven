@@ -25,6 +25,11 @@
 		select tag_id,tag_name from video_tag where invalid ='N'
 	</select>
 
+
+	<select id="findTagIdByName" resultType="String">
+		select tag_id from video_tag where tag_name = #{tagName} and invalid ='N'
+	</select>
+
 	<update id="deleteVideoTag" parameterType="String">
 		update video_tag 
 			<set>
@@ -39,7 +44,7 @@
 			tag_name = #{tagName}
 		</set>
 		<where>
-	    tag_id = '1'
+	    tag_id = #{tagId}
 	    </where>
 	</update>
 

@@ -48,13 +48,24 @@ public class VideoTagController {
 
 	}
 
+//	@RequestMapping(value = "/deleteVideoTag")
+//	@ResponseBody
+//	public String deleteVideoTag(@RequestParam(value = "tagId") String tagId) {
+//		videoTagService.deleteVideoTag(tagId);
+//		return "删除成功";
+//
+//	}
+	
 	@RequestMapping(value = "/deleteVideoTag")
 	@ResponseBody
-	public String deleteVideoTag(@RequestParam(value = "tagId") String tagId) {
+	public String deleteVideoTag(@RequestParam(value = "tagName") String tagName) {
+		String tagId = null;
+		tagId = videoTagService.findTagIdByName(tagName);
 		videoTagService.deleteVideoTag(tagId);
 		return "删除成功";
 
 	}
+
 
 	@RequestMapping(value = "/updateVideoTag")
 	@ResponseBody
