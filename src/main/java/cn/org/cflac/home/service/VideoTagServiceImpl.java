@@ -27,6 +27,13 @@ public class VideoTagServiceImpl implements VideoTagService {
 	}
 	
 	@Override
+	public String findTagIdByName(String tagName) {
+		
+		return videoTagMapper.findTagIdByName(tagName);
+		
+	}
+	
+	@Override
 	public Map insertVideoTag(Map videoTag) {
 		videoTagMapper.insertVideoTag(videoTag);
 		return videoTag;
@@ -38,10 +45,25 @@ public class VideoTagServiceImpl implements VideoTagService {
 	}
 
 	@Override
-	public Integer deleteVideoTag(Map tagName) {
-		videoTagMapper.deleteVideoTag(tagName);
+	public Integer deleteVideoTag(String tagId) {
+		videoTagMapper.deleteVideoTag(tagId);
 		return 0;
 	}
+
+	@Override
+	public Integer updateVideoTag(Map<String,String> videoTag) {
+		videoTagMapper.updateVideoTag(videoTag);
+		return 0;
+	}
+
+	@Override
+	public List<Map<String,String>> findAllVideoTag() {
+		return videoTagMapper.findAllVideoTag();
+		
+	}
+
+	
+	
 	
 	
 //	@Override

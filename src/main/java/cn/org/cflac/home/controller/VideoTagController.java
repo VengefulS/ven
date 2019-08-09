@@ -42,55 +42,65 @@ public class VideoTagController {
 //			res.put(tagName, "添加成功");
 			return "添加成功";
 		} else {
-//			JSONObject res = new JSONObject();
-//			res.put(tagName, tagName+"已经存在");
-			return tagName+"已经存在";
+			return tagName + "已经存在";
 		}
-		
+
 	}
-	
+
 	@RequestMapping(value = "/getAllVideoTag")
 	@ResponseBody
-	public List<String> getAllVideoTag() {
-		List<String> list = new ArrayList<>();
-		list = videoTagService.findAllVideoTagName();
-		return list;	
+	public List<Map<String, String>> getAllVideoTag() {
+		List<Map<String, String>> list = videoTagService.findAllVideoTag();
+		return list;
+
 	}
+
+//	@RequestMapping(value = "/deleteVideoTag")
+//	@ResponseBody
+//	public String deleteVideoTag(@RequestParam(value = "tagId") String tagId) {
+//		videoTagService.deleteVideoTag(tagId);
+//		return "删除成功";
+//
+//	}
 	
 	@RequestMapping(value = "/deleteVideoTag")
 	@ResponseBody
 	public String deleteVideoTag(@RequestParam(value = "tagName") String tagName) {
-		Map<String, String> tagMap = new HashMap<String, String>();
-		tagMap.put("tagName", tagName);
-		videoTagService.deleteVideoTag(tagMap);
+		String tagId = null;
+		tagId = videoTagService.findTagIdByName(tagName);
+		videoTagService.deleteVideoTag(tagId);
 		return "删除成功";
 		
 	}
-	
-	
-	@RequestMapping(value = "/matchRel")
+
+
+	@RequestMapping(value = "/updateVideoTag")
 	@ResponseBody
-	public String matchRel(@RequestParam(value = "") String tagName) {
-		String rid = UUIDGenarator.nextUUID();
-		Map<String, String> matchMap = new HashMap<String, String>();
-		matchMap.put("rid", rid);
-//		tagMap.put("tagName", tagName);
-//		videoTagService.insertVideoTag(tagMap);
-		return null;
+	public String updateVideoTag(@RequestParam(value = "tagId", required = false) String tagId,
+			@RequestParam(value = "tagName", required = false) String tagName) {
+		List<String> list = new ArrayList<>();
+		list = videoTagService.findAllVideoTagName();
+		if (!list.contains(tagName)) {
+			Map<String,String> videoTag = new HashMap<>();
+			videoTag.put("tagId", tagId);
+			videoTag.put("tagName", tagName);
+			try {
+				videoTagService.updateVideoTag(videoTag);
+				
+			} catch (Exception e) {
+
+				e.printStackTrace();
+			}
+			return "修改完成";
+		} else {
+			return "标签已存在";
+		}
+	
+
 	}
 
-//	@RequestMapping(value="/findActivityByTag")
-//	@ResponseBody
-//	public List<String> FindActivity(
-//			@RequestParam(value = "videoTag",required = false) String  videoTag
-//			){
-//		
-//		
-//		List<String> list = new ArrayList<String>();
-//		list = videoTagService.findAvrList(videoTag);
-//		return list;
-//		
-//	}
-//	
+	
+
+
 
 }

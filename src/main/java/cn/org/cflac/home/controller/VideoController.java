@@ -23,9 +23,14 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.alibaba.fastjson.JSONObject;
+
+import cn.org.cflac.entity.Activity;
 import cn.org.cflac.entity.Paging;
 import cn.org.cflac.entity.Video;
 import cn.org.cflac.home.service.VideoService;
+import cn.org.cflac.home.service.VideoTagService;
+import cn.org.cflac.util.UUIDGenarator;
 
 @RestController
 @RequestMapping(value="/video")
@@ -34,6 +39,8 @@ public class VideoController {
 
 	@Autowired
 	private VideoService videoService;
+	@Autowired
+	private VideoTagService videoTagService;
 	/**
 	 * 查询指定活动下的所有视频
 	 * @param activityId
@@ -68,6 +75,39 @@ public class VideoController {
 		
 		
 		return null;
+		
+	}
+	
+	@RequestMapping(value="/deleteMatchRelByName")
+	@ResponseBody
+	public String deleteMatchRelById(@RequestParam(value = "videoId",required=false) String  videoId,
+			@RequestParam(value = "tagName",required=false) String  tagName){		
+		String tagId = null;
+		tagId = videoTagService.findTagIdByName(tagName);
+		//System.out.println(tagId);
+		Map<String,String> delTagMap = new HashMap<String, String>();
+		delTagMap.put("videoId", videoId);
+		delTagMap.put("tagId", tagId);
+		//System.out.println(delTagMap.toString());
+		videoService.deleteTagById(delTagMap);	
+		return null;
+		
+	}
+	
+	@RequestMapping(value = "/addMatchRel")
+	@ResponseBody
+	public String matchRel(@RequestParam(value = "videoId",required=false) String  videoId,
+			@RequestParam(value = "tagName",required=false) String  tagName) {
+		String tagId = null;
+		tagId = videoTagService.findTagIdByName(tagName);
+		String rid = UUIDGenarator.nextUUID();
+		Map<String, String> matchMap = new HashMap<String, String>();
+		matchMap.put("rid", rid);
+		matchMap.put("videoId", videoId);
+		matchMap.put("tagId", tagId);
+		videoService.insertVideoTagRel(matchMap);
+		return null;
+		
 		
 	}
 	
@@ -116,6 +156,23 @@ public class VideoController {
             e.printStackTrace();
         }
         return paging;
+	}
+
+	
+	// findOneVideo
+	@RequestMapping(value = "/findOneVideo")
+	@ResponseBody
+	public String findOneVideo(
+			@RequestParam(value = "videoId", required = false) String videoId) {
+		Video video = videoService.findvideoById(videoId);
+
+		JSONObject result = new JSONObject();
+		result.put("videoId", videoId);
+		result.put("videoTag", video.getTagNames());
+		result.put("videoName", video.getVideoName());
+		String res = result.toJSONString();
+		//System.out.println(res);
+		return res;
 	}
 
 }

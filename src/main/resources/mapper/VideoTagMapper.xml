@@ -20,13 +20,32 @@
 	<select id="findAllVideoTagName" resultType="String">
 		select tag_name from video_tag where invalid ='N'
 	</select>
+	
+	<select id="findAllVideoTag" resultType="java.util.Map">
+		select tag_id,tag_name from video_tag where invalid ='N'
+	</select>
 
-	<update id="deleteVideoTag" parameterType="java.util.Map">
+
+	<select id="findTagIdByName" resultType="String">
+		select tag_id from video_tag where tag_name = #{tagName} and invalid ='N'
+	</select>
+
+	<update id="deleteVideoTag" parameterType="String">
 		update video_tag 
 			<set>
 				invalid = 'Y'
 			</set>
-			WHERE tag_name = #{tagName}
+		WHERE tag_id = #{tagId}
+	</update>
+	
+	<update id="updateVideoTag" parameterType="java.util.Map">
+		UPDATE video_tag 
+		<set>
+			tag_name = #{tagName}
+		</set>
+		<where>
+	    tag_id = #{tagId}
+	    </where>
 	</update>
 
 	<select id="findAidListByVtn1" parameterType="String" resultType="java.util.List">

@@ -2,6 +2,7 @@ package cn.org.cflac.home.controller;
 
 
 import java.io.BufferedInputStream;
+import java.io.BufferedOutputStream;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
@@ -9,18 +10,22 @@ import java.io.IOException;
 
 
 
+import java.io.InputStream;
 import java.io.OutputStream;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipOutputStream;
 
+import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import cn.org.cflac.entity.Paging;
@@ -164,7 +169,68 @@ public class FileDownloadController {
         return null;
     }
 
-
-   
+@RequestMapping("/downloadVideo")
+    public HttpServletResponse download(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	String videoId = request.getParameter("videoId");
+	String addr = videoService.findVideoAddrById(videoId);
+	String s = Path.CUT_PATH;
+	int n = addr.lastIndexOf(".");
+	int m = addr.indexOf(s);
+	String p1 =addr.substring(m+11, n)+".MTS";
+	System.out.println("p1 = "+p1);
+	String path1 = Path.UPLOAD_PATH+p1; 
 	
+        //解决乱码问题
+       String path = new String(path1.getBytes("utf-8"),"utf-8");
+       System.out.println("path:"+path);
+        String filename = "";
+        if(path != null){  //分割字符串，获取文件名称
+           String file[] = path.split("/");
+           filename = file[file.length-1];
+        }
+        //注意这里的路径必须是文件的全路径，如果是文件夹的话就会报错拒绝访问
+       //path = "http://10.1.100.152:9000/resource/515演出/00312/00312.MTS";
+       System.out.println(path);
+        try {
+           // path是指欲下载的文件的路径。
+           File file = new File(path);
+           // 取得文件名。
+//              String filename = file.getName();
+//         String filename = "周工作总结-软件部(5).xlsx";
+           // 取得文件的后缀名。
+           String ext = filename.substring(filename.lastIndexOf(".") + 1).toUpperCase();
+
+           // 以流的形式下载文件。
+           InputStream fis = new BufferedInputStream(new FileInputStream(file));
+           byte[] buffer = new byte[fis.available()];
+           fis.read(buffer);
+           fis.close();
+           // 清空response
+           response.reset();
+           // 设置response的Header
+//         response.addHeader("Content-Disposition", "attachment;filename=" + new String(filename.getBytes()));
+           response.setHeader( "Content-Disposition", "attachment;filename=" + new String( filename.getBytes("GBK"), "ISO8859-1" ) );
+           response.addHeader("Content-Length", "" + file.length());
+           OutputStream toClient = new BufferedOutputStream(response.getOutputStream());
+           response.setContentType("application/octet-stream");
+           toClient.write(buffer);
+           toClient.flush();
+           toClient.close();
+        } catch (IOException ex) {
+           ex.printStackTrace();
+        }
+        return response;
+     }
+	public static void main(String[] args) {
+		String path = "http://10.1.100.152:9000/resource/515演出/00312/00312.mp4";
+		String s = Path.CUT_PATH;
+		int n = path.lastIndexOf(".");
+    	int m = path.indexOf(s);
+    	String p1 =path.substring(m+11, n)+".MTS";
+    	System.out.println("p1 = "+p1);
+    	String p2 = Path.UPLOAD_PATH+p1; 
+    	System.out.println("p2 = "+p2);
+    	
+		
+	}
 }

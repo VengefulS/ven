@@ -4,6 +4,7 @@ var aid;
 //var oUrl = "/video/findVideoByActid2?activityId=" ;
 //var oUrl;
 $(document).ready(function() {
+	
 	$.ajax({
 		url : "/act/aidAname",
 		type : "POST",
@@ -148,6 +149,15 @@ $(document).ready(function() {
 				"visible" : true,
 				"orderable" : true,
 				"width" : "100px",
+				
+			}, {
+				"title" : "视频信息",
+				"type" : "html",
+				"data" : "",
+				"defaultContent" : "",
+				"visible" : true,
+				"orderable" : true,
+				"width" : "80px"
 			}, {
 				"title" : "下载",
 				"type" : "html",
@@ -157,22 +167,36 @@ $(document).ready(function() {
 				"orderable" : true,
 				"width" : "80px"
 			} ],
+			//data-toggle=\"modal\" data-target=\"#activityInfoModal\"
 			// 从右向左第三列列描述 加按钮
 			"columnDefs" : [ {
 				"targets" : -1,
 				"render" : function(data, type, full, meta) {
 					var ret = "<button id="
-							+ full.activityId
-							+ " class = \"btn-download\" disabled = \"disabled\" onClick=\"downloadVideos(this)\" ><span class=\"glyphicon glyphicon-download-alt\"></span> </button>"
+							+ full.videoId
+							+ " class = \"btn-def\"  onClick=\"downloadVideo(this)\" ><span class=\"glyphicon glyphicon-download-alt\"></span> </button>"
 
 					return ret;
+				}
+
+			},{
+				"targets" : -2,
+				"render" : function(data, type, full, meta) {
+					var ret = "<button id="
+						+ full.videoId
+						+ " name="
+						+ full.videoName
+						+ " class = \"btn btn-primary btn-sm\" type=\"button\"  data-toggle=\"modal\" data-target=\"#videoInfoModal\" onClick=\"modalVideoInfo(this)\" ><span class=\"glyphicon glyphicon-edit\"></span>修改</button>"
+				return ret;
 				}
 
 			} ]
 
 		}
 	query2();
-
+	$("#findAllVideo_filter .input-sm").attr({
+		'placeholder' : '按视频标签查找'
+	});
 })
 
 //$('#input-videoSearch').bind('input propertychange',function() {
@@ -205,4 +229,127 @@ $('#toHome').click(function(){
 //	table = $("#findAllVideo").dataTable(datatables_options).api();
 //
 //}
+
+function downloadVideo(video){
+	console.log("downloadVideo");
+	window.location.href = "/videod/downloadVideo?videoId=" + video.id;
+}
+
+
+function modalVideoInfo(v) {
+
+	
+	var strs = new Array();
+	var str= null;
+	var i = null;
+	var s = "";
+	var videoId = null;
+	$.ajax({
+		url : "/video/findOneVideo",
+		type : "POST",
+		dataType : "json",
+		async : false,
+		data : {
+			"videoId" : v.id
+		},
+		success : function(data) {
+			str = data.videoTag;
+			strs = str.split(",");
+			i = strs.length;
+			videoId = data.videoId;
+			for(var a=0;a<i;a++){
+				s += "<div class = 'tags_style_class tags_del' data='"+videoId+"'>"+strs[a]+"</div>";
+			}
+			$("#videoNameUp").val(data.videoName),//
+			$("#videoTagUp").append(s+"<div class='tags_style_class' id='addTag' onclick='addTagNamesDiv1()'  style='cursor:pointer;'> + </div>"),//val(data.videoTag),
+			$("#videoIdUp").val(data.videoId)
+		}
+	});
+}
+//x 和 关闭 两个按钮
+$(".videoModalClose").click(function(){
+	$("#videoTagUp").empty();
+	/*if($("#selectTagNames")){
+		$("#selectTagNames").remove();
+	}*/
+	var k = $("#selectTagNames").css("display") 
+	if(k == "block"){
+		$("#selectTagNames").empty();
+		$("#selectTagNames").css("display","none");
+	}
+})
+
+
+//$("#updateVideo")
+/*$("#addTagNames").click(function(){
+	console.log("click");
+	$("#videoTagUp").parent().append("<div id='selectTagNames' style='border:1px solid black;min-height:40px;overflow-y:auto;'></div>");
+})*/
+//点击video修改框里的保存按钮事件
+function addTagNamesDiv1(){
+	var i=null;
+	var str = "";
+	
+	$("#addTag").html(" - ")
+	$("#selectTagNames").css("display","block");
+	$("#addTag").attr("onclick","addTagNamesDiv2()");
+	//<div class="tags_style_class"><span>演出</span></div>
+	$(".tags_del").append("<div class='deleteTag' onclick='deleteTag(this)'></div>");
+	$.ajax({
+		url : "/videoTag/getAllVideoTag",
+		type : "POST",
+		dataType : "json",
+		async : false,
+		success : function(data) {
+			
+			i = data.length;
+			
+			for(var a=0;a<i;a++){
+				str += "<div class = 'tags_style_class' >"+data[a].tag_name+"</div>";
+			}
+			$("#selectTagNames").append(str);
+		}
+	});
+}
+function addTagNamesDiv2(){
+	
+	$("#addTag").html("+")
+	$("#selectTagNames").empty();
+	$("#selectTagNames").css("display","none");
+	$("#addTag").attr("onclick","addTagNamesDiv1()");
+	$(".deleteTag").remove();
+}
+
+
+//点击红色x号 删除单个标签
+
+function deleteTag(d){
+	
+	var r = confirm("是否确认删除该标签？");
+	
+	var videoId = d.parentElement.getAttribute("data");
+	var tagName = d.parentElement.textContent;
+	
+	$.ajax({
+		url : "/video/deleteMatchRelByName",
+		type : "POST",
+		dataType : "json",
+		async : false,
+		data : {
+			"videoId" : videoId,
+			"tagName" : tagName
+		},
+		success : function(data) {
+			}
+		});
+	$("#videoTagUp").empty();
+	$("#selectTagNames").empty();
+	addTagNamesDiv2()
+	var v = {};
+	v["id"] = videoId;
+	console.log(v.id);
+	modalVideoInfo(v)
+	
+}
+
 

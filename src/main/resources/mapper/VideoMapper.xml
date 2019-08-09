@@ -32,7 +32,10 @@
 		, #{videoId}, 'N')
 	</insert>
 
-
+	<insert id="insertVideoTagRel" parameterType="cn.org.cflac.entity.Relvt">
+		insert into video_tag_rel (rid,video_id,tag_id,invalid)
+		values (#{rid}, #{videoId},#{tagId},'N')
+	</insert>
 
 	<select id="findVideoByActid" parameterType="java.util.Map"
 		resultType="cn.org.cflac.entity.Video">
@@ -87,6 +90,15 @@
 		</set>
 		where video_id = #{videoId} and activity_id = #{actId}
 	</update>
+
+	<update id="deleteTagById" parameterType="java.util.Map">
+		update video_tag_rel
+		<set>
+			invalid = 'Y'
+		</set>
+		where video_id = #{videoId} and tag_id = #{tagId}
+	</update>
+	
 
 	<select id="queryCountByMd5" parameterType="String"
 		resultType="String">
@@ -221,5 +233,29 @@
 		limit #{start},#{length}
 
 	</select>
+
+<select id="findVideoAddrById" resultType="java.lang.String">
+		select video_address from activity_video 
+		<where>
+			video_id = #{videoId}
+		</where>
+</select>
+
+<select id="findVideoById" resultType="cn.org.cflac.entity.Video">
+	SELECT
+	av.video_id,
+	av.video_name,
+	GROUP_CONCAT( vt.tag_name ) AS tag_names
+	FROM
+	video_tag vt,
+	video_tag_rel vtr,
+	activity_video av
+	WHERE
+	vtr.tag_id = vt.tag_id
+	AND vtr.video_id = av.video_id
+	AND vtr.invalid = 'N'
+	AND av.invalid = 'N'
+	AND vtr.video_id = #{videoId}
+</select>
 
 </mapper>
