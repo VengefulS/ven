@@ -5043,3 +5043,6 @@ table.text-center th {
     margin-right: -10px;
     cursor: pointer;
 }
+.tags_add_class {
+	cursor: pointer;
+}

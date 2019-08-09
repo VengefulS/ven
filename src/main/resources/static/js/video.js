@@ -285,7 +285,7 @@ $(".videoModalClose").click(function(){
 	console.log("click");
 	$("#videoTagUp").parent().append("<div id='selectTagNames' style='border:1px solid black;min-height:40px;overflow-y:auto;'></div>");
 })*/
-//点击video修改框里的保存按钮事件
+
 function addTagNamesDiv1(){
 	var i=null;
 	var str = "";
@@ -305,7 +305,7 @@ function addTagNamesDiv1(){
 			i = data.length;
 			
 			for(var a=0;a<i;a++){
-				str += "<div class = 'tags_style_class' >"+data[a].tag_name+"</div>";
+				str += "<div class = 'tags_style_class tags_add_class' onclick='addTags(this)' >"+data[a].tag_name+"</div>";
 			}
 			$("#selectTagNames").append(str);
 		}
@@ -351,5 +351,26 @@ function deleteTag(d){
 	modalVideoInfo(v)
 	
 }
+
+$(".tags_add_class").click(function(){
+	console.log("1");
+})
+
+//点击标签库中的标签 添加
+function addTags(t){
+	var tt = t.innerText;
+	var str;
+	
+	$("#videoTagUp>div").each(function(){
+		str += $(this).text();
+		
+    });
+	
+	if(str.indexOf(tt) != -1){
+		alert("已有此标签");
+	}
+}
+
+
 
 
