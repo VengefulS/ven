@@ -26,6 +26,7 @@ public class VideoTagServiceImpl implements VideoTagService {
 		return list;
 	}
 	
+	
 	@Override
 	public String findTagIdByName(String tagName) {
 		
@@ -61,6 +62,15 @@ public class VideoTagServiceImpl implements VideoTagService {
 		return videoTagMapper.findAllVideoTag();
 		
 	}
+	@Override
+	public List<Map<String, String>> findRestVideoTag(String videoId) {
+	
+		return videoTagMapper.findRestVideoTag(videoId);
+	
+	}
+	
+
+	
 
 	
 	

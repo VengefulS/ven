@@ -9,6 +9,7 @@ public interface VideoTagService {
 	List<String> findAllVideoTagName();
 	//
 	List<Map<String,String>> findAllVideoTag();
+	List<Map<String,String>> findRestVideoTag(String videoId);
 	String findTagIdByName(String tagName);
 	Map insertVideoTag(Map videoTag);
 	Map insertRelvt(Map relvt);

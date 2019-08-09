@@ -14,7 +14,7 @@
 	
 	<insert id="insertRelvt" parameterType="cn.org.cflac.entity.Relvt">
 		INSERT INTO video_tag_rel (rid,video_id,tag_id, invalid)
-		VALUES (#{rid},#{videoId},#{tagTd},'N')
+		VALUES (#{rid},#{videoId},#{tagId},'N')
 	</insert>
 	
 	<select id="findAllVideoTagName" resultType="String">
@@ -23,6 +23,13 @@
 	
 	<select id="findAllVideoTag" resultType="java.util.Map">
 		select tag_id,tag_name from video_tag where invalid ='N'
+	</select>
+	
+	<select id="findRestVideoTag" resultType="java.util.Map">
+		SELECT VT.tag_id,VT.tag_name FROM video_tag AS VT WHERE NOT EXISTS (
+		SELECT VTR.tag_id FROM video_tag_rel AS VTR WHERE VTR.video_id = #{videoId} 
+		AND VTR.tag_id = VT.tag_id AND VTR.invalid ='N')
+		AND VT.invalid ='N'
 	</select>
 
 

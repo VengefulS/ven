@@ -289,7 +289,7 @@ $(".videoModalClose").click(function(){
 function addTagNamesDiv1(){
 	var i=null;
 	var str = "";
-	
+	var videoId = null;
 	$("#addTag").html(" - ")
 	$("#selectTagNames").css("display","block");
 	$("#addTag").attr("onclick","addTagNamesDiv2()");
@@ -326,7 +326,7 @@ function addTagNamesDiv2(){
 function deleteTag(d){
 	
 	var r = confirm("是否确认删除该标签？");
-	
+	if(r==true){
 	var videoId = d.parentElement.getAttribute("data");
 	var tagName = d.parentElement.textContent;
 	
@@ -349,7 +349,9 @@ function deleteTag(d){
 	v["id"] = videoId;
 	console.log(v.id);
 	modalVideoInfo(v)
-	
+	}else{
+		return;
+	}
 }
 
 $(".tags_add_class").click(function(){
