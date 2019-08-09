@@ -2984,7 +2984,7 @@ table.text-center th {
   border-bottom-color: #f4f4f4;
 }
 .modal-footer {
-  border-top-color: #f4f4f4;
+   border-top: 0; 
 }
 .modal-primary .modal-header,
 .modal-primary .modal-footer {
@@ -5015,4 +5015,34 @@ table.text-center th {
 	margin: 2px 11px 2px 6px;
 	padding: 5px 10px;
 	font-size: 12px;
+}
+
+.tags_style_class {
+	display: inline-block;
+    padding: 5px 10px 5px 10px;
+    margin: 4px;
+    border-radius: 12px;
+    color: #fff;
+    background: #ada3ad;
+}
+
+#videoTagUp {
+	padding: unset;
+    border: 0;
+    min-height: 80px;
+    overflow-y: auto;
+}
+
+.deleteTag {
+	float: right;
+    width: 15px;
+    height: 15px;
+    background-image: url(../img/x.png);
+    background-repeat: round;
+    margin-top: -10px;
+    margin-right: -10px;
+    cursor: pointer;
+}
+.tags_add_class {
+	cursor: pointer;
 }

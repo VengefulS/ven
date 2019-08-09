@@ -35,4 +35,10 @@ public interface VideoService {
 			  Integer start,
 			  Integer length,
 			  Integer draw);
+
+
+	String findVideoAddrById(String videoId);
+
+//根据ID查找一个视频信息
+	Video findvideoById(String videoId);
 }

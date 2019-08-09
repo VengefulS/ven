@@ -23,6 +23,9 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.alibaba.fastjson.JSONObject;
+
+import cn.org.cflac.entity.Activity;
 import cn.org.cflac.entity.Paging;
 import cn.org.cflac.entity.Video;
 import cn.org.cflac.home.service.VideoService;
@@ -108,6 +111,7 @@ public class VideoController {
 		
 	}
 	
+	
 	public static void main(String[] args) {
 		String fileName = "qweqw.mp4";
 		String uuid = UUID.randomUUID().toString().replaceAll("-","");
@@ -153,6 +157,23 @@ public class VideoController {
             e.printStackTrace();
         }
         return paging;
+	}
+
+	
+	// findOneVideo
+	@RequestMapping(value = "/findOneVideo")
+	@ResponseBody
+	public String findOneVideo(
+			@RequestParam(value = "videoId", required = false) String videoId) {
+		Video video = videoService.findvideoById(videoId);
+
+		JSONObject result = new JSONObject();
+		result.put("videoId", videoId);
+		result.put("videoTag", video.getTagNames());
+		result.put("videoName", video.getVideoName());
+		String res = result.toJSONString();
+		//System.out.println(res);
+		return res;
 	}
 
 }

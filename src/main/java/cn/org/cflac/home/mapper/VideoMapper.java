@@ -10,6 +10,8 @@ import java.util.Map;
 
 
 
+
+
 import org.apache.ibatis.annotations.Mapper;
 
 import cn.org.cflac.entity.Activity;
@@ -46,4 +48,8 @@ public interface VideoMapper {
     List<Video> findVideoByActid2(Map map);
     //查询活动视频ID总数量
     Integer findActivityCount2(Map map1);
+
+	String findVideoAddrById(String videoId);
+	//按videoId查一个video
+	Video findVideoById(String videoId);
 }

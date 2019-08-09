@@ -150,8 +150,17 @@ public class VideoServiceImpl implements VideoService {
         return paging;
 	}
 
-	
-	
+	@Override
+	public String findVideoAddrById(String videoId) {
+		
+		return videoMapper.findVideoAddrById(videoId);
+	}
+
+	@Override
+	public Video findvideoById(String videoId) {
+		
+		return videoMapper.findVideoById(videoId);
+	}
 
 
 }

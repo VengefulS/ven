@@ -128,7 +128,7 @@ var datatables_options = {
 		"defaultContent" : "",
 		"visible" : true,
 		"orderable" : true,
-		"width" : "100px",
+		"width" : "70px",
 	}, {
 		"title" : "结束时间",
 		"type" : "html",
@@ -136,7 +136,7 @@ var datatables_options = {
 		"defaultContent" : "",
 		"visible" : true,
 		"orderable" : true,
-		"width" : "100px",
+		"width" : "70px",
 	},{
 		"title" : "活动地点",
 		"type" : "html",
@@ -144,7 +144,7 @@ var datatables_options = {
 		"defaultContent" : "",
 		"visible" : true,
 		"orderable" : true,
-		"width" : "40px",
+		"width" : "50px",
 	}, {
 		"title" : "活动门类",
 		"type" : "html",
@@ -152,7 +152,7 @@ var datatables_options = {
 		"defaultContent" : "",
 		"visible" : true,
 		"orderable" : true,
-		"width" : "40px",
+		"width" : "50px",
 	}, {
 		"title" : "相关人物",
 		"type" : "html",
@@ -160,7 +160,7 @@ var datatables_options = {
 		"defaultContent" : "",
 		"visible" : true,
 		"orderable" : true,
-		"width" : "135px",
+		"width" : "155px",
 		"searchable" : true,
 	}, {
 		"title" : "视频采集人",
@@ -169,7 +169,7 @@ var datatables_options = {
 		"defaultContent" : "",
 		"visible" : true,
 		"orderable" : true,
-		"width" : "100px",
+		"width" : "80px",
 		"searchable" : true,
 	},{
 		"title" : "主办单位",
@@ -178,7 +178,7 @@ var datatables_options = {
 		"defaultContent" : "",
 		"visible" : true,
 		"orderable" : true,
-		"width" : "60px",
+		"width" : "150px",
 		"searchable" : true,
 	}, {
 		"title" : "修改活动信息",
@@ -187,7 +187,7 @@ var datatables_options = {
 		"defaultContent" : "",
 		"visible" : true,
 		"orderable" : true,
-		"width" : "100px"
+		"width" : "80px"
 	}, {
 		"title" : "预览",
 		"type" : "html",
@@ -195,7 +195,7 @@ var datatables_options = {
 		"defaultContent" : "",
 		"visible" : true,
 		"orderable" : true,
-		"width" : "60px"
+		"width" : "50px"
 	}, {
 		"title" : "视频详情",
 		"type" : "html",
@@ -211,7 +211,7 @@ var datatables_options = {
 		"defaultContent" : "",
 		"visible" : true,
 		"orderable" : true,
-		"width" : "80px"
+		"width" : "60px"
 	} ],
 	// 从右向左第三列列描述 加按钮
 	"columnDefs" : [
