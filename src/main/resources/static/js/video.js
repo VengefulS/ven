@@ -312,7 +312,7 @@ $(".videoModalClose").click(function(){
 function addTagNamesDiv1(){
 	var i=null;
 	var str = "";
-	
+	var videoId = null;
 	$("#addTag").html(" - ")
 	$("#selectTagNames").css("display","block");
 	$("#addTag").attr("onclick","addTagNamesDiv2()");
@@ -378,6 +378,7 @@ function deleteTag(d){
 		modalVideoInfo(v)
 	}
 	
+
 }
 
 $(".tags_add_class").click(function(){

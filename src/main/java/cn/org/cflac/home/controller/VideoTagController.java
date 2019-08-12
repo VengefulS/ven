@@ -47,6 +47,14 @@ public class VideoTagController {
 		return list;
 
 	}
+	
+	@RequestMapping(value = "/getRestVideoTag")
+	@ResponseBody
+	public List<Map<String, String>> getRestVideoTag(@RequestParam(value = "videoId") String videoId) {
+		List<Map<String, String>> list = videoTagService.findRestVideoTag(videoId);
+		return list;
+
+	}
 
 //	@RequestMapping(value = "/deleteVideoTag")
 //	@ResponseBody

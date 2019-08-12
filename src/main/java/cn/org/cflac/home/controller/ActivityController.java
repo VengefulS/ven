@@ -114,6 +114,7 @@ public class ActivityController {
 		result.put("activityPerson", act.getActivityPerson());
 		result.put("activityType", act.getActivityType());
 		result.put("activityName", act.getActivityName());
+		result.put("activitySponsor", act.getActivitySponsor());
 		String res = result.toJSONString();
 		System.out.println(res);
 		return res;

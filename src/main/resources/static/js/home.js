@@ -128,15 +128,23 @@ var datatables_options = {
 		"defaultContent" : "",
 		"visible" : true,
 		"orderable" : true,
-		"width" : "100px",
+		"width" : "70px",
 	}, {
+		"title" : "结束时间",
+		"type" : "html",
+		"data" : "displayActivityEndDate",
+		"defaultContent" : "",
+		"visible" : true,
+		"orderable" : true,
+		"width" : "70px",
+	},{
 		"title" : "活动地点",
 		"type" : "html",
 		"data" : "activitySite",
 		"defaultContent" : "",
 		"visible" : true,
 		"orderable" : true,
-		"width" : "140px",
+		"width" : "50px",
 	}, {
 		"title" : "活动门类",
 		"type" : "html",
@@ -144,7 +152,7 @@ var datatables_options = {
 		"defaultContent" : "",
 		"visible" : true,
 		"orderable" : true,
-		"width" : "100px",
+		"width" : "50px",
 	}, {
 		"title" : "相关人物",
 		"type" : "html",
@@ -152,7 +160,7 @@ var datatables_options = {
 		"defaultContent" : "",
 		"visible" : true,
 		"orderable" : true,
-		"width" : "135px",
+		"width" : "155px",
 		"searchable" : true,
 	}, {
 		"title" : "视频采集人",
@@ -161,7 +169,16 @@ var datatables_options = {
 		"defaultContent" : "",
 		"visible" : true,
 		"orderable" : true,
-		"width" : "100px",
+		"width" : "80px",
+		"searchable" : true,
+	},{
+		"title" : "主办单位",
+		"type" : "html",
+		"data" : "activitySponsor",
+		"defaultContent" : "",
+		"visible" : true,
+		"orderable" : true,
+		"width" : "150px",
 		"searchable" : true,
 	}, {
 		"title" : "修改活动信息",
@@ -170,7 +187,7 @@ var datatables_options = {
 		"defaultContent" : "",
 		"visible" : true,
 		"orderable" : true,
-		"width" : "100px"
+		"width" : "80px"
 	}, {
 		"title" : "预览",
 		"type" : "html",
@@ -178,7 +195,7 @@ var datatables_options = {
 		"defaultContent" : "",
 		"visible" : true,
 		"orderable" : true,
-		"width" : "60px"
+		"width" : "50px"
 	}, {
 		"title" : "视频详情",
 		"type" : "html",
@@ -194,7 +211,7 @@ var datatables_options = {
 		"defaultContent" : "",
 		"visible" : true,
 		"orderable" : true,
-		"width" : "80px"
+		"width" : "60px"
 	} ],
 	// 从右向左第三列列描述 加按钮
 	"columnDefs" : [
@@ -272,12 +289,12 @@ function to(obj) {
 		async : false,
 		data : {
 			"aid" : aid,
-			"aname":aname
-		
+			"aname" : aname
+
 		},
 		success : function() {
-			//alert("1111");
-			window.location.href="/video";
+			// alert("1111");
+			window.location.href = "/video";
 		}
 	// window.location.href="/video/findVideoByActid2?activityId="+id;
 	});
@@ -297,15 +314,19 @@ function modalActivity(act) {
 		},
 		success : function(data) {
 			var tt1 = data.activityBeginDate;
+			var tt2 = data.activityEndDate;
 			var date = new Date(tt1);
+			var date2 = new Date(tt2);
 			$("#activityNameUp").val(data.activityName), $('#activityTypeUp')
 					.selectpicker('val', (data.activityType)), $(
 					"#activityPersonUp").val(data.activityPerson), $(
 					"#activitySiteUp").val(data.activitySite), $(
 					"#datetimepicker1").datetimepicker("setDate", date),
+					$("#datetimepicker2").datetimepicker("setDate", date2),
 					$("#activityVideoGathererUp").val(
-							data.activityVideoGatherer), $("#activityIdUp")
-							.val(data.activityId)
+							data.activityVideoGatherer), $("#activitySponsorUp")
+							.val(data.activitySponsor), $("#activityIdUp").val(
+							data.activityId)
 		}
 	});
 	// typeObj.setAttribute('title',data.activityType)
@@ -314,10 +335,13 @@ function modalActivity(act) {
 }
 $("#updateAtivity").click(function() {
 	var tt = $("#datetimepicker1").find("input").val();
+	var tt1 = $("#datetimepicker2").find("input").val();
 	// $("#datetimepicker1").data("datetimepicker").getDate();这种也行
 	console.log("activityBeginDateUp = " + activityBeginDateUp);
 	var date = new Date(tt);
+	var date1 = new Date(tt1);
 	console.log("date:" + date);
+	console.log("date1:" + date1);
 
 	$.ajax({
 		type : 'post',
@@ -329,7 +353,9 @@ $("#updateAtivity").click(function() {
 			"activityPerson" : $("#activityPersonUp").val(),
 			"activitySite" : $("#activitySiteUp").val(),
 			"activityBeginDate" : date,
+			"activityEndDate" : date1,
 			"activityVideoGatherer" : $("#activityVideoGathererUp").val(),
+			"activitySponsor" : $("#activitySponsorUp").val(),
 			"activityId" : $("#activityIdUp").val()
 		}),
 		success : function(data) {
@@ -485,7 +511,9 @@ function downloadVideos(v) {
 
 $("#addAtivity").click(function() {
 	var t = $("#datetimepicker11").find("input").val();
+	var t2 = $("#datetimepicker22").find("input").val();
 	var date1 = new Date(t);
+	var date2 = new Date(t2);
 
 	/*
 	 * var datetime = ""; //date.setTime(tt); console.log(date); datetime +=
@@ -505,7 +533,9 @@ $("#addAtivity").click(function() {
 			"activityPerson" : $("#activityPerson").val(),
 			"activitySite" : $("#activitySite").val(),
 			"activityBeginDate" : date1,
-			"activityVideoGatherer" : $("#activityVideoGatherer").val()
+			"activityEndDate" : date2,
+			"activityVideoGatherer" : $("#activityVideoGatherer").val(),
+			"activitySponsor" : $("#activitySponsor").val()
 		}),
 		success : function(data) {
 			window.location.reload()
@@ -554,6 +584,29 @@ $(function() {
 		// initialDate:new Date(),//初始时间
 		todayBtn : true
 
+	});
+})
+
+// #datetimepicker2 #activityEndDateUp 日期选择
+$(function() {
+	$('#datetimepicker2').datetimepicker({
+		format : 'yyyy-mm-dd',
+		locale : moment.locale('zh-cn'),
+		minView : "month",
+		language : 'zh-CN',
+		// initialDate: new Date(),
+		autoclose : true
+	});
+	
+	$('#datetimepicker22').datetimepicker({
+		format : 'yyyy-mm-dd',
+		locale : moment.locale('zh-cn'),
+		minView : "month",
+		language : 'zh-CN',
+		autoclose : true,
+		// initialDate:new Date(),//初始时间
+		todayBtn : true
+		
 	});
 })
 

@@ -12,6 +12,7 @@
 		<result column="activity_end_date" jdbcType="DATE" property="activityEndDate" />
 		<result column="activity_video_gatherer" jdbcType="VARCHAR"
 			property="activityVideoGatherer" />
+		<result column="activity_sponsor" jdbcType="VARCHAR" property="activitySponsor" />
 	</resultMap>
 	<insert id="insert" parameterType="cn.org.cflac.entity.Activity">
 		insert into activity_info
@@ -30,13 +31,13 @@
 		insert into
 		activity_info (activity_id, activity_name, activity_type,
 		activity_person, activity_site,
-		activity_begin_date,activity_video_gatherer)
+		activity_begin_date,activity_end_date,activity_video_gatherer,activity_sponsor)
 		values
 		(#{activityId,jdbcType=VARCHAR}, #{activityName,jdbcType=VARCHAR},
 		#{activityType,jdbcType=VARCHAR},
 		#{activityPerson,jdbcType=VARCHAR},
 		#{activitySite,jdbcType=VARCHAR},
-		#{activityBeginDate,jdbcType=DATE},#{activityVideoGatherer,jdbcType=VARCHAR})
+		#{activityBeginDate,jdbcType=DATE},#{activityEndDate,jdbcType=DATE},#{activityVideoGatherer,jdbcType=VARCHAR},#{activitySponsor,jdbcType=VARCHAR})
 	</insert>
 	<insert id="insertSelective" parameterType="cn.org.cflac.entity.Activity">
 		insert into activity_info
@@ -122,7 +123,7 @@
 		resultType="cn.org.cflac.entity.Activity">
 		SELECT
 		L.activity_id,L.activity_name,L.activity_type,L.activity_person,L.activity_site,
-		L.activity_begin_date,L.activity_video_gatherer
+		L.activity_begin_date,L.activity_end_date,L.activity_video_gatherer,L.activity_sponsor
 		from activity_info L
 		<where>
 			<if test="search != null">
@@ -151,7 +152,7 @@
 
 	<select id="findActivityById" resultType="cn.org.cflac.entity.Activity">
 		select
-		activity_name,activity_type,activity_person,activity_site,activity_begin_date,activity_video_gatherer
+		activity_name,activity_type,activity_person,activity_site,activity_begin_date,activity_end_date,activity_video_gatherer,activity_sponsor
 		from activity_info
 		where activity_id = #{activityId}
 	</select>
@@ -169,7 +170,9 @@
 			<if test="activityPerson !=null">activity_person = #{activityPerson},</if>
 			<if test="activitySite !=null">activity_site = #{activitySite},</if>
 			<if test="activityBeginDate !=null">activity_begin_date = #{activityBeginDate},</if>
-			<if test="activityVideoGatherer !=null">activity_video_gatherer = #{activityVideoGatherer}</if>
+			<if test="activityEndDate !=null">activity_end_date = #{activityEndDate},</if>			
+			<if test="activityVideoGatherer !=null">activity_video_gatherer = #{activityVideoGatherer},</if>
+			<if test="activitySponsor !=null">activity_sponsor = #{activitySponsor}</if>
 		</set>
 		where activity_id = #{activityId}
 	</update>
@@ -212,7 +215,9 @@
 		a.activity_person,
 		a.activity_site,
 		a.activity_begin_date,
-		a.activity_video_gatherer
+		a.activity_end_date,
+		a.activity_video_gatherer,
+		activity_sponsor
 		FROM
 		activity_info a
 		WHERE
