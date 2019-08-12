@@ -52,7 +52,10 @@
 					<div class="col-xs-12">
 						<div class="box">
 						<button type="button" class="btn bg-primary" id="toHome">
-								<span class="glyphicon glyphicon-circle-arrow-left" aria-hidden="true"></span>查看全部活动
+								<span class="glyphicon glyphicon-circle-arrow-left" aria-hidden="true"></span> 查看全部活动
+						</button>
+						<button type="button" class="btn bg-primary" id="addToLD" data-toggle="modal" data-target="#videoTagModal">
+								<span class="glyphicon glyphicon-plus" aria-hidden="true"></span> 新增标签
 						</button>
 						<!-- 
 						<div id="div-videoSearch" class="dataTables_filter" style="float:right;">
@@ -133,9 +136,39 @@
 		</div>
 		<!-- /.modal -->
 	</div>
+</div>
 
-
-
+<!-- 新增标签模态框(Modal) -->
+	<div class="modal fade" id="videoTagModal" data-backdrop="static"
+		tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+		aria-hidden="true">
+		<div class="modal-dialog">
+			<div class="modal-content" style="width: 100%; height: 82%">
+				<div class="modal-header" style="width: 100%; height: 11%;">
+					<button type="button" class="close close-tag" data-dismiss="modal"
+						aria-hidden="true">&times;</button>
+					<h4 class="modal-title">向标签库新增标签</h4>
+				</div>
+				<div class="modal-body"
+					style="overflow: auto; width: 100%; height: 89%;">
+				<div class="form-group">
+						<label for="Tag" class="col-sm-2 control-label">标签</label>
+						<div class="col-sm-10">
+							<input type="text" class="form-control" id="addTagNames"
+								placeholder="向标签库新增标签">
+						</div>
+					</div>
+				<div class="modal-footer" style="width: 100%; height: 13%;">
+					<button type="button" class="btn btn-primary" id="addNewTag"
+						data-dismiss="modal">保存</button>
+					<button type="button" class="btn btn-default close-tag" data-dismiss="modal">关闭</button>
+				</div>
+			</div>
+			<!-- /.modal-content -->
+		</div>
+		<!-- /.modal -->
+	</div>
+</div>
 
 
 	<!-- jQuery 3 -->

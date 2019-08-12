@@ -5046,3 +5046,6 @@ table.text-center th {
 .tags_add_class {
 	cursor: pointer;
 }
+.videoP {
+	width: 86px;
+}
