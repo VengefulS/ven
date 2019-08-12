@@ -12,6 +12,7 @@ import java.util.Map;
 
 
 
+
 import org.apache.ibatis.annotations.Mapper;
 
 import cn.org.cflac.entity.Activity;
@@ -52,4 +53,6 @@ public interface VideoMapper {
 	String findVideoAddrById(String videoId);
 	//按videoId查一个video
 	Video findVideoById(String videoId);
+
+	void updateVideoInfo(Map<String, String> viMap);
 }

@@ -3,6 +3,8 @@ var aid;
 //var oUrl = "/video/queryAllVideo";
 //var oUrl = "/video/findVideoByActid2?activityId=" ;
 //var oUrl;
+var oUrl;
+var sUrl = "/video/queryAllVideo";
 $(document).ready(function() {
 	
 	$.ajax({
@@ -15,11 +17,11 @@ $(document).ready(function() {
 		}
 	});
 	if(aid == null){
-		var oUrl = "/video/queryAllVideo";
-		var sUrl = oUrl;
+		oUrl = "/video/queryAllVideo";
+		sUrl = oUrl;
 	}else{
-		var oUrl = "/video/findVideoByActid2?activityId=";
-		var sUrl = oUrl + aid;
+		oUrl = "/video/findVideoByActid2?activityId=";
+		sUrl = oUrl + aid;
 	}
 	
 	//alert(sUrl);
@@ -27,13 +29,16 @@ $(document).ready(function() {
 	//query2();
 
 
-	function query2(search) {
+	
+	query2();
+	$("#findAllVideo_filter .input-sm").attr({
+		'placeholder' : '按视频标签查找'
+	});
+})
 
-		table = $("#findAllVideo").dataTable(datatables_options).api();
+function query2(search) {
 
-	}
-
-/* ==============================datatables的配置======================= */
+	/* ==============================datatables的配置======================= */
 	var datatables_options = {
 			// 是否使用服务器端处理模式（依赖paging）
 			"serverSide" : true,
@@ -67,7 +72,7 @@ $(document).ready(function() {
 			"sPaginationType" : "full_numbers",
 			// 是否启动过滤、搜索功能
 			"bFilter" : false,
-
+			"destroy": true,
 			"search" : {
 				"smart" : true,
 			},// 智能搜索
@@ -96,7 +101,6 @@ $(document).ready(function() {
 
 			// 异步请求
 			"ajax" : {
-//				"url" : oUrl,
 				"url" : sUrl,
 				"type" : "POST",
 				"async" : false,
@@ -122,7 +126,7 @@ $(document).ready(function() {
 				"defaultContent" : "预览图",
 				"visible" : true,
 				"orderable" : true,
-				"width" : "160px"
+				"width" : "50px"
 			}, {
 				"title" : "视频名称",
 				"type" : "html",
@@ -130,7 +134,7 @@ $(document).ready(function() {
 				"defaultContent" : "视频无名称",
 				"visible" : true,
 				"orderable" : true,
-				"width" : "135px",
+				"width" : "100px",
 				"word-wrap" : "break-word",
 				"searchable" : true,
 			}, {
@@ -210,11 +214,13 @@ $(document).ready(function() {
 			} ]
 
 		}
-	query2();
-	$("#findAllVideo_filter .input-sm").attr({
-		'placeholder' : '按视频标签查找'
-	});
-})
+	
+	
+		table = $("#findAllVideo").dataTable(datatables_options).api();
+
+}
+
+
 
 //$('#input-videoSearch').bind('input propertychange',function() {
 //	var activityId = this.value;
@@ -240,11 +246,7 @@ $('#toHome').click(function(){
 	
 })
 
-$('#addToLD').click(function(){
-	
-		
-	
-})
+
 
 //function query2(search) {
 //
@@ -266,6 +268,9 @@ function modalVideoInfo(v) {
 	var i = null;
 	var s = "";
 	var videoId = null;
+	
+	$("#videoTagUp").attr("data",v.id);
+	
 	$.ajax({
 		url : "/video/findOneVideo",
 		type : "POST",
@@ -276,17 +281,20 @@ function modalVideoInfo(v) {
 		},
 		success : function(data) {
 			str = data.videoTag;
-			strs = str.split(",");
+			if(str != null){
+				strs = str.split(",");
+			}
 			i = strs.length;
 			videoId = data.videoId;
 			for(var a=0;a<i;a++){
 				s += "<div class = 'tags_style_class tags_del' data='"+videoId+"'>"+strs[a]+"</div>";
 			}
 			$("#videoNameUp").val(data.videoName),//
-			$("#videoTagUp").append(s+"<div class='tags_style_class' id='addTag' onclick='addTagNamesDiv1()'  style='cursor:pointer;float: right;'> + </div>"),//val(data.videoTag),
+			$("#videoTagUp").append(s),//val(data.videoTag),
 			$("#videoIdUp").val(data.videoId)
 		}
 	});
+	$("#videoTagUp").append("<div class='tags_style_class' id='addTag' onclick='addTagNamesDiv1()'  style='cursor:pointer;float: right;'> +展开标签库  </div>")
 }
 //x 和 关闭 两个按钮
 $(".videoModalClose").click(function(){
@@ -299,28 +307,48 @@ $(".videoModalClose").click(function(){
 		$("#selectTagNames").empty();
 		$("#selectTagNames").css("display","none");
 	}
-	parent.location.reload();
+	query2();
 })
 
 
-//$("#updateVideo")
-/*$("#addTagNames").click(function(){
-	console.log("click");
-	$("#videoTagUp").parent().append("<div id='selectTagNames' style='border:1px solid black;min-height:40px;overflow-y:auto;'></div>");
-})*/
+//点击保存按钮
+$("#updateVideo").click(function(){
+	
+	var vn = $("#videoNameUp").val();
+	console.log(vn);
+	var vid = $("#videoTagUp").attr("data");
+	$.ajax({
+		url : "/video/updateVideoInfo",
+		type : "POST",
+		dataType : "json",
+		async : false,
+		data : {
+			"videoId" : vid,
+			"videoName" : vn
+		},
+		success : function(data) {
+		}
+	});
+	
+	$("#videoTagUp").empty();
+	$("#selectTagNames").empty();
+	$("#selectTagNames").css("display","none");
+	$(".deleteTag").remove();
+	query2();
+})
 
 function addTagNamesDiv1(){
 	var i=null;
 	var str = "";
 	var videoId = null;
-	$("#addTag").html(" - ")
+	$("#addTag").html(" -隐藏标签库 ")
 	$("#selectTagNames").css("display","block");
 	$("#addTag").attr("onclick","addTagNamesDiv2()");
 	//<div class="tags_style_class"><span>演出</span></div>
 	$(".deleteTag").remove();
 	$(".tags_del").append("<div class='deleteTag' onclick='deleteTag(this)'></div>");
 	
-	var vid = $(".tags_del").attr("data");
+	var vid = $("#videoTagUp").attr("data");//$(".tags_del").attr("data");//==================vid
 	$.ajax({
 		url : "/videoTag/getAllVideoTag",
 		type : "POST",
@@ -339,7 +367,7 @@ function addTagNamesDiv1(){
 }
 function addTagNamesDiv2(){
 	
-	$("#addTag").html("+")
+	$("#addTag").html("+展开标签库")
 	$("#selectTagNames").empty();
 	$("#selectTagNames").css("display","none");
 	$("#addTag").attr("onclick","addTagNamesDiv1()");
@@ -392,7 +420,7 @@ function addTags(t){
 	console.log(tt);
 	console.log(videoId);
 	var strs;
-	var id = $(".tags_del").attr("data");
+	var id = $("#videoTagUp").attr("data");//$(".tags_del").attr("data");
 	var str = "<div class = 'tags_style_class tags_del' data='"+id+"'>"+tt+"</div>";
 	$("#videoTagUp>div").each(function(){
 		strs += $(this).text();

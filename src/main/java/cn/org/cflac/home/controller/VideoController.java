@@ -176,4 +176,16 @@ public class VideoController {
 		return res;
 	}
 
+	@RequestMapping(value = "/updateVideoInfo")
+	@ResponseBody
+	public String updateVideoInfo(
+			@RequestParam(value = "videoName", required = false) String videoName,
+			@RequestParam(value = "videoId", required = false) String videoId){
+		Map<String, String> viMap = new HashMap<String, String>();
+		
+		viMap.put("videoId", videoId);
+		viMap.put("videoName", videoName);
+		videoService.updateVideoInfo(viMap);
+		return null;
+	}
 }

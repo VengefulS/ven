@@ -41,4 +41,7 @@ public interface VideoService {
 
 //根据ID查找一个视频信息
 	Video findvideoById(String videoId);
+
+
+	void updateVideoInfo(Map<String, String> viMap);
 }

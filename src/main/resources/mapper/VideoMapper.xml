@@ -84,6 +84,14 @@
 		where video_id = #{videoId}
 	</update>
 
+<update id="updateVideoInfo" parameterType="java.util.Map">
+		update activity_video
+		<set>
+			video_name = #{videoName}
+		</set>
+		where video_id = #{videoId}
+	</update>
+
 	<update id="deleteVideoById" parameterType="java.util.Map">
 		update activity_video_rel
 		<set>

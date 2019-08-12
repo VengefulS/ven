@@ -20,6 +20,8 @@ import org.springframework.stereotype.Service;
 
 
 
+
+
 import cn.org.cflac.entity.Activity;
 import cn.org.cflac.entity.Paging;
 import cn.org.cflac.entity.Video;
@@ -160,6 +162,12 @@ public class VideoServiceImpl implements VideoService {
 	public Video findvideoById(String videoId) {
 		
 		return videoMapper.findVideoById(videoId);
+	}
+
+	@Override
+	public void updateVideoInfo(Map<String, String> viMap) {
+		videoMapper.updateVideoInfo(viMap);
+		
 	}
 
 
