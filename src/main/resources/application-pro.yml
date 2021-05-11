@@ -28,7 +28,7 @@ mybatis:
     
 
 
-pic_upload_path: http://10.1.11.120:9000/resource
+pic_upload_path: http://10.1.11./resource
 upload_path: /opt/lar/files/videomanager/videoresource
 download_zip_path: /opt/lar/files/videomanager/videoresource/tempzip
 temp_path: /opt/lar/files/videomanager
